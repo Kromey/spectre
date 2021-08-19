@@ -3,14 +3,14 @@
 [ext_resource path="res://tanks/Bullet.gd" type="Script" id=1]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.01, 0.01, 0.01 )
+extents = Vector3( 0.05, 0.05, 0.02 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.980392, 0.0196078, 0.0196078, 1 )
 
 [sub_resource type="PrismMesh" id=3]
 material = SubResource( 2 )
-size = Vector3( 0.01, 0.01, 0.01 )
+size = Vector3( 0.05, 0.05, 0.05 )
 
 [node name="Bullet" type="Spatial"]
 script = ExtResource( 1 )

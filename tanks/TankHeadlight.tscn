@@ -9,6 +9,4 @@ radius = 0.05
 material = ExtResource( 1 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
-light_energy = 2.0
-shadow_enabled = true
 spot_range = 25.0

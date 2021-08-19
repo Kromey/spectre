@@ -7,7 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
-shader_param/BASE_COLOR = Color( 0, 0, 0, 1 )
+shader_param/BASE_COLOR = Color( 0.427451, 0.545098, 0.415686, 1 )
 shader_param/LINE_WIDTH = 0.01
 shader_param/LINE_COLOR = Color( 0.0196078, 0.976471, 0.101961, 1 )
 shader_param/COLUMN_COUNT = 15.0

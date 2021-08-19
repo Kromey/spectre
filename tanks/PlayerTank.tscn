@@ -7,17 +7,17 @@
 [node name="PlayerTank" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="HeadlightR" parent="CSGCombiner/Body" index="1" instance=ExtResource( 2 )]
+[node name="Camera" type="Camera" parent="CSGCombiner/Body/Turret" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )
 
-[node name="HeadlightL" parent="CSGCombiner/Body" index="2" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )
-
-[node name="OmniLight" type="OmniLight" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.264586, -0.103231 )
+[node name="OmniLight" type="OmniLight" parent="CSGCombiner/Body/Turret/Camera" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012586, -0.103231 )
 light_energy = 0.2
 light_indirect_energy = 0.0
 omni_range = 0.8
 omni_attenuation = 0.435275
 
-[node name="Camera" type="Camera" parent="." index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25157, 0 )
+[node name="HeadlightR" parent="CSGCombiner/Body" index="1" instance=ExtResource( 2 )]
+
+[node name="HeadlightL" parent="CSGCombiner/Body" index="2" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )

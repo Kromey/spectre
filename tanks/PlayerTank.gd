@@ -62,7 +62,6 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("action_shoot"):
-		print("Shooting!")
 		var bullet = Bullet.instance()
 		#bullet.BULLET_TIME = 1.5
 		bullet.BULLET_SPEED = MAX_SPEED * 1.2

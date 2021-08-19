@@ -1,6 +1,5 @@
 extends RigidBody
 
-
 func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -16,5 +15,5 @@ func _physics_process(_delta):
 	if translation.y < -5:
 		queue_free()
 
-func take_damage(force, _amount):
-	apply_central_impulse(force)
+func take_damage(velocity, amount):
+	apply_central_impulse(velocity * amount)

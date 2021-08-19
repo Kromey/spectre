@@ -15,3 +15,6 @@ func _ready():
 func _physics_process(_delta):
 	if translation.y < -5:
 		queue_free()
+
+func take_damage(force, _amount):
+	apply_central_impulse(force)

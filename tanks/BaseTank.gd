@@ -2,6 +2,8 @@ extends KinematicBody
 
 var falling = 0.0
 const GRAVITY = 2
+var damage = 0
+export(int) var MAX_DAMAGE = 1
 
 signal dead
 
@@ -16,5 +18,14 @@ func _physics_process(delta):
 	falling = -vel.y
 	
 	if translation.y < -5:
-		emit_signal("dead")
-		queue_free()
+		die()
+
+func take_damage(_force, amount):
+	damage += amount
+	
+	if damage >= MAX_DAMAGE:
+		die()
+
+func die():
+	emit_signal("dead")
+	queue_free()

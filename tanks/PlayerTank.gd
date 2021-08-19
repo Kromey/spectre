@@ -64,7 +64,7 @@ func _input(event):
 	if event.is_action_pressed("action_shoot"):
 		print("Shooting!")
 		var bullet = Bullet.instance()
-		bullet.BULLET_TIME = 1.5
+		#bullet.BULLET_TIME = 1.5
 		bullet.BULLET_SPEED = MAX_SPEED * 1.2
 		bullet.global_transform = $BulletSpawn.global_transform
 		get_tree().root.add_child(bullet)

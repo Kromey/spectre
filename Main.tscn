@@ -45,7 +45,6 @@ environment = SubResource( 5 )
 
 [node name="OverheadLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
-visible = false
 shadow_enabled = true
 
 [node name="RespawnTimer" type="Timer" parent="."]

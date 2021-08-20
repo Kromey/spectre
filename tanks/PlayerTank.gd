@@ -75,3 +75,5 @@ func _input(event):
 		bullet.BULLET_SPEED = MAX_SPEED * 1.2
 		bullet.global_transform = $BulletSpawn.global_transform
 		get_tree().root.add_child(bullet)
+		
+		$MuzzleFlare.restart()

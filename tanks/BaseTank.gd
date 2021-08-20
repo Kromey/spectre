@@ -18,7 +18,7 @@ func _physics_process(delta):
 	falling = -vel.y
 	
 	if translation.y < -5:
-		die()
+		take_damage(Vector3.DOWN, MAX_DAMAGE * MAX_DAMAGE)
 
 func take_damage(_force, amount):
 	damage += amount

@@ -12,6 +12,9 @@ var angular_velocity = 0
 export(float) var TURN_RATE = PI / 2.0
 export(float) var TURN_ACCEL = 8
 
+export(float) var MAX_AMMO = 3
+var ammo
+
 enum Direction {
 	FORWARD = -1,
 	BACK = 1,
@@ -25,7 +28,7 @@ signal dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	reload()
 
 func _physics_process(delta):
 	falling += GRAVITY * delta
@@ -68,15 +71,21 @@ func turn(direction, delta):
 	
 	rotate_y(angular_velocity)
 
-func shoot(speed, gun_range, damage = 1):
-	var bullet = Bullet.instance()
-	bullet.BULLET_TIME = gun_range / speed
-	bullet.BULLET_SPEED = speed
-	bullet.BULLET_DAMAGE = damage
-	bullet.global_transform = $BulletSpawn.global_transform
-	get_tree().root.add_child(bullet)
-	
-	$MuzzleFlare.restart()
+func shoot(bullet_speed, gun_range, gun_damage = 1):
+	if ammo > 0:
+		ammo -= 1
+		
+		var bullet = Bullet.instance()
+		bullet.BULLET_TIME = gun_range / bullet_speed
+		bullet.BULLET_SPEED = bullet_speed
+		bullet.BULLET_DAMAGE = gun_damage
+		bullet.global_transform = $BulletSpawn.global_transform
+		get_tree().root.add_child(bullet)
+		
+		$MuzzleFlare.restart()
+
+func reload():
+	ammo = MAX_AMMO
 
 func take_damage(_force, amount):
 	damage += amount

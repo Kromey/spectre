@@ -26,7 +26,7 @@ size = Vector2( 200, 200 )
 [sub_resource type="Environment" id=5]
 background_mode = 1
 
-[node name="Spatial" type="Spatial"]
+[node name="Main" type="Spatial"]
 script = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
@@ -52,8 +52,11 @@ autostart = true
 
 [node name="AITank" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.664252, 0, 0.747508, 0, 1, 0, -0.747508, 0, -0.664252, 1.13256, 10.6767, 1.86926 )
+MAX_SPEED = 5.0
 
-[node name="PlayerTank" parent="." instance=ExtResource( 4 )]
+[node name="PlayerTank" parent="." groups=[
+"player",
+] instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.28594, 4.25671 )
 
 [node name="Camera" type="Camera" parent="."]

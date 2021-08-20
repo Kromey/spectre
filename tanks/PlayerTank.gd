@@ -5,10 +5,12 @@ const ACCEL = 2
 const DEACCEL = ACCEL * 2
 const MAX_SPEED = 10
 const TURN_RATE = PI / 2.0 # Radians/sec
+const TURN_INERTIA = 8
 
 var Bullet = preload("res://tanks/Bullet.tscn")
 
 var velocity = Vector3.ZERO
+var turn = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,13 +19,19 @@ func _ready():
 func _physics_process(delta):
 	# -----
 	# Turning
-	var turn = 0
+	var turn_input = 0
 	
 	if Input.is_action_pressed("movement_left"):
-		turn += TURN_RATE * delta
+		turn_input += TURN_RATE * delta
 	if Input.is_action_pressed("movement_right"):
-		turn -= TURN_RATE * delta
+		turn_input -= TURN_RATE * delta
 	
+	var inertia = TURN_INERTIA
+	if abs(turn_input) < abs(turn):
+		# Stop turning twice as fast as we started
+		inertia *= 2
+	
+	turn = lerp(turn, turn_input, inertia * delta)
 	rotate_y(turn)
 	# -----
 	

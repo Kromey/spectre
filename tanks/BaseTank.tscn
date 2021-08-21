@@ -84,3 +84,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 2 )
 draw_pass_1 = SubResource( 4 )
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true

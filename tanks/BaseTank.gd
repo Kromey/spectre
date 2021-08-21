@@ -2,8 +2,10 @@ extends KinematicBody
 
 var falling = 0.0
 const GRAVITY = 2
+
 var damage = 0
 export(int) var MAX_DAMAGE = 1
+
 var velocity = Vector3.ZERO
 export(float) var MAX_SPEED = 10
 export(float) var ACCEL = 2
@@ -13,7 +15,12 @@ export(float) var TURN_RATE = PI / 2.0
 export(float) var TURN_ACCEL = 8
 
 export(float) var MAX_AMMO = 3
+export(float) var FIRE_RATE = 1.5
+export(float) var RELOAD_TIME = 3
+export(float) var GUN_RANGE = 50
 var ammo
+var reloading = false
+
 
 enum Direction {
 	FORWARD = -1,
@@ -71,12 +78,15 @@ func turn(direction, delta):
 	
 	rotate_y(angular_velocity)
 
-func shoot(bullet_speed, gun_range, gun_damage = 1):
-	if ammo > 0:
+func shoot(gun_damage = 1):
+	if ammo > 0 and !reloading and $FireRate.is_stopped():
+		$FireRate.start(FIRE_RATE)
 		ammo -= 1
 		
+		var bullet_speed = MAX_SPEED * 1.2
+		
 		var bullet = Bullet.instance()
-		bullet.BULLET_TIME = gun_range / bullet_speed
+		bullet.BULLET_TIME = GUN_RANGE / bullet_speed
 		bullet.BULLET_SPEED = bullet_speed
 		bullet.BULLET_DAMAGE = gun_damage
 		bullet.global_transform = $BulletSpawn.global_transform
@@ -85,7 +95,13 @@ func shoot(bullet_speed, gun_range, gun_damage = 1):
 		$MuzzleFlare.restart()
 
 func reload():
+	if !reloading:
+		reloading = true
+		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", self, "reload_immediate")
+
+func reload_immediate():
 	ammo = MAX_AMMO
+	reloading = false
 
 func take_damage(_force, amount):
 	damage += amount

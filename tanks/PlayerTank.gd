@@ -29,4 +29,6 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("action_shoot"):
-		shoot(MAX_SPEED * 1.2, 50)
+		shoot()
+	elif event.is_action_pressed("action_reload"):
+		reload()

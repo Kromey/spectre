@@ -10,9 +10,9 @@ var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var timer = get_tree().create_timer(BULLET_TIME)
-	timer.connect("timeout", self, "queue_free")
+	var _e = timer.connect("timeout", self, "queue_free")
 	
-	$Area.connect("body_entered", self, "collided")
+	_e = $Area.connect("body_entered", self, "collided")
 	
 	velocity = transform.basis.z * -BULLET_SPEED
 

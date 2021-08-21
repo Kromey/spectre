@@ -12,24 +12,25 @@ func _physics_process(delta):
 		var to_target = kill_target.translation.direction_to(translation)
 		var dot = transform.basis.z.dot(to_target)
 
-		var turning_cone = 0.75
+		var facing_cone = 0.75
 		var fire_cone = 0.90
-		if dot > turning_cone:
+		if dot > facing_cone:
 			# Target is in front of us
 			drive(Direction.FORWARD, delta)
 			
 			if dot > fire_cone:
 				# Target is directly in front of us!
 				shoot()
-		elif dot < -turning_cone:
+		elif dot < -facing_cone:
 			# Target is behind us
 			drive(Direction.BACK, delta)
 
 		# Is target left or right of us?
 		var cross = transform.basis.z.cross(to_target).y
-		if cross > 0:
+		var turn_threshold = 0.08
+		if cross > turn_threshold:
 			turn(Direction.LEFT, delta)
-		elif cross < 0:
+		elif cross < -turn_threshold:
 			turn(Direction.RIGHT, delta)
 	
 	if ammo == 0 and !reloading:

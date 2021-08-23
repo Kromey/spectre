@@ -18,7 +18,7 @@ export(float) var MAX_AMMO = 3
 export(float) var FIRE_RATE = 1.5
 export(float) var RELOAD_TIME = 3
 export(float) var GUN_RANGE = 30
-var ammo
+var ammo = 0
 var reloading = false
 
 
@@ -35,7 +35,7 @@ signal dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	reload()
+	reload_immediate()
 
 func _physics_process(delta):
 	falling += GRAVITY * delta

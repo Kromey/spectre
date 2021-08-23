@@ -52,14 +52,11 @@ autostart = true
 
 [node name="AITank" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.664252, 0, 0.747508, 0, 1, 0, -0.747508, 0, -0.664252, 1.13256, 10.6767, 1.86926 )
-MAX_SPEED = 5.0
-GUN_RECOIL = null
 
 [node name="PlayerTank" parent="." groups=[
 "player",
 ] instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.28594, 4.25671 )
-GUN_RANGE = 50.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 12 )

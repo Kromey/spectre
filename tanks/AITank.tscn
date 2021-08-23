@@ -5,3 +5,4 @@
 
 [node name="AITank" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+MAX_SPEED = 5.0

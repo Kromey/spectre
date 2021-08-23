@@ -17,7 +17,7 @@ export(float) var TURN_ACCEL = 8
 export(float) var MAX_AMMO = 3
 export(float) var FIRE_RATE = 1.5
 export(float) var RELOAD_TIME = 3
-export(float) var GUN_RANGE = 50
+export(float) var GUN_RANGE = 30
 var ammo
 var reloading = false
 

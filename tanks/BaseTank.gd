@@ -102,6 +102,8 @@ func reload():
 func reload_immediate():
 	ammo = MAX_AMMO
 	reloading = false
+	# Ensure reloading clears fire rate timer
+	$FireRate.stop()
 
 func take_damage(_force, amount):
 	damage += amount

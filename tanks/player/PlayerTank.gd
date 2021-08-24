@@ -5,6 +5,9 @@ onready var PlayerCamera = find_node("Camera")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	PlayerCamera.make_current()
+	
+	emit_signal("ammo_changed", ammo)
+	emit_signal("damage_changed", damage, MAX_DAMAGE)
 
 func _physics_process(delta):
 	# -----

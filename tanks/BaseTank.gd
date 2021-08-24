@@ -31,6 +31,9 @@ enum Direction {
 
 const Bullet = preload("res://tanks/Bullet.tscn")
 
+signal damage_changed
+signal ammo_changed
+signal reloading
 signal dead
 
 # Called when the node enters the scene tree for the first time.
@@ -82,6 +85,7 @@ func shoot(gun_damage = 1):
 	if ammo > 0 and !reloading and $FireRate.is_stopped():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
+		emit_signal("ammo_changed", ammo)
 		
 		var bullet_speed = MAX_SPEED * 1.2
 		
@@ -96,17 +100,21 @@ func shoot(gun_damage = 1):
 
 func reload():
 	if !reloading:
+		emit_signal("reloading", true)
 		reloading = true
 		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", self, "reload_immediate")
 
 func reload_immediate():
 	ammo = MAX_AMMO
+	emit_signal("ammo_changed", ammo)
 	reloading = false
+	emit_signal("reloading", false)
 	# Ensure reloading clears fire rate timer
 	$FireRate.stop()
 
 func take_damage(_force, amount):
 	damage += amount
+	emit_signal("damage_changed", damage, MAX_DAMAGE)
 	
 	if damage >= MAX_DAMAGE:
 		die()

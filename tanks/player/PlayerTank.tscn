@@ -7,6 +7,7 @@
 
 [node name="PlayerTank" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+MAX_DAMAGE = 3
 
 [node name="Camera" type="Camera" parent="CSGCombiner/Body/Turret" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )
@@ -24,3 +25,7 @@ omni_attenuation = 0.435275
 
 [node name="HeadlightL" parent="CSGCombiner/Body" index="2" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )
+
+[connection signal="ammo_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_ammo"]
+[connection signal="damage_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_damage"]
+[connection signal="reloading" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="reloading"]

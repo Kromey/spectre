@@ -119,6 +119,9 @@ func take_damage(_force, amount):
 	if damage >= MAX_DAMAGE:
 		die()
 
+func repair_damage(amount):
+	take_damage(0, -amount)
+
 func die():
 	emit_signal("dead")
 	queue_free()

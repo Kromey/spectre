@@ -3,6 +3,7 @@ extends Spatial
 #const PillBomb = preload("res://PillBomb.tscn")
 const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
+const ArmorPickup = preload("res://ArmorPickup.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,14 @@ func _ready():
 		tank.add_to_group("enemies")
 		add_child(tank)
 		_e = tank.connect("dead", self, "tank_death")
+	
+	for _i in 35:
+		var x = rng.randf_range(-90, 90)
+		var z = rng.randf_range(-90, 90)
+		
+		var pickup = ArmorPickup.instance()
+		pickup.translate(Vector3(x, 0, z))
+		add_child(pickup)
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

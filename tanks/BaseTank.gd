@@ -113,7 +113,7 @@ func reload_immediate():
 	$FireRate.stop()
 
 func take_damage(_force, amount):
-	damage += amount
+	damage = clamp(damage + amount, 0, MAX_DAMAGE)
 	emit_signal("damage_changed", damage, MAX_DAMAGE)
 	
 	if damage >= MAX_DAMAGE:

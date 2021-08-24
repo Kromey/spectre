@@ -36,7 +36,7 @@ func _ready():
 # compiled and eliminates "first-shot lag"
 func first_shot(player):
 	var gun_range = player.GUN_RANGE
-	player.GUN_RANGE = 0.2
+	player.GUN_RANGE = 0
 	player.shoot()
 	player.GUN_RANGE = gun_range
 	player.reload_immediate()

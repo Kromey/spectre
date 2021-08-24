@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://tanks/player/PlayerHUD.gd" type="Script" id=2]
@@ -20,6 +20,23 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "Damage"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("GUI/Armor:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="PlayerHUD" type="MarginContainer"]
 anchor_right = 1.0
 margin_bottom = 40.0
@@ -39,7 +56,7 @@ margin_right = 1004.0
 margin_bottom = 64.0
 
 [node name="Armor" type="HSplitContainer" parent="GUI"]
-margin_right = 805.0
+margin_right = 831.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 
@@ -51,13 +68,12 @@ text = "Armor:"
 
 [node name="Value" type="Label" parent="GUI/Armor"]
 margin_left = 136.0
-margin_right = 805.0
+margin_right = 831.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "1"
 
 [node name="Ammo" type="HSplitContainer" parent="GUI"]
-margin_left = 817.0
+margin_left = 843.0
 margin_right = 984.0
 margin_bottom = 44.0
 
@@ -69,10 +85,16 @@ text = "Ammo:"
 
 [node name="Value" type="Label" parent="GUI/Ammo"]
 margin_left = 141.0
-margin_right = 167.0
+margin_right = 141.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "3"
 
 [node name="ReloadingAnimation" type="AnimationPlayer" parent="."]
 anims/Reloading = SubResource( 1 )
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/Damage = SubResource( 2 )
+
+[node name="DurationTimer" type="Timer" parent="DamageAnimation"]
+
+[connection signal="timeout" from="DamageAnimation/DurationTimer" to="." method="damage_anim_elapsed"]

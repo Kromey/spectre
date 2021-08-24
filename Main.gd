@@ -46,8 +46,8 @@ func spawn_pickup(scene):
 	
 	var pickup = scene.instance()
 	pickup.translate(Vector3(x, 0, z))
-	add_child(pickup)
 	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
+	call_deferred("add_child", pickup)
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

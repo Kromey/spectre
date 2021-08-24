@@ -15,6 +15,7 @@ size = Vector3( 0.05, 0.05, 0.05 )
 [sub_resource type="ParticlesMaterial" id=4]
 
 [sub_resource type="SpatialMaterial" id=5]
+flags_vertex_lighting = true
 flags_do_not_receive_shadows = true
 
 [sub_resource type="CubeMesh" id=6]

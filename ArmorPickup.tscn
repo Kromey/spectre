@@ -45,7 +45,7 @@ tracks/0/keys = {
 }
 
 [node name="ArmorPickup" type="Spatial"]
-transform = Transform( -0.800235, 0, 0.474879, 0, 0.93053, 0, -0.474879, 0, -0.800235, 0, 0.05, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
 script = ExtResource( 2 )
 
 [node name="Area" type="Area" parent="."]

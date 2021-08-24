@@ -97,4 +97,4 @@ anims/Damage = SubResource( 2 )
 
 [node name="DurationTimer" type="Timer" parent="DamageAnimation"]
 
-[connection signal="timeout" from="DamageAnimation/DurationTimer" to="." method="damage_anim_elapsed"]
+[connection signal="timeout" from="DamageAnimation/DurationTimer" to="." method="reset_damage_animation"]

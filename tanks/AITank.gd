@@ -5,8 +5,8 @@ export(float) var MAX_CHASE_DISTANCE = 40
 var kill_target
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	kill_target = get_tree().get_nodes_in_group("player")[0]
+#func _ready():
+#	kill_target = get_tree().get_nodes_in_group("player")[0]
 
 func _physics_process(delta):
 	if is_instance_valid(kill_target) and translation.distance_to(kill_target.translation) <= MAX_CHASE_DISTANCE:
@@ -34,6 +34,10 @@ func _physics_process(delta):
 			turn(Direction.LEFT, delta)
 		elif cross < -turn_threshold:
 			turn(Direction.RIGHT, delta)
+	else:
+		var players = get_tree().get_nodes_in_group("player")
+		if players.size() > 0:
+			kill_target = players[0]
 	
 	if ammo == 0 and !reloading:
 		reload()

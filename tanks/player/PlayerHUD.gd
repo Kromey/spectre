@@ -11,4 +11,9 @@ func update_ammo(new_value):
 
 func reloading(is_reloading):
 	if is_reloading:
+		$ReloadingAnimation.play("Reloading")
 		update_ammo(0)
+	else:
+		if $ReloadingAnimation.is_playing():
+			$ReloadingAnimation.seek(0, true)
+			$ReloadingAnimation.stop(true)

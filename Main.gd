@@ -34,12 +34,20 @@ func _ready():
 		_e = tank.connect("dead", self, "tank_death")
 	
 	for _i in 35:
-		var x = rng.randf_range(-90, 90)
-		var z = rng.randf_range(-90, 90)
-		
-		var pickup = ArmorPickup.instance()
-		pickup.translate(Vector3(x, 0, z))
-		add_child(pickup)
+		spawn_pickup(ArmorPickup)
+
+func spawn_pickup(scene):
+	print("Spawning pickup...")
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	var x = rng.randf_range(-90, 90)
+	var z = rng.randf_range(-90, 90)
+	
+	var pickup = scene.instance()
+	pickup.translate(Vector3(x, 0, z))
+	add_child(pickup)
+	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

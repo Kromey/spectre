@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
-[ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
-[ext_resource path="res://tanks/PlayerTank.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -46,19 +44,5 @@ environment = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 shadow_enabled = true
 
-[node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 2.5
-autostart = true
-
-[node name="AITank" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.664252, 0, 0.747508, 0, 1, 0, -0.747508, 0, -0.664252, 1.13256, 10.6767, 1.86926 )
-
-[node name="PlayerTank" parent="." groups=[
-"player",
-] instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.28594, 4.25671 )
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 12 )
-
-[connection signal="timeout" from="RespawnTimer" to="." method="respawn"]

@@ -1,8 +1,10 @@
 extends "res://tanks/BaseTank.gd"
 
+onready var PlayerCamera = find_node("Camera")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	PlayerCamera.make_current()
 
 func _physics_process(delta):
 	# -----

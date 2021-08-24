@@ -13,7 +13,7 @@ extents = Vector3( 100, 0, 100 )
 shader = ExtResource( 1 )
 shader_param/BASE_COLOR = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 shader_param/LINE_WIDTH = 0.02
-shader_param/LINE_COLOR = Color( 0.0196078, 0.976471, 0.101961, 1 )
+shader_param/LINE_COLOR = Color( 0.0588235, 0.470588, 0.0941176, 1 )
 shader_param/COLUMN_COUNT = 100.0
 shader_param/ROW_COUNT = 100.0
 

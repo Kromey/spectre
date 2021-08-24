@@ -1,7 +1,7 @@
 extends Spatial
 
 #const PillBomb = preload("res://PillBomb.tscn")
-const PlayerTank = preload("res://tanks/PlayerTank.tscn")
+const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
 
 

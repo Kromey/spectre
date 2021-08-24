@@ -3,10 +3,12 @@ extends Control
 onready var Armor = find_node("Armor")
 onready var Ammo = find_node("Ammo")
 
+var last_damage = 0
+
 func update_damage(new_value, max_value):
 	Armor.get_node("Value").text = str(max_value - new_value)
 	
-	if new_value > 0:
+	if new_value > last_damage:
 		$DamageAnimation.play("Damage")
 		var duration = $DamageAnimation.get_animation("Damage").length * 5
 		if max_value - new_value > 1:
@@ -16,6 +18,8 @@ func update_damage(new_value, max_value):
 	elif max_value - new_value > 1:
 		# If we're repairing from 1 armor, we want to stop blinking
 		reset_damage_animation()
+	
+	last_damage = new_value
 
 func reset_damage_animation():
 	if $DamageAnimation.is_playing():

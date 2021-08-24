@@ -92,7 +92,7 @@ func shoot(gun_damage = 1):
 		bullet.global_transform = $BulletSpawn.global_transform
 		get_tree().root.add_child(bullet)
 		
-		#$MuzzleFlare.restart()
+		$MuzzleFlare.restart()
 
 func reload():
 	if !reloading:

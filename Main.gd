@@ -4,6 +4,7 @@ extends Spatial
 const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
 const ArmorPickup = preload("res://ArmorPickup.tscn")
+const Flag = preload("res://FlagArea.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +12,7 @@ func _ready():
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
 	player.add_to_group("player")
+	GameStats.add_to_score(0)
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
 	call_deferred("first_shot", player)
@@ -35,6 +37,15 @@ func _ready():
 	
 	for _i in 35:
 		spawn_pickup(ArmorPickup)
+	
+	for _i in 5:
+		var x = rng.randf_range(-90, 90)
+		var z = rng.randf_range(-90, 90)
+		
+		var flag = Flag.instance()
+		flag.translate(Vector3(x, 0, z))
+		add_child(flag)
+		_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
 
 func spawn_pickup(scene):
 	print("Spawning pickup...")
@@ -48,6 +59,11 @@ func spawn_pickup(scene):
 	pickup.translate(Vector3(x, 0, z))
 	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
 	call_deferred("add_child", pickup)
+
+func _on_flag_pickup(body, flag):
+	if body.is_in_group("player"):
+		GameStats.add_to_score(1)
+		flag.queue_free()
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

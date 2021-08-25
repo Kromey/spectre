@@ -29,3 +29,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )
 [connection signal="ammo_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_ammo"]
 [connection signal="damage_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_damage"]
 [connection signal="reloading" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="reloading"]
+[connection signal="score_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_score"]

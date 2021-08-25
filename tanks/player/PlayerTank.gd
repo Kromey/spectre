@@ -1,6 +1,9 @@
 extends "res://tanks/BaseTank.gd"
 
 onready var PlayerCamera = find_node("Camera")
+onready var HUD = find_node("PlayerHUD")
+
+signal score_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,6 +11,7 @@ func _ready():
 	
 	emit_signal("ammo_changed", ammo)
 	emit_signal("damage_changed", damage, MAX_DAMAGE)
+	emit_signal("score_changed", GameStats.player_score)
 
 func _physics_process(delta):
 	# -----
@@ -37,3 +41,6 @@ func _input(event):
 		shoot()
 	elif event.is_action_pressed("action_reload"):
 		reload()
+
+func update_score(score):
+	emit_signal("score_changed", score)

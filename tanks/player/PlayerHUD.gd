@@ -2,6 +2,7 @@ extends Control
 
 onready var Armor = find_node("Armor")
 onready var Ammo = find_node("Ammo")
+onready var Score = find_node("Score")
 
 var last_damage = 0
 
@@ -37,3 +38,6 @@ func reloading(is_reloading):
 		if $ReloadingAnimation.is_playing():
 			$ReloadingAnimation.seek(0, true)
 			$ReloadingAnimation.stop(true)
+
+func update_score(score):
+	Score.get_node("Value").text = str(score)

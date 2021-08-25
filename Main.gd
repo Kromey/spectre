@@ -6,6 +6,12 @@ const AITank = preload("res://tanks/AITank.tscn")
 const ArmorPickup = preload("res://ArmorPickup.tscn")
 const Flag = preload("res://Flag.tscn")
 
+const Walls = [
+	preload("res://obstacles/Wall.tscn"),
+	preload("res://obstacles/WindowedWall.tscn"),
+	preload("res://obstacles/SawTeeth.tscn"),
+]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +25,19 @@ func _ready():
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
+	
+	for _i in 200:
+		var x = rng.randi_range(-90, 90)
+		var z = rng.randi_range(-90, 90)
+		var r = rng.randi_range(0, 1) * PI / 2
+		var i = rng.randi_range(0, Walls.size() + 1) # Allow extra numbers for bias
+		if i >= Walls.size():
+			i = 0 # Make the first wall more likely to be chosen
+		
+		var wall = Walls[i].instance()
+		wall.translate(Vector3(x, 0, z))
+		wall.rotate_y(r)
+		add_child(wall)
 	
 	for _i in 20:
 		var x = rng.randf_range(75, 90)

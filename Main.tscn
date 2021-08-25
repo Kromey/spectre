@@ -1,10 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
-[ext_resource path="res://obstacles/Wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
-[ext_resource path="res://obstacles/SawTeeth.tscn" type="PackedScene" id=4]
-[ext_resource path="res://obstacles/WindowedWall.tscn" type="PackedScene" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -49,12 +46,3 @@ shadow_enabled = true
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, -1.23634e-07, 1.23634e-07, 0, 0.707107, 0.707107, -1.74846e-07, -0.707107, 0.707107, 3.49691e-06, 10, 20 )
-
-[node name="SawTeeth" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
-
-[node name="Wall" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10 )
-
-[node name="WindowedWall" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10 )

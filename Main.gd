@@ -26,7 +26,8 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	for _i in 200:
+	var num_walls = 0
+	while num_walls < 250:
 		var x = rng.randi_range(-90, 90)
 		var z = rng.randi_range(-90, 90)
 		var r = rng.randi_range(0, 1) * PI / 2
@@ -37,34 +38,45 @@ func _ready():
 		var wall = Walls[i].instance()
 		wall.translate(Vector3(x, 0, z))
 		wall.rotate_y(r)
-		add_child(wall)
-	
-	for _i in 20:
-		var x = rng.randf_range(75, 90)
-		var z = rng.randf_range(75, 90)
-		
-		if rng.randi_range(0, 1) == 1:
-			x = -x
-		if rng.randi_range(0, 1) == 1:
-			z = -z
-		
-		var tank = AITank.instance()
-		tank.translate(Vector3(x, 1, z))
-		tank.add_to_group("enemies")
-		add_child(tank)
-		_e = tank.connect("dead", self, "tank_death")
+		if wall.translation.distance_to(player.translation) > 3:
+			add_child(wall)
+			num_walls += 1
+	print("Spawned ", num_walls, " walls")
 	
 	for _i in 35:
 		spawn_pickup(ArmorPickup)
 	
-	for _i in 5:
+	var num_flags = 0
+	while num_flags < 5:
 		var x = rng.randf_range(-90, 90)
 		var z = rng.randf_range(-90, 90)
 		
 		var flag = Flag.instance()
 		flag.translate(Vector3(x, 0, z))
-		add_child(flag)
-		_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
+		if flag.translation.distance_to(player.translation) > 50:
+			add_child(flag)
+			_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
+			num_flags += 1
+			
+			var tanks = rng.randi_range(3, 7)
+			for _t in tanks:
+				spawn_tank(AITank, flag.translation, 0.5, 4.5)
+	
+	for _i in 35:
+		spawn_tank(AITank, player.translation, 50, 95)
+
+func spawn_tank(scene, around, min_dist, max_dist):
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	var local_pos = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2 * PI))
+	local_pos *= rng.randf_range(min_dist, max_dist)
+	
+	var tank = scene.instance()
+	tank.translate(around + local_pos + Vector3.UP)
+	tank.add_to_group("enemies")
+	add_child(tank)
+	var _e = tank.connect("dead", self, "tank_death")
 
 func spawn_pickup(scene):
 	var rng = RandomNumberGenerator.new()

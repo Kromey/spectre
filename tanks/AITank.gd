@@ -19,7 +19,7 @@ func _physics_process(delta):
 		if dot > facing_cone:
 			# Target is in front of us
 			drive(Direction.FORWARD, delta)
-			
+
 			if dot > fire_cone:
 				# Target is directly in front of us!
 				shoot()

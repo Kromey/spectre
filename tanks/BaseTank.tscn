@@ -77,7 +77,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, -0.51 )
 [node name="MuzzleFlare" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.125, -0.4746 )
 emitting = false
-amount = 75
+amount = 175
 lifetime = 0.2
 one_shot = true
 explosiveness = 1.0

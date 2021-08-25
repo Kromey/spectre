@@ -41,10 +41,8 @@ func _ready():
 	reload_immediate()
 
 func _physics_process(delta):
-	falling += GRAVITY * delta
-	
-	var vel = move_and_slide(Vector3.DOWN * falling, Vector3.UP)
-	falling = -vel.y
+	velocity += Vector3.DOWN * GRAVITY * delta
+	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	if translation.y < -5:
 		take_damage(Vector3.DOWN, MAX_DAMAGE * MAX_DAMAGE)
@@ -65,8 +63,6 @@ func drive(direction, delta):
 		hvel = hvel.linear_interpolate(target, accel * delta)
 		velocity.x = hvel.x
 		velocity.z = hvel.z
-	
-	velocity = move_and_slide(velocity, Vector3.UP)
 
 func turn(direction, delta):
 	if is_on_floor():

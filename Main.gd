@@ -4,7 +4,7 @@ extends Spatial
 const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
 const ArmorPickup = preload("res://ArmorPickup.tscn")
-const Flag = preload("res://FlagArea.tscn")
+const Flag = preload("res://Flag.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -48,7 +48,6 @@ func _ready():
 		_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
 
 func spawn_pickup(scene):
-	print("Spawning pickup...")
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	

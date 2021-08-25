@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://materials/Obstacles.material" type="Material" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.1, 0.1 )
+
+[node name="SawTeeth" type="StaticBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+shape = SubResource( 1 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+material_override = ExtResource( 1 )
+
+[node name="SawTooth1" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth2" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth3" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth4" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth5" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth6" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth7" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth8" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth9" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth10" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth11" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth12" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth13" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth14" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth15" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth16" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth17" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth18" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2
+
+[node name="SawTooth19" type="CSGPolygon" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.1 )
+polygon = PoolVector2Array( 0, 0, 0.1, 0.2, 0.2, 0 )
+depth = 0.2

@@ -13,10 +13,9 @@ emission_sphere_radius = 0.01
 direction = Vector3( 0, -5, -5 )
 spread = 180.0
 flatness = 1.0
-gravity = Vector3( 0, 0, 4 )
+gravity = Vector3( 0, 0, 6 )
 initial_velocity = 3.0
 initial_velocity_random = 0.75
-damping = 2.0
 angle = 360.0
 angle_random = 1.0
 

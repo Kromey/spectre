@@ -53,6 +53,7 @@ func _ready():
 		
 		var flag = Flag.instance()
 		flag.translate(Vector3(x, 0, z))
+		flag.add_to_group("goals")
 		if flag.translation.distance_to(player.translation) > 50:
 			add_child(flag)
 			_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])

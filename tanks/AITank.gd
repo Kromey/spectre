@@ -9,8 +9,9 @@ func _physics_process(delta):
 	if !is_instance_valid(current_target) or current_target.is_in_group("waypoints"):
 		current_target = select_target(current_target)
 	
-	if !engage_target(current_target, delta, current_target.is_in_group("player")):
-		current_target = null
+	if is_instance_valid(current_target):
+		if !engage_target(current_target, delta, current_target.is_in_group("player")):
+			current_target = null
 	
 	if ammo == 0 and !reloading:
 		reload()
@@ -41,7 +42,8 @@ func set_patrol_target():
 	target.translation.y = 0.1
 	
 	if abs(target.translation.x) > 95 or abs(target.translation.z) > 95:
-		return set_patrol_target()
+		# Didn't get a valid target, we'll just try again next frame
+		return null
 	else:
 		get_tree().root.add_child(target)
 		# Ensure we clean up our waypoints even if we get stuck/abandon them

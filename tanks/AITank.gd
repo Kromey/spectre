@@ -67,6 +67,7 @@ func engage_target(target, delta, attack = true):
 	var speed = 1.0
 	if target.is_in_group("waypoints"):
 		speed = 0.3 # Patrol slower
+	
 	if dot > facing_cone:
 		# Target is in front of us
 		drive(Direction.FORWARD * speed, delta)

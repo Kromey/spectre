@@ -31,6 +31,7 @@ enum Direction {
 }
 
 const Bullet = preload("res://tanks/Bullet.tscn")
+const BOOM = preload("res://tanks/BoomTheTank.tscn")
 
 signal damage_changed
 signal ammo_changed
@@ -121,5 +122,9 @@ func repair_damage(amount):
 	take_damage(0, -amount)
 
 func die(killer):
+	var boom = BOOM.instance()
+	boom.translation = translation
+	get_parent().add_child(boom)
+	
 	emit_signal("dead", killer)
 	queue_free()

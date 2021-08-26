@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://materials/BaseTank.material" type="Material" id=1]
+[ext_resource path="res://tanks/BoomTheTank.gd" type="Script" id=3]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+initial_velocity = 5.0
+initial_velocity_random = 0.2
+angular_velocity = 3.0
+angle = 360.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 1.0
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 1 )
+size = Vector3( 0.02, 0.02, 0.02 )
+
+[node name="BoomTheTank" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Particles" type="Particles" parent="."]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )

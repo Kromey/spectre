@@ -7,9 +7,22 @@ const ArmorPickup = preload("res://ArmorPickup.tscn")
 const Flag = preload("res://Flag.tscn")
 
 const Walls = [
+	preload("res://obstacles/Wall.tscn"), # Basic wall should be the most common
+	preload("res://obstacles/Wall.tscn"),
+	preload("res://obstacles/Wall.tscn"),
+	preload("res://obstacles/Wall.tscn"),
 	preload("res://obstacles/Wall.tscn"),
 	preload("res://obstacles/WindowedWall.tscn"),
+	preload("res://obstacles/WindowedWall.tscn"),
+	preload("res://obstacles/WindowedWall.tscn"),
 	preload("res://obstacles/SawTeeth.tscn"),
+	preload("res://obstacles/SawTeeth.tscn"),
+	preload("res://obstacles/SawTeeth.tscn"),
+	preload("res://obstacles/CWall.tscn"),
+	preload("res://obstacles/Cross.tscn"),
+	preload("res://obstacles/WindowedCross.tscn"),
+	preload("res://obstacles/HalfWall.tscn"),
+	preload("res://obstacles/HalfWall.tscn"),
 ]
 
 
@@ -30,10 +43,8 @@ func _ready():
 	while num_walls < 250:
 		var x = rng.randi_range(-90, 90)
 		var z = rng.randi_range(-90, 90)
-		var r = rng.randi_range(0, 1) * PI / 2
-		var i = rng.randi_range(0, Walls.size() + 1) # Allow extra numbers for bias
-		if i >= Walls.size():
-			i = 0 # Make the first wall more likely to be chosen
+		var r = rng.randi_range(0, 3) * PI / 2
+		var i = rng.randi_range(0, Walls.size() - 1) # Range is inclusive
 		
 		var wall = Walls[i].instance()
 		wall.translate(Vector3(x, 0, z))

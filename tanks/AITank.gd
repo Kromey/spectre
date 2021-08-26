@@ -45,6 +45,8 @@ func set_patrol_target():
 		return set_patrol_target()
 	else:
 		get_tree().root.add_child(target)
+		# Ensure we clean up our waypoints even if we get stuck/abandon them
+		var _e = get_tree().create_timer(30).connect("timeout", target, "queue_free")
 		
 		return target
 
@@ -56,7 +58,6 @@ func engage_target(target, delta, attack = true):
 	if dist > MAX_CHASE_DISTANCE:
 		return false
 	elif dist < 1.5 and target.is_in_group("waypoints"):
-		target.queue_free()
 		return false
 	
 	var to_target = target.translation.direction_to(translation)

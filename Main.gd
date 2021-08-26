@@ -112,3 +112,5 @@ func tank_death(killer):
 	print("Enemy tank died!")
 	if is_instance_valid(killer) and killer.is_in_group("player"):
 		print("\tWe blame the player!")
+	elif is_instance_valid(killer) and killer.is_in_group("enemies"):
+		print("\tFriendly fire casualty!")

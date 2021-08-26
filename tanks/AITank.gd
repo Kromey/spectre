@@ -41,9 +41,12 @@ func set_patrol_target():
 	target.translate(translation + target_pos)
 	target.translation.y = 0.1
 	
-	get_tree().root.add_child(target)
-	
-	return target
+	if abs(target.translation.x) > 95 or abs(target.translation.z) > 95:
+		return set_patrol_target()
+	else:
+		get_tree().root.add_child(target)
+		
+		return target
 
 func engage_target(target, delta, attack = true):
 	if !is_instance_valid(target):

@@ -85,6 +85,8 @@ func spawn_tank(scene, around, min_dist, max_dist):
 	
 	var local_pos = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2 * PI))
 	local_pos *= rng.randf_range(min_dist, max_dist)
+	local_pos.x = clamp(local_pos.x, -95, 95)
+	local_pos.z = clamp(local_pos.z, -95, 95)
 	
 	var tank = scene.instance()
 	tank.translate(around + local_pos + Vector3.UP)

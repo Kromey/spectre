@@ -18,6 +18,7 @@ export(float) var MAX_AMMO = 3
 export(float) var FIRE_RATE = 1.5
 export(float) var RELOAD_TIME = 3
 export(float) var GUN_RANGE = 30
+export(float) var BULLET_SPEED = 0
 var ammo = 0
 var reloading = false
 
@@ -38,6 +39,8 @@ signal dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if BULLET_SPEED <= 0:
+		BULLET_SPEED = MAX_SPEED + 2
 	reload_immediate()
 
 func _physics_process(delta):
@@ -83,11 +86,9 @@ func shoot(gun_damage = 1):
 		ammo -= 1
 		emit_signal("ammo_changed", ammo)
 		
-		var bullet_speed = MAX_SPEED + 2
-		
 		var bullet = Bullet.instance()
-		bullet.BULLET_TIME = GUN_RANGE / bullet_speed
-		bullet.BULLET_SPEED = bullet_speed
+		bullet.BULLET_TIME = GUN_RANGE / BULLET_SPEED
+		bullet.BULLET_SPEED = BULLET_SPEED
 		bullet.BULLET_DAMAGE = gun_damage
 		bullet.shooter = self
 		bullet.global_transform = $BulletSpawn.global_transform

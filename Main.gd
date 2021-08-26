@@ -3,6 +3,7 @@ extends Spatial
 #const PillBomb = preload("res://PillBomb.tscn")
 const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
+const Turret = preload("res://tanks/Turret.tscn")
 const ArmorPickup = preload("res://ArmorPickup.tscn")
 const Flag = preload("res://Flag.tscn")
 
@@ -73,6 +74,7 @@ func _ready():
 			var tanks = rng.randi_range(3, 7)
 			for _t in tanks:
 				spawn_tank(AITank, flag.translation, 0.5, 4.5)
+			spawn_tank(Turret, flag.translation, 0.5, 1.5)
 	
 	for _i in 35:
 		spawn_tank(AITank, player.translation, 50, 95)

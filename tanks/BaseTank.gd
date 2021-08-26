@@ -83,12 +83,13 @@ func shoot(gun_damage = 1):
 		ammo -= 1
 		emit_signal("ammo_changed", ammo)
 		
-		var bullet_speed = MAX_SPEED * 1.2
+		var bullet_speed = MAX_SPEED + 2
 		
 		var bullet = Bullet.instance()
 		bullet.BULLET_TIME = GUN_RANGE / bullet_speed
 		bullet.BULLET_SPEED = bullet_speed
 		bullet.BULLET_DAMAGE = gun_damage
+		bullet.shooter = self
 		bullet.global_transform = $BulletSpawn.global_transform
 		get_tree().root.add_child(bullet)
 		
@@ -108,16 +109,16 @@ func reload_immediate():
 	# Ensure reloading clears fire rate timer
 	$FireRate.stop()
 
-func take_damage(_force, amount):
+func take_damage(_force, amount, shooter = null):
 	damage = clamp(damage + amount, 0, MAX_DAMAGE)
 	emit_signal("damage_changed", damage, MAX_DAMAGE)
 	
 	if damage >= MAX_DAMAGE:
-		die()
+		die(shooter)
 
 func repair_damage(amount):
 	take_damage(0, -amount)
 
-func die():
-	emit_signal("dead")
+func die(killer):
+	emit_signal("dead", killer)
 	queue_free()

@@ -6,6 +6,7 @@ export var BULLET_DAMAGE = 1.0
 
 var hit_something = false
 var velocity
+var shooter
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,8 +21,12 @@ func _physics_process(delta):
 	global_translate(velocity * delta)
 
 func collided(target):
+	if target == shooter:
+		# Ugly, shouldn't-be-necessary hack to prevent AITanks shooting themselves
+		return
+	
 	if !hit_something and target.has_method("take_damage"):
-		target.take_damage(velocity, BULLET_DAMAGE)
+		target.take_damage(velocity, BULLET_DAMAGE, shooter)
 	
 	hit_something = true
 	queue_free()

@@ -105,8 +105,10 @@ func first_shot(player):
 	player.GUN_RANGE = gun_range
 	player.reload_immediate()
 
-func player_death():
+func player_death(_killer):
 	print("Player died!")
 
-func tank_death():
+func tank_death(killer):
 	print("Enemy tank died!")
+	if is_instance_valid(killer) and killer.is_in_group("player"):
+		print("\tWe blame the player!")

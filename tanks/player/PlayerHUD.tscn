@@ -115,23 +115,23 @@ margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 
-[node name="Level" type="HSplitContainer" parent="GUI/GUIRight"]
+[node name="Kills" type="HSplitContainer" parent="GUI/GUIRight"]
 margin_top = 48.0
 margin_right = 157.0
 margin_bottom = 92.0
 
-[node name="Label" type="Label" parent="GUI/GUIRight/Level"]
-margin_right = 114.0
+[node name="Label" type="Label" parent="GUI/GUIRight/Kills"]
+margin_right = 87.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "Level:"
+text = "Kills:"
 
-[node name="Value" type="Label" parent="GUI/GUIRight/Level"]
-margin_left = 126.0
+[node name="Value" type="Label" parent="GUI/GUIRight/Kills"]
+margin_left = 99.0
 margin_right = 157.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "1"
+text = "0"
 
 [node name="ReloadingAnimation" type="AnimationPlayer" parent="."]
 anims/Reloading = SubResource( 1 )

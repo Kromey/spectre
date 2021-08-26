@@ -6,8 +6,8 @@ export(float) var MAX_CHASE_DISTANCE = 80
 var current_target
 
 func _physics_process(delta):
-	if !is_instance_valid(current_target):
-		current_target = select_target()
+	if !is_instance_valid(current_target) or current_target.is_in_group("waypoints"):
+		current_target = select_target(current_target)
 	
 	if !engage_target(current_target, delta, current_target.is_in_group("player")):
 		current_target = null
@@ -15,9 +15,8 @@ func _physics_process(delta):
 	if ammo == 0 and !reloading:
 		reload()
 
-func select_target():
+func select_target(target):
 	var dist = INF
-	var target = null
 	for ptarget in get_tree().get_nodes_in_group("player"):
 		var target_dist = translation.distance_to(ptarget.translation)
 		if target_dist <= MAX_ENGAGE_DISTANCE and target_dist < dist:

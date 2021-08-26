@@ -3,6 +3,7 @@ extends Control
 onready var Armor = find_node("Armor")
 onready var Ammo = find_node("Ammo")
 onready var Score = find_node("Score")
+onready var Kills = find_node("Kills")
 
 var last_damage = 0
 
@@ -41,3 +42,6 @@ func reloading(is_reloading):
 
 func update_score(score):
 	Score.get_node("Value").text = str(score)
+
+func update_kills(kills):
+	Kills.get_node("Value").text = str(kills)

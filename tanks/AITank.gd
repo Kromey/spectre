@@ -6,8 +6,10 @@ export(float) var MAX_CHASE_DISTANCE = 80
 var current_target
 
 func _physics_process(delta):
-	current_target = select_target()
-	if !engage_target(current_target, delta):
+	if !is_instance_valid(current_target):
+		current_target = select_target()
+	
+	if !engage_target(current_target, delta, current_target.is_in_group("player")):
 		current_target = null
 	
 	if ammo == 0 and !reloading:
@@ -22,6 +24,25 @@ func select_target():
 			target = ptarget
 			dist = target_dist
 	
+	if is_instance_valid(target):
+		return target
+	else:
+		return set_patrol_target()
+
+func set_patrol_target():
+	var target = Position3D.new()
+	target.add_to_group("waypoints")
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	var target_pos = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2 * PI))
+	target_pos *= rng.randf_range(3, 8)
+	target.translate(translation + target_pos)
+	target.translation.y = 0.1
+	
+	get_tree().root.add_child(target)
+	
 	return target
 
 func engage_target(target, delta, attack = true):
@@ -31,22 +52,28 @@ func engage_target(target, delta, attack = true):
 	var dist = translation.distance_to(target.translation)
 	if dist > MAX_CHASE_DISTANCE:
 		return false
+	elif dist < 1.5 and target.is_in_group("waypoints"):
+		target.queue_free()
+		return false
 	
 	var to_target = target.translation.direction_to(translation)
 	var dot = transform.basis.z.dot(to_target)
 
 	var facing_cone = 0.75
 	var fire_cone = 0.90
+	var speed = 1.0
+	if target.is_in_group("waypoints"):
+		speed = 0.3 # Patrol slower
 	if dot > facing_cone:
 		# Target is in front of us
-		drive(Direction.FORWARD, delta)
+		drive(Direction.FORWARD * speed, delta)
 
 		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
 			# Target is directly in front of us and in range!
 			shoot()
 	elif dot < -facing_cone:
 		# Target is behind us
-		drive(Direction.BACK, delta)
+		drive(Direction.BACK * speed, delta)
 
 	# Is target left or right of us?
 	var cross = transform.basis.z.cross(to_target).y

@@ -6,7 +6,6 @@
 extents = Vector3( 0.1, 0.15, 0.1 )
 
 [node name="Turret" instance=ExtResource( 1 )]
-MAX_DAMAGE = 2
 MAX_SPEED = 0.0
 ACCEL = 0.0
 TURN_RATE = 2.0

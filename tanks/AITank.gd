@@ -5,6 +5,19 @@ export(float) var MAX_CHASE_DISTANCE = 80
 
 var current_target
 
+var ray_angles = []
+var interest = []
+var danger = []
+export(int) var NUM_RAYS = 16
+
+func _ready():
+	ray_angles.resize(NUM_RAYS)
+	interest.resize(NUM_RAYS)
+	danger.resize(NUM_RAYS)
+	
+	for i in NUM_RAYS:
+		ray_angles[i] = i * 2 * PI / NUM_RAYS
+
 func _physics_process(delta):
 	if !is_instance_valid(current_target) or current_target.is_in_group("waypoints"):
 		current_target = select_target(current_target)
@@ -61,8 +74,8 @@ func engage_target(target, delta, attack = true):
 	elif dist < 1.5 and target.is_in_group("waypoints"):
 		return false
 	
-	var to_target = target.translation.direction_to(translation)
-	var dot = transform.basis.z.dot(to_target)
+	var to_target = get_direction_to(target)
+	var dot = (-transform.basis.z).dot(to_target)
 
 	var facing_cone = 0.75
 	var fire_cone = 0.90
@@ -74,9 +87,9 @@ func engage_target(target, delta, attack = true):
 		# Target is in front of us
 		drive(Direction.FORWARD * speed, delta)
 
-		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
-			# Target is directly in front of us and in range!
-			shoot()
+#		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
+#			# Target is directly in front of us and in range!
+#			shoot()
 	elif dot < -facing_cone:
 		# Target is behind us
 		drive(Direction.BACK * speed, delta)
@@ -85,12 +98,41 @@ func engage_target(target, delta, attack = true):
 	var cross = transform.basis.z.cross(to_target).y
 	var turn_threshold = 0.08
 	if cross > turn_threshold:
-		turn(Direction.LEFT, delta)
-	elif cross < -turn_threshold:
 		turn(Direction.RIGHT, delta)
+	elif cross < -turn_threshold:
+		turn(Direction.LEFT, delta)
 	elif dot < 0:
 		# Target is behind us AND we're not already turning
 		# Turn in an arbitrary direction
 		turn(Direction.RIGHT, delta)
 	
 	return true
+
+func get_ray(i):
+	return transform.basis.z.rotated(Vector3.UP, ray_angles[i])
+
+func get_direction_to(target):
+	set_interest(target)
+	set_danger()
+	
+	return get_interest_direction()
+
+func set_interest(target):
+	var direction = translation.direction_to(target.translation)
+	for i in NUM_RAYS:
+		var d = get_ray(i).dot(direction)
+		interest[i] = max(0, d)
+
+func set_danger():
+	var space_state = get_world().direct_space_state
+	for i in NUM_RAYS:
+		var result = space_state.intersect_ray(translation, translation + get_ray(i) * -4, [self])
+		danger[i] = 1.0 if result else 0.0
+
+func get_interest_direction():
+	var vec = Vector3.ZERO
+	
+	for i in NUM_RAYS:
+		vec += get_ray(i) * clamp(interest[i] + danger[i], 0.0, 1.0)
+	
+	return vec.normalized()

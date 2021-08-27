@@ -19,7 +19,7 @@ func _draw():
 	draw_vector(tank.translation, tank.velocity, color)
 	
 	for i in tank.NUM_RAYS:
-		var vec = tank.get_ray(i) * clamp(tank.interest[i] + tank.danger[i], 0.0, 1.0)
+		var vec = tank.get_ray(i) * (tank.interest[i] + tank.danger[i])
 		draw_vector(tank.translation, vec, Color(0, 1, 0))
 		
 #		if tank.danger[i] > 0:

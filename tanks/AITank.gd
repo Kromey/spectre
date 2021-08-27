@@ -126,13 +126,13 @@ func set_interest(target):
 func set_danger():
 	var space_state = get_world().direct_space_state
 	for i in NUM_RAYS:
-		var result = space_state.intersect_ray(translation, translation + get_ray(i) * -4, [self])
-		danger[i] = 1.0 if result else 0.0
+		var result = space_state.intersect_ray(translation, translation + get_ray(i) * -2, [self])
+		danger[i] = 1.5 if result else 0.0
 
 func get_interest_direction():
 	var vec = Vector3.ZERO
 	
 	for i in NUM_RAYS:
-		vec += get_ray(i) * clamp(interest[i] + danger[i], 0.0, 1.0)
+		vec += get_ray(i) * (interest[i] + danger[i])
 	
 	return vec.normalized()

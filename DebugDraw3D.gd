@@ -2,6 +2,7 @@ extends Control
 
 var tank1
 var tank2
+var tank3
 var camera
 var width = 1
 
@@ -9,6 +10,7 @@ var width = 1
 func _ready():
 	tank1 = $"/root/TestScene/AITank"
 	tank2 = $"/root/TestScene/AITankNew"
+	tank3 = $"/root/TestScene/AITankNew2"
 	camera = $"/root/TestScene/AITankNew/Camera"
 
 func _process(_delta):
@@ -35,6 +37,13 @@ func _draw():
 	draw_vector(tank2.translation, tank2.get_bumper())
 	
 	draw_vector(tank2.translation, tank2.get_direction_to(tank2.current_target), Color(0, 1, 0))
+	
+	# New tank
+	draw_vector(tank3.translation, tank3.velocity, Color(1, 1, 1))
+	draw_vector(tank3.translation, tank3.get_intent(tank3.current_target), Color(0, 0, 1))
+	draw_vector(tank3.translation, tank3.get_bumper())
+	
+	draw_vector(tank3.translation, tank3.get_direction_to(tank3.current_target), Color(0, 1, 0))
 
 func draw_vector(origin, vec, color = Color(1, 0, 0)):
 	if vec.length() == 0:

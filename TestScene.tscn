@@ -60,6 +60,14 @@ MAX_AMMO = 0.0
 [node name="Camera" type="Camera" parent="AITankNew"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 10, 0 )
 
+[node name="AITankNew2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4445, 0.15, 0 )
+MAX_SPEED = 2.0
+MAX_AMMO = 0.0
+
+[node name="Camera" type="Camera" parent="AITankNew2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 10, 0 )
+
 [node name="Sprite3D" type="Sprite3D" parent="." groups=[
 "player",
 ]]
@@ -74,7 +82,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27576, 0, -14.7722 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92554, 0, -10.1966 )
 
 [node name="Wall5" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396936, 0, -10.1966 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149481, 0, -10.1966 )
 
 [node name="Wall2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.638969, 0, -0.769232, 0, 1, 0, 0.769232, 0, 0.638969, 6.07249, 0, -14.1195 )

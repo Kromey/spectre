@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://grid.shader" type="Shader" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://DebugDraw3D.gd" type="Script" id=4]
 [ext_resource path="res://obstacles/Wall.tscn" type="PackedScene" id=5]
-[ext_resource path="res://tanks/AITankNew.tscn" type="PackedScene" id=6]
 
 [sub_resource type="PhysicsMaterial" id=4]
 bounce = 1.0
@@ -51,19 +50,22 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101103, 0.15, 0 )
 MAX_AMMO = 0.0
 
-[node name="AITankNew" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2676, 0.15, 0 )
+[node name="Camera" type="Camera" parent="AITank"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
+
+[node name="AITank2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82955, 0.15, 0 )
 MAX_AMMO = 0.0
 
-[node name="Camera" type="Camera" parent="AITankNew"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 10, 0 )
+[node name="Camera" type="Camera" parent="AITank2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 
-[node name="AITankNew2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4445, 0.15, 0 )
+[node name="AITank3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22764, 0.15, 0 )
 MAX_AMMO = 0.0
 
-[node name="Camera" type="Camera" parent="AITankNew2"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 10, 0 )
+[node name="Camera" type="Camera" parent="AITank3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=[
 "player",

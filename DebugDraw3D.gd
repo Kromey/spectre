@@ -3,15 +3,13 @@ extends Control
 var tank1
 var tank2
 var tank3
-var camera
 var width = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tank1 = $"/root/TestScene/AITank"
-	tank2 = $"/root/TestScene/AITankNew"
-	tank3 = $"/root/TestScene/AITankNew2"
-	camera = $"/root/TestScene/AITankNew/Camera"
+	tank2 = $"/root/TestScene/AITank2"
+	tank3 = $"/root/TestScene/AITank3"
 
 func _process(_delta):
 	if not visible:
@@ -19,31 +17,18 @@ func _process(_delta):
 	update()
 
 func _draw():
-	# Old tank
-	draw_vector(tank1.translation, tank1.velocity, Color(1, 1, 1))
-	draw_vector(tank1.translation, tank1.navigation.get_intent(tank1.current_target), Color(0, 0, 1))
-	draw_vector(tank1.translation, tank1.navigation.get_bumper())
-	
-	draw_vector(tank1.translation, tank1.navigation.get_direction_to(tank1.current_target), Color(0, 1, 0))
-	
-	# New tank
-	draw_vector(tank2.translation, tank2.velocity, Color(1, 1, 1))
-	draw_vector(tank2.translation, tank2.get_intent(tank2.current_target), Color(0, 0, 1))
-	draw_vector(tank2.translation, tank2.get_bumper())
-	
-	draw_vector(tank2.translation, tank2.get_direction_to(tank2.current_target), Color(0, 1, 0))
-	
-	# New tank
-	draw_vector(tank3.translation, tank3.velocity, Color(1, 1, 1))
-	draw_vector(tank3.translation, tank3.get_intent(tank3.current_target), Color(0, 0, 1))
-	draw_vector(tank3.translation, tank3.get_bumper())
-	
-	draw_vector(tank3.translation, tank3.get_direction_to(tank3.current_target), Color(0, 1, 0))
+	for tank in [tank1, tank2, tank3]:
+		draw_vector(tank.translation, tank.velocity, Color(1, 1, 1))
+		draw_vector(tank.translation, tank.navigation.get_intent(tank.current_target), Color(0, 0, 1))
+		draw_vector(tank.translation, tank.navigation.get_bumper())
+		
+		draw_vector(tank.translation, tank.navigation.get_direction_to(tank.current_target), Color(0, 1, 0))
 
 func draw_vector(origin, vec, color = Color(1, 0, 0)):
 	if vec.length() == 0:
 		return
 	
+	var camera = get_viewport().get_camera()
 	var start = camera.unproject_position(origin)
 	var end = camera.unproject_position(origin + vec)
 	

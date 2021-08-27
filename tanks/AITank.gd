@@ -109,7 +109,10 @@ func engage_target(target, delta, attack = true):
 	return true
 
 func get_ray(i):
-	return transform.basis.z.rotated(Vector3.UP, ray_angles[i])
+	return (-transform.basis.z).rotated(Vector3.UP, ray_angles[i])
+
+func get_interest_ray(i):
+	return get_ray(i) * (interest[i] + danger[i])
 
 func get_direction_to(target):
 	set_interest(target)
@@ -133,6 +136,6 @@ func get_interest_direction():
 	var vec = Vector3.ZERO
 	
 	for i in NUM_RAYS:
-		vec += get_ray(i) * (interest[i] + danger[i])
+		vec += get_interest_ray(i)
 	
 	return vec.normalized()

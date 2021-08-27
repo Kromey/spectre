@@ -1,13 +1,15 @@
 extends Control
 
-var tank
+var tank1
+var tank2
 var camera
 var width = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tank = $"/root/TestScene/AITank"
-	camera = $"/root/TestScene/AITank/Camera"
+	tank1 = $"/root/TestScene/AITank"
+	tank2 = $"/root/TestScene/AITankNew"
+	camera = $"/root/TestScene/AITankNew/Camera"
 
 func _process(_delta):
 	if not visible:
@@ -15,17 +17,24 @@ func _process(_delta):
 	update()
 
 func _draw():
-	var color = Color(1, 1, 1)
-	draw_vector(tank.translation, tank.velocity, color)
+	# Old tank
+	draw_vector(tank1.translation, tank1.velocity, Color(1, 1, 1))
 	
-	for i in tank.NUM_RAYS:
-		var vec = tank.get_ray(i) * (tank.interest[i] + tank.danger[i])
-		draw_vector(tank.translation, vec, Color(0, 1, 0))
+	for i in tank1.NUM_RAYS:
+		var vec = tank1.get_interest_ray(i)
+		draw_vector(tank1.translation, vec, Color(0, 1, 0))
 		
 #		if tank.danger[i] > 0:
 #			draw_vector(tank.translation, vec * 4)
 	
-	draw_vector(tank.translation, tank.get_interest_direction(), Color(0, 0, 1))
+	draw_vector(tank1.translation, tank1.get_interest_direction(), Color(0, 0, 1))
+	
+	# New tank
+	draw_vector(tank2.translation, tank2.velocity, Color(1, 1, 1))
+	draw_vector(tank2.translation, tank2.get_intent(tank2.current_target), Color(0, 0, 1))
+	draw_vector(tank2.translation, tank2.get_bumper())
+	
+	draw_vector(tank2.translation, tank2.get_direction_to(tank2.current_target), Color(0, 1, 0))
 
 func draw_vector(origin, vec, color = Color(1, 0, 0)):
 	if vec.length() == 0:

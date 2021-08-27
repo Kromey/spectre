@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Object",
+"class": "TankNavigation",
+"language": "GDScript",
+"path": "res://tanks/TankNavigation.gd"
+} ]
+_global_script_class_icons={
+"TankNavigation": ""
+}
+
 [application]
 
 config/name="Spectre Reborn"

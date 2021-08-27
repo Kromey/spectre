@@ -15,7 +15,7 @@ FIRE_RATE = 0.8
 RELOAD_TIME = 5.0
 BULLET_SPEED = 8.0
 MAX_ENGAGE_DISTANCE = 35.0
-NUM_RAYS = 3
+navigation_lookahead = 0
 
 [node name="CollisionShape" parent="." index="0"]
 shape = SubResource( 1 )

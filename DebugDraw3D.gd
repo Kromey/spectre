@@ -21,15 +21,10 @@ func _process(_delta):
 func _draw():
 	# Old tank
 	draw_vector(tank1.translation, tank1.velocity, Color(1, 1, 1))
+	draw_vector(tank1.translation, tank1.navigation.get_intent(tank1.current_target), Color(0, 0, 1))
+	draw_vector(tank1.translation, tank1.navigation.get_bumper())
 	
-	for i in tank1.NUM_RAYS:
-		var vec = tank1.get_interest_ray(i)
-		draw_vector(tank1.translation, vec, Color(0, 1, 0))
-		
-#		if tank.danger[i] > 0:
-#			draw_vector(tank.translation, vec * 4)
-	
-	draw_vector(tank1.translation, tank1.get_interest_direction(), Color(0, 0, 1))
+	draw_vector(tank1.translation, tank1.navigation.get_direction_to(tank1.current_target), Color(0, 1, 0))
 	
 	# New tank
 	draw_vector(tank2.translation, tank2.velocity, Color(1, 1, 1))

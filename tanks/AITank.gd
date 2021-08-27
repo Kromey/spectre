@@ -87,9 +87,9 @@ func engage_target(target, delta, attack = true):
 		# Target is in front of us
 		drive(Direction.FORWARD * speed, delta)
 
-#		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
-#			# Target is directly in front of us and in range!
-#			shoot()
+		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
+			# Target is directly in front of us and in range!
+			shoot()
 	elif dot < -facing_cone:
 		# Target is behind us
 		drive(Direction.BACK * speed, delta)

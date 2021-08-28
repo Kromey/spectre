@@ -24,8 +24,9 @@ func get_intent(target):
 		return target_direction
 	
 	var intended = target.translation - _me.translation
-	var angle_step = PI / 150
-	for i in 150:
+	var rays = 10
+	var angle_step = PI * 1.25 / rays
+	for i in rays:
 		var vec1 = intended.rotated(Vector3.UP, angle_step * i)
 		var vec2 = intended.rotated(Vector3.UP, -angle_step * i)
 		

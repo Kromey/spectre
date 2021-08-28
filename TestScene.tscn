@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://grid.shader" type="Shader" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://DebugDraw3D.gd" type="Script" id=4]
 [ext_resource path="res://obstacles/Wall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obstacles/CWall.tscn" type="PackedScene" id=6]
 
 [sub_resource type="PhysicsMaterial" id=4]
 bounce = 1.0
@@ -61,7 +62,7 @@ MAX_AMMO = 0.0
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 
 [node name="AITank3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22764, 0.15, 1.34822 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63197, 0.15, 1.34822 )
 MAX_AMMO = 0.0
 
 [node name="Camera" type="Camera" parent="AITank3"]
@@ -84,7 +85,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92554, 0, -10.1966 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149481, 0, -10.1966 )
 
 [node name="Wall2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.638969, 0, -0.769232, 0, 1, 0, 0.769232, 0, 0.638969, 6.07249, 0, -14.1195 )
+transform = Transform( 0.638969, 0, -0.769232, 0, 1, 0, 0.769232, 0, 0.638969, 5.92071, 0, -14.034 )
 
 [node name="Wall3" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.663717, 0, 0.747984, 0, 1, 0, -0.747984, 0, 0.663717, 5.95476, 0, -11.7366 )
+transform = Transform( 0.663717, 0, 0.747984, 0, 1, 0, -0.747984, 0, 0.663717, 5.95476, 0, -12.5043 )
+
+[node name="CWall" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.652509 )

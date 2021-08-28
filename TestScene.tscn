@@ -61,7 +61,7 @@ MAX_AMMO = 0.0
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 
 [node name="AITank3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22764, 0.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22764, 0.15, 1.34822 )
 MAX_AMMO = 0.0
 
 [node name="Camera" type="Camera" parent="AITank3"]

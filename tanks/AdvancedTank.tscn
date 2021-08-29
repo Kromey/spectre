@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://grid.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/BASE_COLOR = Color( 0.839216, 0.6, 0.0784314, 1 )
+shader_param/LINE_WIDTH = 0.02
+shader_param/LINE_COLOR = Color( 0, 0, 0, 1 )
+shader_param/COLUMN_COUNT = 10.0
+shader_param/ROW_COUNT = 10.0
+
+[node name="AdvancedTank" instance=ExtResource( 1 )]
+MAX_DAMAGE = 2
+MAX_SPEED = 3.0
+TURN_RATE = 1.8
+MAX_AMMO = 1.0
+GUN_RANGE = 20.0
+BULLET_SPEED = 9.0
+
+[node name="CSGCombiner" parent="." index="1"]
+material_override = SubResource( 1 )

@@ -12,7 +12,7 @@ func get_direction_to(target):
 	var intent = get_intent(target)
 	var bumper = get_bumper()
 	
-	return (intent + bumper).normalized()
+	return (intent + bumper * 3).normalized()
 
 func get_intent(target):
 	var target_direction = _me.translation.direction_to(target.translation)

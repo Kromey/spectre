@@ -9,7 +9,7 @@ bounce = 1.0
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 100, 0, 100 )
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
 shader_param/BASE_COLOR = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 shader_param/LINE_WIDTH = 0.02
@@ -18,7 +18,7 @@ shader_param/COLUMN_COUNT = 100.0
 shader_param/ROW_COUNT = 100.0
 
 [sub_resource type="PlaneMesh" id=4]
-material = SubResource( 6 )
+material = SubResource( 3 )
 size = Vector2( 200, 200 )
 
 [sub_resource type="Environment" id=5]

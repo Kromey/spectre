@@ -44,5 +44,13 @@ environment = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 shadow_enabled = true
 
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 5, 0 )
+light_energy = 0.5
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="."]
+transform = Transform( -0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 5, 0 )
+light_energy = 0.5
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, -1.23634e-07, 1.23634e-07, 0, 0.707107, 0.707107, -1.74846e-07, -0.707107, 0.707107, 3.49691e-06, 10, 20 )

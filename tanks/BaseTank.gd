@@ -19,6 +19,7 @@ export(float) var FIRE_RATE = 1.5
 export(float) var RELOAD_TIME = 3
 export(float) var GUN_RANGE = 30
 export(float) var BULLET_SPEED = 0
+export(int) var GUN_DAMAGE = 1
 var ammo = 0
 var reloading = false
 
@@ -81,7 +82,7 @@ func turn(direction, delta):
 	
 	rotate_y(angular_velocity)
 
-func shoot(gun_damage = 1):
+func shoot():
 	if ammo > 0 and !reloading and $FireRate.is_stopped():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
@@ -90,7 +91,7 @@ func shoot(gun_damage = 1):
 		var bullet = Bullet.instance()
 		bullet.BULLET_TIME = GUN_RANGE / BULLET_SPEED
 		bullet.BULLET_SPEED = BULLET_SPEED
-		bullet.BULLET_DAMAGE = gun_damage
+		bullet.BULLET_DAMAGE = GUN_DAMAGE
 		bullet.shooter = self
 		bullet.global_transform = $BulletSpawn.global_transform
 		get_tree().root.add_child(bullet)

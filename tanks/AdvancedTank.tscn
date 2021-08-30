@@ -19,6 +19,7 @@ TURN_RATE = 1.8
 MAX_AMMO = 1.0
 GUN_RANGE = 20.0
 BULLET_SPEED = 9.0
+GUN_DAMAGE = 2
 navigation_lookahead = 4
 
 [node name="CSGCombiner" parent="." index="1"]

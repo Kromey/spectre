@@ -32,7 +32,9 @@ height = 0.001
 radial_segments = 4
 rings = 4
 
-[node name="BaseTank" type="KinematicBody"]
+[node name="BaseTank" type="KinematicBody" groups=[
+"tanks",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
 script = ExtResource( 3 )
 

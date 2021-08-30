@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.1
-height = 0.5
+height = 0.1
 
 [node name="Missile" type="Spatial"]
 script = ExtResource( 2 )
@@ -14,6 +14,7 @@ script = ExtResource( 2 )
 [node name="Area" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
 shape = SubResource( 1 )
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
@@ -82,6 +83,7 @@ depth = 0.5
 [node name="Debug" type="CanvasLayer" parent="."]
 
 [node name="DebugDraw3D" type="Control" parent="Debug"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )

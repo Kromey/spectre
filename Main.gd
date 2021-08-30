@@ -5,6 +5,7 @@ const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
 const AITank = preload("res://tanks/AITank.tscn")
 const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
+const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 const ArmorPickup = preload("res://ArmorPickup.tscn")
 const Flag = preload("res://Flag.tscn")
 
@@ -76,6 +77,7 @@ func _ready():
 			for _t in tanks:
 				spawn_tank(AITank, flag.translation, 0.5, 4.5)
 			spawn_tank(Turret, flag.translation, 0.5, 1.5)
+			spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
 			spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
 	
 	for _i in 35:

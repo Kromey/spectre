@@ -9,7 +9,7 @@ TURN_RATE = 1.0
 MAX_AMMO = 4.0
 FIRE_RATE = 0.4
 RELOAD_TIME = 3.0
-MAX_ENGAGE_DISTANCE = 45.0
+MAX_ENGAGE_DISTANCE = 60.0
 MAX_CHASE_DISTANCE = 90.0
 
 [node name="Gun" parent="CSGCombiner/Body/Turret" index="0"]

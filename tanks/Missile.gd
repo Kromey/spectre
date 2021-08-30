@@ -1,7 +1,7 @@
 extends Spatial
 
 export var speed = 20
-export var steer_force = 1.5
+export var steer_force = 1
 export var damage = 1
 export var flight_time = 5
 

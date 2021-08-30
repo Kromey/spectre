@@ -53,6 +53,8 @@ material/0 = null
 
 [node name="AITank" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101103, 0.15, 0 )
+collision_layer = 1
+collision_mask = 1
 MAX_AMMO = 0.0
 
 [node name="Camera" type="Camera" parent="AITank"]
@@ -60,6 +62,8 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 
 
 [node name="AITank2" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.82955, 0.15, 0 )
+collision_layer = 1
+collision_mask = 1
 MAX_AMMO = 0.0
 
 [node name="Camera" type="Camera" parent="AITank2"]
@@ -67,6 +71,8 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 
 
 [node name="AITank3" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.63197, 0.15, 1.34822 )
+collision_layer = 1
+collision_mask = 1
 MAX_AMMO = 0.0
 
 [node name="Camera" type="Camera" parent="AITank3"]

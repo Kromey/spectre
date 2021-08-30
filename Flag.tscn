@@ -18,6 +18,8 @@ material = ExtResource( 1 )
 size = Vector3( 0.2, 0.3, 0.001 )
 
 [node name="Flag" type="Area"]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )

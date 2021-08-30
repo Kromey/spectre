@@ -33,7 +33,6 @@ const Walls = [
 func _ready():
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
-	player.add_to_group("player")
 	GameStats.add_to_score(0)
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
@@ -110,10 +109,9 @@ func spawn_pickup(scene):
 	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
 	call_deferred("add_child", pickup)
 
-func _on_flag_pickup(body, flag):
-	if body.is_in_group("player"):
-		GameStats.add_to_score(1)
-		flag.queue_free()
+func _on_flag_pickup(_body, flag):
+	GameStats.add_to_score(1)
+	flag.queue_free()
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

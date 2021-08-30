@@ -12,12 +12,14 @@ shader_param/COLUMN_COUNT = 10.0
 shader_param/ROW_COUNT = 10.0
 
 [node name="AdvancedTank" instance=ExtResource( 1 )]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.25, 0 )
 MAX_DAMAGE = 2
 MAX_SPEED = 3.0
 TURN_RATE = 1.8
 MAX_AMMO = 1.0
 GUN_RANGE = 20.0
 BULLET_SPEED = 9.0
+navigation_lookahead = 4
 
 [node name="CSGCombiner" parent="." index="1"]
 material_override = SubResource( 1 )

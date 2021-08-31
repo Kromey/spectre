@@ -18,8 +18,8 @@ func _ready():
 	
 	emit_signal("ammo_changed", ammo)
 	emit_signal("damage_changed", damage, MAX_DAMAGE)
-	emit_signal("score_changed", GameStats.player_score)
-	emit_signal("kills_changed", GameStats.player_kills)
+	emit_signal("score_changed", GameState.player_score)
+	emit_signal("kills_changed", GameState.player_kills)
 
 func _physics_process(delta):
 	match current_state:

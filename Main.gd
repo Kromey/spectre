@@ -35,7 +35,7 @@ func _ready():
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
-	GameStats.add_to_score(0)
+	GameState.add_to_score(0)
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
 	call_deferred("first_shot", player)
@@ -131,7 +131,7 @@ func spawn_pickup(scene):
 	call_deferred("add_child", pickup)
 
 func _on_flag_pickup(_body, flag):
-	GameStats.add_to_score(1)
+	GameState.add_to_score(1)
 	flag.queue_free()
 
 # Pretty hacky, but calling this at game start ensures all our materials get
@@ -145,11 +145,15 @@ func first_shot(player):
 
 func player_death(_killer):
 	print("Player died!")
+	yield(get_tree().create_timer(1.5), "timeout")
+	
+	var e = get_tree().reload_current_scene()
+	assert(e == OK)
 
 func tank_death(killer):
 	print("Enemy tank died!")
 	if is_instance_valid(killer) and killer.is_in_group("player"):
 		print("\tWe blame the player!")
-		GameStats.add_to_kills(1)
+		GameState.add_to_kills(1)
 	elif is_instance_valid(killer) and killer.is_in_group("enemies"):
 		print("\tFriendly fire casualty!")

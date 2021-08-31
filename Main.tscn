@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
+[ext_resource path="res://scenery/ObservationTower.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -36,6 +37,9 @@ shape = SubResource( 2 )
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 mesh = SubResource( 4 )
 material/0 = null
+
+[node name="ObservationTower" parent="." instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 5, 105 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )

@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://grid.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/BASE_COLOR = Color( 0, 0, 0, 1 )
+shader_param/LINE_WIDTH = 0.1
+shader_param/LINE_COLOR = Color( 0.952941, 0.0392157, 0.0392157, 1 )
+shader_param/COLUMN_COUNT = 20.0
+shader_param/ROW_COUNT = 20.0
+
+[node name="ObservationTower" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+material_override = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+width = 5.0
+height = 10.0
+depth = 3.0
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+radius = 3.0
+radial_segments = 16
+rings = 10
+
+[node name="CSGTorus" type="CSGTorus" parent="CSGCombiner/CSGBox/CSGSphere"]
+outer_radius = 4.0
+sides = 16
+ring_sides = 16
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+width = 3.0
+height = 1.0
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus/CSGBox"]
+operation = 2
+height = 0.5
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+operation = 2
+height = 0.5

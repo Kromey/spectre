@@ -16,7 +16,7 @@ var shooter
 func _ready():
 	var __ = get_tree().create_timer(flight_time).connect("timeout", self, "queue_free")
 
-func start(_transform, _target, _shooter):
+func start(_transform, _target, _shooter = null):
 	global_transform = _transform
 	velocity = transform.basis.z * -speed
 	
@@ -30,7 +30,7 @@ func _physics_process(delta):
 		var desired = global_transform.origin.direction_to(target.global_transform.origin) * speed
 		velocity = velocity.linear_interpolate(desired, steer_force * delta)
 	
-	translation += velocity * delta
+	global_translate(velocity * delta)
 
 
 func _on_missile_collision(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://grid.shader" type="Shader" id=2]
@@ -25,6 +25,8 @@ shader_param/ROW_COUNT = 100.0
 [sub_resource type="PlaneMesh" id=4]
 material = SubResource( 3 )
 size = Vector2( 200, 200 )
+
+[sub_resource type="SpatialMaterial" id=5]
 
 [node name="TestScene" type="Spatial"]
 
@@ -79,12 +81,16 @@ MAX_AMMO = 0.0
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 
 [node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8167, 0.431532, -10.2127 )
+transform = Transform( -0.356966, -0.660521, -0.660521, 0, 0.707107, -0.707107, 0.934117, -0.252413, -0.252413, -11.817, 0, -10.213 )
 script = ExtResource( 7 )
 
 [node name="Timer" type="Timer" parent="Position3D"]
 wait_time = 2.0
 autostart = true
+
+[node name="CSGSphere" type="CSGSphere" parent="Position3D"]
+radius = 0.4
+material = SubResource( 5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.339, 0.1, -10.6373 )

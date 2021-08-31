@@ -8,5 +8,5 @@ func fire_missile():
 	if tanks.size() > 0:
 		var target = tanks[0]
 		var missile = Missile.instance()
-		missile.start(global_transform, target, 90)
+		missile.start(global_transform, target)
 		add_child(missile)

@@ -24,7 +24,7 @@ func start(_transform, _target, _shooter):
 	shooter = _shooter
 
 func _physics_process(delta):
-	look_at(translation + velocity, Vector3.UP)
+	look_at(global_transform.origin + velocity, Vector3.UP)
 	
 	if is_instance_valid(target):
 		var desired = global_transform.origin.direction_to(target.global_transform.origin) * speed

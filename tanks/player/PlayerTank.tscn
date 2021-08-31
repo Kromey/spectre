@@ -11,6 +11,7 @@
 collision_layer = 2
 script = ExtResource( 3 )
 MAX_DAMAGE = 3
+FIRE_RATE = 1.0
 
 [node name="Camera" type="Camera" parent="CSGCombiner/Body/Turret" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )

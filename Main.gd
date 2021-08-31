@@ -39,6 +39,8 @@ func _ready():
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
 	call_deferred("first_shot", player)
+	player.current_state = player.PlayerState.Locked
+	var __ = get_tree().create_timer(2).connect("timeout", player, "set_state", [player.PlayerState.Running])
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()

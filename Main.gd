@@ -31,6 +31,8 @@ const Walls = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
 	GameStats.add_to_score(0)

@@ -97,6 +97,9 @@ func shoot():
 		get_tree().root.add_child(bullet)
 		
 		$MuzzleFlare.restart()
+		
+		if ammo <= 0:
+			reload()
 
 func reload():
 	if !reloading:

@@ -18,9 +18,6 @@ func _physics_process(delta):
 	if is_instance_valid(current_target):
 		if !engage_target(current_target, delta, current_target.is_in_group("player")):
 			current_target = null
-	
-	if ammo == 0 and !reloading:
-		reload()
 
 func select_target(target):
 	var dist = INF

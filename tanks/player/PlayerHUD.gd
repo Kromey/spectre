@@ -4,6 +4,7 @@ onready var Armor = find_node("Armor")
 onready var Ammo = find_node("Ammo")
 onready var Score = find_node("Score")
 onready var Kills = find_node("Kills")
+onready var Level = find_node("Level")
 
 var last_damage = 0
 
@@ -45,3 +46,6 @@ func update_score(score):
 
 func update_kills(kills):
 	Kills.get_node("Value").text = str(kills)
+
+func update_level(level):
+	Level.get_node("Value").text = str(level)

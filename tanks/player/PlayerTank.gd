@@ -5,6 +5,7 @@ onready var HUD = find_node("PlayerHUD")
 
 signal score_changed
 signal kills_changed
+signal update_level(level)
 
 enum PlayerState {
 	Running,
@@ -20,6 +21,7 @@ func _ready():
 	emit_signal("damage_changed", damage, MAX_DAMAGE)
 	emit_signal("score_changed", GameState.player_score)
 	emit_signal("kills_changed", GameState.player_kills)
+	emit_signal("update_level", GameState.level)
 
 func _physics_process(delta):
 	match current_state:
@@ -62,3 +64,6 @@ func update_score(score):
 
 func update_kills(kills):
 	emit_signal("kills_changed", kills)
+
+func update_level(level):
+	emit_signal("update_level", level)

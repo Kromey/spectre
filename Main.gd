@@ -93,15 +93,32 @@ func _ready():
 			_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
 			num_flags += 1
 			
-			var tanks = rng.randi_range(3, 7)
+			var min_tanks = 1 + floor(GameState.level / 2)
+			var max_tanks = min_tanks + 4 + floor(GameState.level / 5)
+			var tanks = rng.randi_range(min_tanks, max_tanks)
 			for _t in tanks:
 				spawn_tank(AITank, flag.translation, 0.5, 4.5)
-			spawn_tank(Turret, flag.translation, 0.5, 1.5)
-			spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
-			spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
+			
+			for _t in tanks_by_level(3, 5):
+				spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
+			for _t in tanks_by_level(5, 4):
+				spawn_tank(Turret, flag.translation, 0.5, 1.5)
+			for _t in tanks_by_level(8, 3):
+				spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
 	
-	for _i in 35:
+	for _i in GameState.level * 6:
 		spawn_tank(AITank, player.translation, 50, 95)
+
+func tanks_by_level(first_at, more_every = 0):
+	var tanks = 0
+	
+	if GameState.level > first_at:
+		tanks += 1
+		
+		if more_every > 0:
+			tanks += floor((GameState.level - first_at) / more_every)
+	
+	return tanks
 
 func spawn_tank(scene, around, min_dist, max_dist):
 	var rng = RandomNumberGenerator.new()
@@ -130,9 +147,15 @@ func spawn_pickup(scene):
 	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
 	call_deferred("add_child", pickup)
 
-func _on_flag_pickup(_body, flag):
+func _on_flag_pickup(_body, flag: Spatial):
 	GameState.add_to_score(1)
+	flag.remove_from_group("goals")
 	flag.queue_free()
+	
+	if get_tree().get_nodes_in_group("goals").size() == 0:
+		GameState.level_up()
+		var e = get_tree().reload_current_scene()
+		assert(e == OK)
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

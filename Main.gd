@@ -56,6 +56,23 @@ func _ready():
 		if wall.translation.distance_to(player.translation) > 3:
 			add_child(wall)
 			num_walls += 1
+			
+			var offset = Vector3.DOWN * 1.5
+			var tween = Tween.new()
+			wall.add_child(tween)
+			tween.interpolate_property(
+				wall,
+				"translation",
+				wall.translation + offset,
+				wall.translation,
+				1,
+				Tween.TRANS_SINE,
+				Tween.EASE_OUT,
+				0.75
+			)
+			tween.start()
+			wall.translation += offset
+	
 	print("Spawned ", num_walls, " walls")
 	
 	for _i in 35:

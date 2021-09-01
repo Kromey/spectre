@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
 [ext_resource path="res://scenery/ObservationTower.tscn" type="PackedScene" id=2]
@@ -22,9 +22,6 @@ shader_param/ROW_COUNT = 100.0
 material = SubResource( 6 )
 size = Vector3( 200, 0, 200 )
 
-[sub_resource type="Environment" id=5]
-background_mode = 1
-
 [node name="Main" type="Spatial"]
 script = ExtResource( 3 )
 
@@ -41,11 +38,9 @@ material/0 = null
 [node name="ObservationTower" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 110 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 5 )
-
 [node name="OverheadLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
+visible = false
 shadow_enabled = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]

@@ -6,8 +6,8 @@ const AITank = preload("res://tanks/AITank.tscn")
 const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
-const ArmorPickup = preload("res://ArmorPickup.tscn")
-const Flag = preload("res://Flag.tscn")
+const ArmorPickup = preload("res://pickups/ArmorPickup.tscn")
+const Flag = preload("res://pickups/Flag.tscn")
 
 const Walls = [
 	preload("res://obstacles/Wall.tscn"), # Basic wall should be the most common

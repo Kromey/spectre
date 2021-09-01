@@ -34,6 +34,8 @@ enum Direction {
 const Bullet = preload("res://tanks/Bullet.tscn")
 const BOOM = preload("res://tanks/BoomTheTank.tscn")
 
+onready var ShootSound = find_node("ShootAudio")
+
 signal damage_changed
 signal ammo_changed
 signal reloading
@@ -97,6 +99,7 @@ func shoot():
 		get_tree().root.add_child(bullet)
 		
 		$MuzzleFlare.restart()
+		ShootSound.play()
 		
 		if ammo <= 0:
 			reload()

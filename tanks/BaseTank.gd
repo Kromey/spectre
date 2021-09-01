@@ -8,7 +8,7 @@ export(int) var MAX_DAMAGE = 1
 
 var velocity = Vector3.ZERO
 export(float) var MAX_SPEED = 10
-export(float) var ACCEL = 2
+export(float) var ACCEL = 9 # Acceleration per second
 
 var angular_velocity = 0
 export(float) var TURN_RATE = PI / 2.0
@@ -65,7 +65,7 @@ func drive(direction, delta):
 		if dir.dot(hvel) <= 0:
 			accel *= 2
 		
-		hvel = hvel.linear_interpolate(target, accel * delta)
+		hvel = hvel.move_toward(target, accel * delta)
 		velocity.x = hvel.x
 		velocity.z = hvel.z
 

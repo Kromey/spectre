@@ -10,11 +10,14 @@ func update_pos(xform: Transform, zoom := 1.0):
 		queue_free()
 		return
 	
-	var my_pos = to_relative_position2d(xform, me.global_transform.origin, zoom)
-	position = my_pos + center
-
-func to_relative_position2d(xform: Transform, point: Vector3, zoom: float):
-	var pos = xform.xform_inv(point)
-	pos = pos.normalized() * min(pos.length() * zoom, clamp_to)
+	var my_pos = to_vec2(xform.xform_inv(me.global_transform.origin)) * zoom
+	position = my_pos.clamped(clamp_to) + center
 	
-	return Vector2(pos.x, pos.z)
+	if rotate:
+		var looking = to_vec2(me.global_transform.basis.z)
+		var radar_forward = to_vec2(xform.basis.z)
+		
+		rotation = looking.angle() - radar_forward.angle()
+
+func to_vec2(vec: Vector3):
+	return Vector2(vec.x, vec.z)

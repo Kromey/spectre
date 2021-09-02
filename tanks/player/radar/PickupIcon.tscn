@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tanks/player/radar/RadarIcon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/simpleSpace_vector.svg" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 328, 328, 32, 32 )
+
+[node name="PickupIcon" instance=ExtResource( 1 )]
+modulate = Color( 0.0156863, 0.682353, 0.0745098, 0.498039 )
+scale = Vector2( 0.75, 0.75 )
+texture = SubResource( 1 )

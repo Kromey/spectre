@@ -55,5 +55,7 @@ light_energy = 0.5
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 3.49691e-06, 19.5848, 98.1502 )
 
-[node name="ZoomZoom" parent="." instance=ExtResource( 4 )]
+[node name="ZoomZoom" parent="." groups=[
+"zoomzoom",
+] instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5 )

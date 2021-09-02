@@ -7,6 +7,7 @@ const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 const ArmorPickup = preload("res://pickups/ArmorPickup.tscn")
+const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
 const Flag = preload("res://pickups/Flag.tscn")
 
 const Walls = [
@@ -79,6 +80,8 @@ func _ready():
 	
 	for _i in 35:
 		spawn_pickup(ArmorPickup)
+	for _i in 10:
+		spawn_pickup(ZoomZoom)
 	
 	var num_flags = 0
 	while num_flags < 5:

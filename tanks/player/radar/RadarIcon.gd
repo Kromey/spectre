@@ -2,7 +2,7 @@ extends Sprite
 
 var me: Spatial
 var center := Vector2.ZERO
-var clamp_to := 75.0
+var clamp_to := 72.0
 var point_radius := 105.0
 export(bool) var rotate := false
 export(int, "hide", "shrink", "point") var clamp_behavior = CLAMP_HIDE

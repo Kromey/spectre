@@ -5,14 +5,14 @@
 [ext_resource path="res://assets/sprites/rollingBall_vector.svg" type="Texture" id=3]
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 2240, 1360, 240, 240 )
-
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 136, 64, 32, 48 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 2240, 1360, 240, 240 )
 
 [node name="Radar" type="MarginContainer"]
 anchor_left = 1.0
@@ -30,6 +30,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Player" type="Sprite" parent="."]
+modulate = Color( 0.0156863, 0.682353, 0.0745098, 1 )
+position = Vector2( 120, 120 )
+scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 2 )
+
+[node name="RadarIcons" type="Node2D" parent="."]
+
 [node name="Background" type="TextureRect" parent="."]
 margin_left = 5.0
 margin_top = 5.0
@@ -38,14 +46,6 @@ margin_bottom = 235.0
 texture = SubResource( 1 )
 expand = true
 stretch_mode = 5
-
-[node name="Player" type="Sprite" parent="."]
-modulate = Color( 0.0156863, 0.682353, 0.0745098, 1 )
-position = Vector2( 120, 120 )
-scale = Vector2( 0.5, 0.5 )
-texture = SubResource( 2 )
-
-[node name="RadarIcons" type="Node2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25

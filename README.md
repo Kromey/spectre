@@ -7,15 +7,11 @@ to learn to use the [Godot game engine](https://godotengine.org).
 
  * `WASD` or `arrow keys` to move
  * `Spacebar` or `left click` to fire
- * `R` or `right click` to reload
+ * `R` or `right click` to reload (although your tank will reload automatically when you run out of ammo
+ * Mouse scroll wheel zooms the radar in/out
+ * `Esc` to quit the game
 
-While there's no UI yet, you have 3 shots per reload. You can reload any time, but it takes time and
-you cannot shoot while you're reloading.
-
-If you die (by being shot or falling off the edge) you'll revert to an overhead camera; to restart you
-must close and re-launch the game.
-
-The pill-shaped "bombs" are harmless (and fun to knock around!), but they continually spawn indefinitely
-and eventually will tank (no pun intended) your framerate if you don't kick them off the play area.
+Your goal is to collect the flags on each level, battling more and more difficult enemies as your progress,
+all while the unseen observers in the ominous tower watch. They do not take kindly to acts of rebellion!
 
 [spectre]: https://en.wikipedia.org/wiki/Spectre_(1991_video_game)

@@ -12,20 +12,24 @@ var zoom = 1.5
 var center := Vector2.ZERO
 
 func _ready():
+	# Disable physics processing until we've set up our radar
 	set_physics_process(false)
-	call_deferred("initialize")
 
-func initialize():
+func refresh():
 	var p = get_tree().get_nodes_in_group("player")
 	if p.size() > 0:
 		player = p[0]
 	else:
 		print("Failed to initialize radar, retrying...")
-		call_deferred("initialize")
+		call_deferred("refresh")
 		return
 	
+	# Flush our radar
+	for child in $RadarIcons.get_children():
+		$RadarIcons.remove_child(child)
+		child.queue_free()
+	
 	center = rect_size / 2.0
-	print(rect_size, center)
 	
 	# NB: Order matters! First icons added will be underneath later icons
 	
@@ -41,13 +45,15 @@ func initialize():
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		add_icon(EnemyIcon, enemy)
 	
+	# All good now, enable physics processing
 	set_physics_process(true)
 
 func add_icon(packed_icon: PackedScene, node: Spatial):
 	var icon = packed_icon.instance()
 	icon.me = node
 	icon.center = center
-	add_child(icon)
+	$RadarIcons.add_child(icon)
+	icon.update_pos(player.global_transform, zoom)
 
 func _physics_process(_delta):
 	get_tree().call_group("radar_icons", "update_pos", player.global_transform, zoom)

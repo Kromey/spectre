@@ -43,3 +43,11 @@ modulate = Color( 0.0156863, 0.682353, 0.0745098, 1 )
 position = Vector2( 120, 120 )
 scale = Vector2( 0.5, 0.5 )
 texture = SubResource( 2 )
+
+[node name="RadarIcons" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="refresh"]

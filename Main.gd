@@ -78,7 +78,7 @@ func _ready():
 	
 	print("Spawned ", num_walls, " walls")
 	
-	for _i in 35:
+	for _i in 5:
 		spawn_pickup(ArmorPickup)
 	for _i in 10:
 		spawn_pickup(ZoomZoom)

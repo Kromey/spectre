@@ -12,11 +12,13 @@ height = 0.1
 [sub_resource type="SpatialMaterial" id=3]
 flags_do_not_receive_shadows = true
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=4]
 material = SubResource( 3 )
 size = Vector3( 0.1, 0.1, 0.001 )
 
-[node name="Missile" type="Spatial"]
+[node name="Missile" type="Spatial" groups=[
+"missiles",
+]]
 script = ExtResource( 2 )
 
 [node name="Area" type="Area" parent="."]
@@ -100,7 +102,7 @@ light_bake_mode = 0
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.256299 )
 process_material = ExtResource( 4 )
-draw_pass_1 = SubResource( 2 )
+draw_pass_1 = SubResource( 4 )
 
 [node name="Debug" type="CanvasLayer" parent="."]
 

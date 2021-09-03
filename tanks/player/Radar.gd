@@ -8,6 +8,7 @@ const FeatureIcon = preload("res://tanks/player/radar/FeatureIcon.tscn")
 const PickupIcon = preload("res://tanks/player/radar/PickupIcon.tscn")
 const FlagIcon = preload("res://tanks/player/radar/FlagIcon.tscn")
 const FlagPointer = preload("res://tanks/player/radar/FlagPointer.tscn")
+const MissileIcon = preload("res://tanks/player/radar/MissileIcon.tscn")
 
 var zoom = 1.5
 var center := Vector2.ZERO
@@ -46,6 +47,9 @@ func refresh():
 	
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		add_icon(EnemyIcon, enemy)
+	
+	for missile in get_tree().get_nodes_in_group("missiles"):
+		add_icon(MissileIcon, missile)
 	
 	# All good now, enable physics processing
 	set_physics_process(true)

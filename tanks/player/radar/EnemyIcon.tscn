@@ -13,3 +13,4 @@ modulate = Color( 0.952941, 0.0392157, 0.0392157, 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = SubResource( 1 )
 rotate = true
+clamp_behavior = 1

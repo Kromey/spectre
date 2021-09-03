@@ -7,6 +7,7 @@ const EnemyIcon = preload("res://tanks/player/radar/EnemyIcon.tscn")
 const FeatureIcon = preload("res://tanks/player/radar/FeatureIcon.tscn")
 const PickupIcon = preload("res://tanks/player/radar/PickupIcon.tscn")
 const FlagIcon = preload("res://tanks/player/radar/FlagIcon.tscn")
+const FlagPointer = preload("res://tanks/player/radar/FlagPointer.tscn")
 
 var zoom = 1.5
 var center := Vector2.ZERO
@@ -41,6 +42,7 @@ func refresh():
 	
 	for flag in get_tree().get_nodes_in_group("goals"):
 		add_icon(FlagIcon, flag)
+		add_icon(FlagPointer, flag)
 	
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		add_icon(EnemyIcon, enemy)

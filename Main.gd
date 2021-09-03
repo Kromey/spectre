@@ -30,9 +30,14 @@ const Walls = [
 ]
 
 
+func _input(event):
+	# TODO: Temporary for now quit-on-Escape
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)

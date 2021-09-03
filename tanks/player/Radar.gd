@@ -57,3 +57,13 @@ func add_icon(packed_icon: PackedScene, node: Spatial):
 
 func _physics_process(_delta):
 	get_tree().call_group("radar_icons", "update_pos", player.global_transform, zoom)
+
+func _input(event):
+	if event.is_action_pressed("radar_zoom_in"):
+		zoom += 0.5
+	if event.is_action_pressed("radar_zoom_out"):
+		zoom -= 0.5
+	
+	var max_zoom = 5
+	zoom = clamp(zoom, 0.5, max_zoom)
+	$CanvasLayer/ZoomLevel.text = "x%s" % str((max_zoom - zoom + 0.5) * 2)

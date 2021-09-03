@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/simpleSpace_vector.svg" type="Texture" id=1]
 [ext_resource path="res://tanks/player/Radar.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/rollingBall_vector.svg" type="Texture" id=3]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -33,7 +34,7 @@ __meta__ = {
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 235.0
-margin_bottom = 235.0
+margin_bottom = 249.0
 texture = SubResource( 1 )
 expand = true
 stretch_mode = 5
@@ -49,5 +50,21 @@ texture = SubResource( 2 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ZoomLevel" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -220.0
+margin_top = -44.0
+custom_fonts/font = ExtResource( 4 )
+text = "x12"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="Timer" to="." method="refresh"]

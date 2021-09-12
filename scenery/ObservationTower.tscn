@@ -3,10 +3,10 @@
 [ext_resource path="res://grid.shader" type="Shader" id=1]
 [ext_resource path="res://scenery/ObservationTower.gd" type="Script" id=2]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 7.5, 9.75, 4.5 )
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
 shader_param/BASE_COLOR = Color( 0, 0, 0, 1 )
 shader_param/LINE_WIDTH = 0.1
@@ -19,11 +19,11 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
-material_override = SubResource( 1 )
+material_override = SubResource( 2 )
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
 width = 5.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://tanks/player/PlayerHUD.gd" type="Script" id=2]
 [ext_resource path="res://tanks/player/Radar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/crosshair102.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/mixkit-industry-alarm-tone-2979.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Reloading"
@@ -189,5 +190,10 @@ anims/Reloading = SubResource( 1 )
 anims/Damage = SubResource( 2 )
 
 [node name="DurationTimer" type="Timer" parent="DamageAnimation"]
+
+[node name="DamageCriticalAlarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -4.0
+mix_target = 2
 
 [connection signal="timeout" from="DamageAnimation/DurationTimer" to="." method="reset_damage_animation"]

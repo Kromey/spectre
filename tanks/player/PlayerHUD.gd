@@ -17,6 +17,7 @@ func update_damage(new_value, max_value):
 		if max_value - new_value > 1:
 			$DamageAnimation/DurationTimer.start(duration)
 		else:
+			$DamageCriticalAlarm.play()
 			$DamageAnimation/DurationTimer.stop()
 	elif max_value - new_value > 1:
 		# If we're repairing from 1 armor, we want to stop blinking
@@ -25,6 +26,7 @@ func update_damage(new_value, max_value):
 	last_damage = new_value
 
 func reset_damage_animation():
+	$DamageCriticalAlarm.stop()
 	if $DamageAnimation.is_playing():
 		$DamageAnimation.seek(0, true)
 		$DamageAnimation.stop(true)

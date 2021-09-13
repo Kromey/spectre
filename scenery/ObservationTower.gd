@@ -16,6 +16,10 @@ onready var Silos = [
 func take_damage(_force, _amount, shooter = null):
 	if is_instance_valid(shooter):
 		print("ObservationTower taking revenge upon ", shooter, "!")
+		
+		if !$FacilityAlarm.playing:
+			$FacilityAlarm.play()
+		
 		for silo in Silos:
 			yield(get_tree().create_timer(0.2), "timeout")
 			

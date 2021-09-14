@@ -13,6 +13,8 @@ var hit_something = false
 var target
 var shooter
 
+const BOOM = preload("res://tanks/BoomTheMissile.tscn")
+
 func _ready():
 	var __ = get_tree().create_timer(flight_time).connect("timeout", self, "queue_free")
 
@@ -36,6 +38,10 @@ func _physics_process(delta):
 func _on_missile_collision(body):
 	if !hit_something and body.has_method("take_damage"):
 		body.take_damage(velocity, damage)
+	
+	var boom = BOOM.instance()
+	boom.translation = translation
+	get_parent().add_child(boom)
 	
 	hit_something = true
 	queue_free()

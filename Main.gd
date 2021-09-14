@@ -156,6 +156,8 @@ func spawn_pickup(scene):
 	call_deferred("add_child", pickup)
 
 func _on_flag_pickup(_body, flag: Spatial):
+	$FlagPickup.play()
+	
 	GameState.add_to_score(1)
 	flag.remove_from_group("goals")
 	flag.queue_free()

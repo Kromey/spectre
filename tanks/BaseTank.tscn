@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://materials/BaseTank.material" type="Material" id=1]
 [ext_resource path="res://assets/sounds/laser.ogg" type="AudioStream" id=2]
 [ext_resource path="res://tanks/BaseTank.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/explosionCrunch_000.ogg" type="AudioStream" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.3, 0.15, 0.5 )
@@ -94,3 +95,9 @@ draw_pass_1 = SubResource( 4 )
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178697, 0 )
+stream = ExtResource( 4 )
+unit_db = 4.0
+unit_size = 3.0

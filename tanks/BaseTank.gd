@@ -124,6 +124,8 @@ func take_damage(_force, amount, shooter = null):
 	
 	if damage >= MAX_DAMAGE:
 		die(shooter)
+	else:
+		$HitSound.play()
 
 func repair_damage(amount):
 	take_damage(0, -amount)

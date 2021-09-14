@@ -5,8 +5,8 @@ to learn to use the [Godot game engine](https://godotengine.org).
 
 ## Controls
 
- * `WASD` or `arrow keys` to move
- * Mouse to steer
+ * `W` or `Up` arrow to accelerate; `S` or `Down` arrow to slow/reverse
+ * `A`/`D` or `Left`/`Right` arrows or mouse to steer
  * `Spacebar` or `left click` to fire
  * `R` or `right click` to reload (although your tank will reload automatically when you run out of ammo)
  * Mouse scroll wheel zooms the radar in/out

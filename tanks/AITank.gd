@@ -87,7 +87,7 @@ func engage_target(target, delta, attack = true):
 
 	# Is target left or right of us?
 	var cross = transform.basis.z.cross(to_target).y
-	var turn_threshold = 0.08
+	var turn_threshold = 0.00
 	if cross > turn_threshold:
 		turn(Direction.RIGHT, delta)
 	elif cross < -turn_threshold:

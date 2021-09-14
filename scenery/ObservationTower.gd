@@ -24,7 +24,7 @@ func take_damage(_force, _amount, shooter = null):
 			yield(get_tree().create_timer(0.2), "timeout")
 			
 			var missile = Missile.instance()
-			missile.steer_force = 2
+			missile.steer_force = 4
 			add_child(missile)
 			missile.start(silo.global_transform, shooter, self)
 			

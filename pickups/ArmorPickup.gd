@@ -13,7 +13,7 @@ func _on_Area_body_entered(body):
 	$ArmorPickup.play()
 	body.repair_damage(pickup_value)
 	
-	$Area.monitoring = false
+	$Area.set_deferred("monitoring", false)
 	
 	$Tween.interpolate_property(self, "translation", translation, translation + Vector3.DOWN, 1.0)
 	$Tween.repeat = false

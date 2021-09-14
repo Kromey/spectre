@@ -15,6 +15,8 @@ enum PlayerState {
 }
 var current_state = PlayerState.Running
 
+var turn_input := 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	PlayerCamera.make_current()
@@ -30,13 +32,13 @@ func _physics_process(delta):
 		PlayerState.Running:
 			# -----
 			# Turning
-			var turn_input = 0
 			
 			if Input.is_action_pressed("movement_left"):
 				turn_input += Direction.LEFT
 			if Input.is_action_pressed("movement_right"):
 				turn_input += Direction.RIGHT
-			turn(turn_input, delta)
+			turn(clamp(turn_input, -1.0, 1.0), delta)
+			turn_input = 0.0
 			# -----
 			
 			# -----
@@ -57,6 +59,8 @@ func _input(event):
 				shoot()
 			elif event.is_action_pressed("action_reload"):
 				reload()
+			elif event is InputEventMouseMotion:
+				turn_input -= event.relative.x
 
 func die(killer):
 	var cam = BOOMCAM.instance()

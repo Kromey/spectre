@@ -101,8 +101,8 @@ func _ready():
 			_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
 			num_flags += 1
 			
-			var min_tanks = 1 + floor(GameState.level / 2)
-			var max_tanks = min_tanks + 4 + floor(GameState.level / 5)
+			var min_tanks = tanks_by_level(0, 2)
+			var max_tanks = min_tanks + tanks_by_level(0, 5) * 2
 			var tanks = rng.randi_range(min_tanks, max_tanks)
 			for _t in tanks:
 				spawn_tank(AITank, flag.translation, 0.5, 4.5)
@@ -111,10 +111,10 @@ func _ready():
 				spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
 			for _t in tanks_by_level(5, 4):
 				spawn_tank(Turret, flag.translation, 0.5, 1.5)
-			for _t in tanks_by_level(8, 3):
+			for _t in tanks_by_level(7, 3):
 				spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
 	
-	for _i in GameState.level * 6:
+	for _i in 3 + tanks_by_level(0, 2) * 3:
 		spawn_tank(AITank, player.translation, 50, 95)
 
 func tanks_by_level(first_at, more_every = 0):

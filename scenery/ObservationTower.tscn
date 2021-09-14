@@ -130,3 +130,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -4.5 )
 
 [node name="FacilityAlarm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -4.0

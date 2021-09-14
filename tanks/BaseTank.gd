@@ -23,6 +23,12 @@ export(int) var GUN_DAMAGE = 1
 var ammo = 0
 var reloading = false
 
+export(float) var TRAUMA_DECAY = 0.8
+export(float) var max_offset = 0.3
+
+var trauma = 0.0
+var trauma_power = 2
+
 
 enum Direction {
 	FORWARD = -1,
@@ -43,6 +49,8 @@ signal dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
+	
 	if BULLET_SPEED <= 0:
 		BULLET_SPEED = MAX_SPEED + 2
 	reload_immediate()
@@ -53,6 +61,14 @@ func _physics_process(delta):
 	
 	if translation.y < -5:
 		take_damage(Vector3.DOWN, MAX_DAMAGE * MAX_DAMAGE)
+	
+	if trauma:
+		trauma = max(trauma - TRAUMA_DECAY * delta, 0)
+		shake()
+
+func shake():
+	var amount = pow(trauma, trauma_power)
+	translation += global_transform.basis.x * max_offset * amount * rand_range(-1, 1)
 
 func drive(direction, delta):
 	if is_on_floor():
@@ -125,6 +141,7 @@ func take_damage(_force, amount, shooter = null):
 	if damage >= MAX_DAMAGE:
 		die(shooter)
 	else:
+		trauma = min(trauma + amount / 2.0, 1.0)
 		$HitSound.play()
 
 func repair_damage(amount):

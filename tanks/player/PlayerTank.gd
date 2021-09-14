@@ -3,6 +3,8 @@ extends "res://tanks/BaseTank.gd"
 onready var PlayerCamera = find_node("Camera")
 onready var HUD = find_node("PlayerHUD")
 
+const BOOMCAM = preload("res://tanks/BoomCam.tscn")
+
 signal score_changed
 signal kills_changed
 signal update_level(level)
@@ -55,6 +57,14 @@ func _input(event):
 				shoot()
 			elif event.is_action_pressed("action_reload"):
 				reload()
+
+func die(killer):
+	var cam = BOOMCAM.instance()
+	cam.translation = translation
+	get_parent().add_child(cam)
+	cam.get_node("Camera").current = true
+	
+	.die(killer)
 
 func set_state(state):
 	current_state = state

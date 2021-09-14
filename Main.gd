@@ -178,7 +178,7 @@ func first_shot(player):
 
 func player_death(_killer):
 	print("Player died!")
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(get_tree().create_timer(5.5), "timeout")
 	
 	GameState.reset_stats()
 	var e = get_tree().reload_current_scene()

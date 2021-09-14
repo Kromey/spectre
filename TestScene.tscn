@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://tanks/AITank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://grid.shader" type="Shader" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://obstacles/Wall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://obstacles/CWall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Position3D.gd" type="Script" id=7]
+[ext_resource path="res://tanks/BoomCam.tscn" type="PackedScene" id=8]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -29,6 +30,8 @@ size = Vector2( 200, 200 )
 [sub_resource type="SpatialMaterial" id=5]
 
 [node name="TestScene" type="Spatial"]
+
+[node name="BoomCam" parent="." instance=ExtResource( 8 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 12.1214 )
@@ -114,5 +117,8 @@ transform = Transform( 0.663717, 0, 0.747984, 0, 1, 0, -0.747984, 0, 0.663717, 5
 
 [node name="CWall" parent="." instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.652509 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 18.01, 0 )
 
 [connection signal="timeout" from="Position3D/Timer" to="Position3D" method="fire_missile"]

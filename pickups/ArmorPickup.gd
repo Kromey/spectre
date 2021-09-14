@@ -10,5 +10,14 @@ func _ready():
 	$Tween.start()
 
 func _on_Area_body_entered(body):
+	$ArmorPickup.play()
 	body.repair_damage(pickup_value)
+	
+	$Area.monitoring = false
+	
+	$Tween.interpolate_property(self, "translation", translation, translation + Vector3.DOWN, 1.0)
+	$Tween.repeat = false
+	$Tween.start()
+	
+	yield(get_tree().create_timer(1.0), "timeout")
 	queue_free()

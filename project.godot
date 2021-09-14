@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Spectre Reborn"
+config/name="Spectral Legacy"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 

@@ -80,6 +80,9 @@ func engage_target(target, delta, attack = true):
 
 		if dot > fire_cone and attack and dist <= GUN_RANGE * 0.9:
 			# Target is directly in front of us and in range!
+			# NB: Not the target, but the "path around the obstacle", however this
+			# is desirable behavior as it causes tanks to sometimes appear to
+			# "lead" the player with otherwise "wild" shots around obstacles.
 			shoot()
 	elif dot < -facing_cone:
 		# Target is behind us

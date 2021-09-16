@@ -11,6 +11,8 @@ const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
 const Flag = preload("res://pickups/Flag.tscn")
 const Observers = preload("res://scenery/Observer.tscn")
 
+const OBSERVER_SPAWN_RATE := 0.01
+
 const Walls = [
 	preload("res://obstacles/Wall.tscn"), # Basic wall should be the most common
 	preload("res://obstacles/Wall.tscn"),
@@ -41,7 +43,9 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	for __ in 3:
-		add_child(Observers.instance())
+		var obs = Observers.instance()
+		obs.EVAC_CHANCE = OBSERVER_SPAWN_RATE
+		add_child(obs)
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
@@ -120,6 +124,12 @@ func _ready():
 	
 	for _i in 3 + tanks_by_level(0, 2) * 3:
 		spawn_tank(AITank, player.translation, 50, 95)
+
+func _physics_process(delta):
+	if randf() < OBSERVER_SPAWN_RATE * delta:
+		var obs = Observers.instance()
+		obs.EVAC_CHANCE = OBSERVER_SPAWN_RATE
+		add_child(obs)
 
 func tanks_by_level(first_at, more_every = 0):
 	var tanks = 0

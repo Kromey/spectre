@@ -32,12 +32,8 @@ func new_destination():
 	var flags = get_tree().get_nodes_in_group("goals")
 	if flags.size() > 0:
 		if !is_instance_valid(target):
-			var d = INF
-			for flag in flags:
-				var d2 = global_transform.origin.distance_to(flag.global_transform.origin)
-				if d2 < d:
-					d = d2
-					target = flag
+			flags.shuffle()
+			target = flags[0]
 		
 		var angle = rand_range(0, 2 * PI)
 		var dist = rand_range(0, 25)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/models/Observer.glb" type="PackedScene" id=1]
 [ext_resource path="res://scenery/ObservationLight.tscn" type="PackedScene" id=2]
@@ -19,6 +19,36 @@ material = SubResource( 1 )
 radius = 0.15
 height = 0.1
 is_hemisphere = true
+
+[sub_resource type="Animation" id=3]
+resource_name = "RunningLights"
+length = 0.75
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RunningLights:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0.85 ), Vector3( 0, 0, -0.718245 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RunningLights:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Observer" type="Spatial"]
 script = ExtResource( 4 )
@@ -57,3 +87,26 @@ material/0 = null
 transform = Transform( 2, 0, 0, 0, -1.5, 3.01992e-07, 0, -2.26494e-07, -2, 0, -0.256865, -0.609385 )
 mesh = SubResource( 2 )
 material/0 = null
+
+[node name="RunningLights" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.85 )
+
+[node name="Right" type="OmniLight" parent="RunningLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+light_color = Color( 0.968627, 0.933333, 0.054902, 1 )
+light_energy = 5.0
+light_specular = 1.0
+omni_range = 0.5
+omni_attenuation = 8.93605e-05
+
+[node name="Left" type="OmniLight" parent="RunningLights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+light_color = Color( 0.968627, 0.933333, 0.054902, 1 )
+light_energy = 5.0
+light_specular = 1.0
+omni_range = 0.5
+omni_attenuation = 8.93605e-05
+
+[node name="RunningLightsAnim" type="AnimationPlayer" parent="."]
+autoplay = "RunningLights"
+anims/RunningLights = SubResource( 3 )

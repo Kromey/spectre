@@ -5,3 +5,6 @@
 bin/
 build/
 lib/
+
+# Blender backups
+*.blend[1-9]

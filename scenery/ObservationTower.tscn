@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sounds/mixkit-critical-alarm-1004.wav" type="AudioStream" id=3]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 7.5, 9.75, 4.5 )
+extents = Vector3( 14, 9.75, 7.5 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
@@ -23,16 +23,49 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0 )
 shape = SubResource( 1 )
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 material_override = SubResource( 2 )
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
-width = 5.0
-height = 10.0
-depth = 3.0
+width = 28.0
+height = 4.0
+depth = 15.0
+
+[node name="Left" type="CSGSphere" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0 )
+radius = 8.0
+radial_segments = 32
+rings = 16
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Left"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+radial_segments = 8
+rings = 4
+
+[node name="Right" type="CSGSphere" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0 )
+radius = 8.0
+radial_segments = 32
+rings = 16
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Right"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+radial_segments = 8
+rings = 4
+
+[node name="Middle" type="CSGSphere" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+radius = 8.0
+radial_segments = 32
+rings = 16
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Middle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+radial_segments = 8
+rings = 4
 
 [node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 15, 0 )
+visible = false
 radius = 3.0
 radial_segments = 16
 rings = 10
@@ -57,77 +90,82 @@ operation = 2
 height = 0.5
 
 [node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder2" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder3" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder4" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder5" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder6" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder7" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.5, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder8" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="CSGCylinder9" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.5, 2, -1.1 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
 [node name="MissileSilo1" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -7.5 )
 
 [node name="MissileSilo2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, -7.5 )
 
 [node name="MissileSilo3" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -7.5 )
 
 [node name="MissileSilo4" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, -7.5 )
 
 [node name="MissileSilo5" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -7.5 )
 
 [node name="MissileSilo6" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, -7.5 )
 
 [node name="MissileSilo7" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -7.5 )
 
 [node name="MissileSilo8" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, -7.5 )
 
 [node name="MissileSilo9" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -7.5 )
 
 [node name="FacilityAlarm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -4.0
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84837, 20.2461, -15.7184 )
+editor_only = true
+omni_range = 50.0

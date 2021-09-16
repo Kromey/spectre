@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="ObservationLight" type="Spatial"]
+
+[node name="SpecularGlow" type="OmniLight" parent="."]
+light_specular = 1.0
+omni_range = 1.0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 0, 0 )
+light_color = Color( 0.980392, 0.0196078, 0.0196078, 1 )
+light_energy = 15.0
+light_indirect_energy = 15.0
+spot_range = 10.0
+spot_attenuation = 8.93601e-05

@@ -9,6 +9,7 @@ const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 const ArmorPickup = preload("res://pickups/ArmorPickup.tscn")
 const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
 const Flag = preload("res://pickups/Flag.tscn")
+const Observers = preload("res://scenery/Observer.tscn")
 
 const Walls = [
 	preload("res://obstacles/Wall.tscn"), # Basic wall should be the most common
@@ -38,6 +39,9 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	for __ in 3:
+		add_child(Observers.instance())
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)

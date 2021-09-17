@@ -8,7 +8,6 @@ var destination := Vector3.ZERO
 var altitude := 5.0
 var target = null
 
-var EVAC_CHANCE = 0.01
 var current_state = State.Arriving
 
 enum State {
@@ -55,9 +54,6 @@ func _physics_process(delta):
 			var vel = velocity.normalized()
 			velocity = vel.slerp(direction, turn_rate * delta)
 			velocity *= speed
-	
-			if randf() < EVAC_CHANCE * delta:
-				current_state = State.Evacuating
 			
 		State.Evacuating:
 			velocity += velocity.normalized() * transit_accel * delta

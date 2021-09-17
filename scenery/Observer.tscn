@@ -50,7 +50,9 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[node name="Observer" type="Spatial"]
+[node name="Observer" type="Spatial" groups=[
+"observers",
+]]
 script = ExtResource( 4 )
 
 [node name="Observer" parent="." instance=ExtResource( 1 )]

@@ -44,7 +44,6 @@ func _ready():
 	
 	for __ in 3:
 		var obs = Observers.instance()
-		obs.EVAC_CHANCE = OBSERVER_SPAWN_RATE
 		add_child(obs)
 	
 	var player = PlayerTank.instance()
@@ -126,10 +125,17 @@ func _ready():
 		spawn_tank(AITank, player.translation, 50, 95)
 
 func _physics_process(delta):
+	# Chance to spawn a new Observer
 	if randf() < OBSERVER_SPAWN_RATE * delta:
 		var obs = Observers.instance()
-		obs.EVAC_CHANCE = OBSERVER_SPAWN_RATE
 		add_child(obs)
+	
+	# Equal chance to evacuate one
+	if randf() < OBSERVER_SPAWN_RATE * delta:
+		var observers = get_tree().get_nodes_in_group("observers")
+		if observers.size() > 0:
+			observers.shuffle()
+			observers[0].current_state = observers[0].State.Evacuating
 
 func tanks_by_level(first_at, more_every = 0):
 	var tanks = 0

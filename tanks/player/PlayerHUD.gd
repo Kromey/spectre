@@ -6,24 +6,24 @@ onready var Score = find_node("Score")
 onready var Kills = find_node("Kills")
 onready var Level = find_node("Level")
 
-var last_damage = 0
+var last_armor = 0
 
-func update_damage(new_value, max_value):
-	Armor.get_node("Value").text = str(max_value - new_value)
+func update_armor(armor, _max_armor):
+	Armor.get_node("Value").text = str(armor)
 	
-	if new_value > last_damage:
+	if armor < last_armor:
 		$DamageAnimation.play("Damage")
 		var duration = $DamageAnimation.get_animation("Damage").length * 5
-		if max_value - new_value > 1:
+		if armor > 1:
 			$DamageAnimation/DurationTimer.start(duration)
 		else:
 			$DamageCriticalAlarm.play()
 			$DamageAnimation/DurationTimer.stop()
-	elif max_value - new_value > 1:
+	elif armor > 1:
 		# If we're repairing from 1 armor, we want to stop blinking
 		reset_damage_animation()
 	
-	last_damage = new_value
+	last_armor = armor
 
 func reset_damage_animation():
 	$DamageCriticalAlarm.stop()

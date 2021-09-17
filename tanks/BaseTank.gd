@@ -3,8 +3,8 @@ extends KinematicBody
 var falling = 0.0
 const GRAVITY = 2
 
-var damage = 0
-export(int) var MAX_DAMAGE = 1
+export(int) var MAX_ARMOR = 1
+onready var armor = MAX_ARMOR
 
 var velocity = Vector3.ZERO
 export(float) var MAX_SPEED = 10
@@ -42,7 +42,7 @@ const BOOM = preload("res://tanks/BoomTheTank.tscn")
 
 onready var ShootSound = find_node("ShootAudio")
 
-signal damage_changed
+signal armor_changed
 signal ammo_changed
 signal reloading
 signal dead
@@ -60,7 +60,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	if translation.y < -5:
-		take_damage(Vector3.DOWN, MAX_DAMAGE * MAX_DAMAGE)
+		take_damage(Vector3.DOWN, INF)
 	
 	if trauma:
 		trauma = max(trauma - TRAUMA_DECAY * delta, 0)
@@ -135,10 +135,10 @@ func reload_immediate():
 	$FireRate.stop()
 
 func take_damage(_force, amount, shooter = null):
-	damage = clamp(damage + amount, 0, MAX_DAMAGE)
-	emit_signal("damage_changed", damage, MAX_DAMAGE)
+	armor = clamp(armor - amount, 0, MAX_ARMOR)
+	emit_signal("armor_changed", armor, MAX_ARMOR)
 	
-	if damage >= MAX_DAMAGE:
+	if armor <= 0:
 		die(shooter)
 	else:
 		trauma = min(trauma + amount / 2.0, 1.0)

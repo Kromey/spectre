@@ -10,7 +10,7 @@
 ] instance=ExtResource( 1 )]
 collision_layer = 2
 script = ExtResource( 3 )
-MAX_DAMAGE = 5
+MAX_ARMOR = 5
 MAX_AMMO = 8.0
 FIRE_RATE = 0.5
 GUN_RANGE = 60.0
@@ -34,7 +34,7 @@ omni_attenuation = 0.435275
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )
 
 [connection signal="ammo_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_ammo"]
-[connection signal="damage_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_damage"]
+[connection signal="armor_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_armor"]
 [connection signal="kills_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_kills"]
 [connection signal="reloading" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="reloading"]
 [connection signal="score_changed" from="." to="CSGCombiner/Body/Turret/Camera/PlayerHUD" method="update_score"]

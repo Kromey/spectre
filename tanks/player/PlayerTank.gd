@@ -21,8 +21,9 @@ var turn_input := 0.0
 func _ready():
 	PlayerCamera.make_current()
 	
+	prints(armor, MAX_ARMOR)
 	emit_signal("ammo_changed", ammo)
-	emit_signal("damage_changed", damage, MAX_DAMAGE)
+	emit_signal("armor_changed", armor, MAX_ARMOR)
 	emit_signal("score_changed", GameState.player_score)
 	emit_signal("kills_changed", GameState.player_kills)
 	emit_signal("update_level", GameState.level)

@@ -69,12 +69,12 @@ margin_right = 1004.0
 margin_bottom = 160.0
 
 [node name="GUILeft" type="VBoxContainer" parent="Top/GUI"]
-margin_right = 815.0
+margin_right = 726.0
 margin_bottom = 140.0
 size_flags_horizontal = 3
 
 [node name="Armor" type="HSplitContainer" parent="Top/GUI/GUILeft"]
-margin_right = 815.0
+margin_right = 726.0
 margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Armor"]
@@ -107,7 +107,7 @@ text = "0"
 
 [node name="Ammo" type="HSplitContainer" parent="Top/GUI/GUILeft"]
 margin_top = 48.0
-margin_right = 815.0
+margin_right = 726.0
 margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Ammo"]
@@ -137,63 +137,83 @@ margin_bottom = 48.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 
+[node name="Kills" type="HSplitContainer" parent="Top/GUI/GUILeft"]
+margin_top = 96.0
+margin_right = 726.0
+margin_bottom = 140.0
+
+[node name="Label" type="Label" parent="Top/GUI/GUILeft/Kills"]
+margin_right = 130.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Kills:"
+
+[node name="Value" type="Label" parent="Top/GUI/GUILeft/Kills"]
+margin_left = 142.0
+margin_right = 726.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
 [node name="GUIRight" type="VBoxContainer" parent="Top/GUI"]
-margin_left = 827.0
+margin_left = 738.0
 margin_right = 984.0
 margin_bottom = 140.0
 
 [node name="Level" type="HSplitContainer" parent="Top/GUI/GUIRight"]
-margin_right = 157.0
+margin_right = 246.0
 margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUIRight/Level"]
-margin_right = 114.0
+margin_right = 130.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
 custom_fonts/font = ExtResource( 1 )
 text = "Level:"
 
 [node name="Value" type="Label" parent="Top/GUI/GUIRight/Level"]
-margin_left = 126.0
-margin_right = 157.0
+margin_left = 142.0
+margin_right = 246.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "0"
 
 [node name="Score" type="HSplitContainer" parent="Top/GUI/GUIRight"]
 margin_top = 48.0
-margin_right = 157.0
+margin_right = 246.0
 margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUIRight/Score"]
-margin_right = 119.0
+margin_right = 130.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
 custom_fonts/font = ExtResource( 1 )
 text = "Score:"
 
 [node name="Value" type="Label" parent="Top/GUI/GUIRight/Score"]
-margin_left = 131.0
-margin_right = 157.0
+margin_left = 142.0
+margin_right = 246.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
-text = "0"
 
-[node name="Kills" type="HSplitContainer" parent="Top/GUI/GUIRight"]
+[node name="Bonus" type="HSplitContainer" parent="Top/GUI/GUIRight"]
 margin_top = 96.0
-margin_right = 157.0
+margin_right = 246.0
 margin_bottom = 140.0
 
-[node name="Label" type="Label" parent="Top/GUI/GUIRight/Kills"]
-margin_right = 87.0
+[node name="Label" type="Label" parent="Top/GUI/GUIRight/Bonus"]
+margin_right = 130.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
 custom_fonts/font = ExtResource( 1 )
-text = "Kills:"
+text = "Bonus:"
 
-[node name="Value" type="Label" parent="Top/GUI/GUIRight/Kills"]
-margin_left = 99.0
-margin_right = 157.0
+[node name="Value" type="Label" parent="Top/GUI/GUIRight/Bonus"]
+margin_left = 142.0
+margin_right = 246.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 104, 0 )
 custom_fonts/font = ExtResource( 1 )
-text = "0"
 
 [node name="Radar" parent="." instance=ExtResource( 3 )]
 

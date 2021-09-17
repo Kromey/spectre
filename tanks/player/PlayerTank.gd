@@ -6,6 +6,7 @@ onready var HUD = find_node("PlayerHUD")
 const BOOMCAM = preload("res://tanks/BoomCam.tscn")
 
 signal score_changed
+signal bonus_changed(bonus)
 signal kills_changed
 signal update_level(level)
 
@@ -24,9 +25,9 @@ func _ready():
 	prints(armor, MAX_ARMOR)
 	emit_signal("ammo_changed", ammo, MAX_AMMO)
 	emit_signal("armor_changed", armor, MAX_ARMOR)
-	emit_signal("score_changed", GameState.player_score)
-	emit_signal("kills_changed", GameState.player_kills)
-	emit_signal("update_level", GameState.level)
+	emit_signal("score_changed", Game.player_score)
+	emit_signal("kills_changed", Game.player_kills)
+	emit_signal("update_level", Game.level)
 
 func _physics_process(delta):
 	match current_state:
@@ -76,6 +77,9 @@ func set_state(state):
 
 func update_score(score):
 	emit_signal("score_changed", score)
+
+func update_bonus(bonus):
+	emit_signal("bonus_changed", bonus)
 
 func update_kills(kills):
 	emit_signal("kills_changed", kills)

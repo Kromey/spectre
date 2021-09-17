@@ -3,6 +3,7 @@ extends Control
 onready var Armor = find_node("Armor")
 onready var Ammo = find_node("Ammo")
 onready var Score = find_node("Score")
+onready var Bonus = find_node("Bonus")
 onready var Kills = find_node("Kills")
 onready var Level = find_node("Level")
 
@@ -76,3 +77,6 @@ func update_kills(kills):
 
 func update_level(level):
 	Level.get_node("Value").text = str(level)
+
+func update_bonus(bonus):
+	Bonus.get_node("Value").text = str(bonus)

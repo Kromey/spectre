@@ -38,8 +38,11 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	Game.world = self
+	Game.current_state = Game.State.LoadingLevel
+
+func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	for __ in 3:
@@ -48,7 +51,6 @@ func _ready():
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
-	GameState.add_to_score(0)
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
 	call_deferred("first_shot", player)
@@ -140,11 +142,11 @@ func _physics_process(delta):
 func tanks_by_level(first_at, more_every = 0):
 	var tanks = 0
 	
-	if GameState.level > first_at:
+	if Game.level > first_at:
 		tanks += 1
 		
 		if more_every > 0:
-			tanks += floor((GameState.level - first_at) / more_every)
+			tanks += floor((Game.level - first_at) / more_every)
 	
 	return tanks
 
@@ -178,12 +180,12 @@ func spawn_pickup(scene):
 func _on_flag_pickup(_body, flag: Spatial):
 	$FlagPickup.play()
 	
-	GameState.add_to_score(1)
+	Game.add_to_score(1)
 	flag.remove_from_group("goals")
 	flag.queue_free()
 	
 	if get_tree().get_nodes_in_group("goals").size() == 0:
-		GameState.level_up()
+		Game.level_up()
 		var e = get_tree().reload_current_scene()
 		assert(e == OK)
 
@@ -200,7 +202,7 @@ func player_death(_killer):
 	print("Player died!")
 	yield(get_tree().create_timer(5.5), "timeout")
 	
-	GameState.reset_stats()
+	Game.reset_stats()
 	var e = get_tree().reload_current_scene()
 	assert(e == OK)
 
@@ -208,6 +210,6 @@ func tank_death(killer):
 	print("Enemy tank died!")
 	if is_instance_valid(killer) and killer.is_in_group("player"):
 		print("\tWe blame the player!")
-		GameState.add_to_kills(1)
+		Game.add_to_kills(1)
 	elif is_instance_valid(killer) and killer.is_in_group("enemies"):
 		print("\tFriendly fire casualty!")

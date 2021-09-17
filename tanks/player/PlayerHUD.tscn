@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://tanks/player/PlayerHUD.gd" type="Script" id=2]
 [ext_resource path="res://tanks/player/Radar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/crosshair102.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/mixkit-industry-alarm-tone-2979.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/ui/bar_bg.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/bar_fill.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/bar_frame.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Reloading"
@@ -17,10 +20,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.5 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -75,16 +78,32 @@ margin_right = 815.0
 margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Armor"]
-margin_right = 124.0
+margin_right = 130.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
 custom_fonts/font = ExtResource( 1 )
 text = "Armor:"
 
+[node name="Bar" type="TextureProgress" parent="Top/GUI/GUILeft/Armor"]
+margin_left = 142.0
+margin_top = 2.0
+margin_right = 390.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 248, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+step = 0.05
+value = 75.0
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 0.0980392, 0.603922, 0.0392157, 1 )
+
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Armor"]
-margin_left = 136.0
-margin_right = 815.0
-margin_bottom = 44.0
+margin_left = 395.0
+margin_bottom = 48.0
 custom_fonts/font = ExtResource( 1 )
+text = "0"
 
 [node name="Ammo" type="HSplitContainer" parent="Top/GUI/GUILeft"]
 margin_top = 48.0
@@ -92,16 +111,31 @@ margin_right = 815.0
 margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Ammo"]
-margin_right = 129.0
+margin_right = 130.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 130, 0 )
 custom_fonts/font = ExtResource( 1 )
 text = "Ammo:"
 
+[node name="Bar" type="TextureProgress" parent="Top/GUI/GUILeft/Ammo"]
+margin_left = 142.0
+margin_top = 2.0
+margin_right = 390.0
+margin_bottom = 42.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+step = 0.05
+value = 75.0
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+tint_progress = Color( 0.65098, 0.556863, 0.0470588, 1 )
+
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Ammo"]
-margin_left = 141.0
-margin_right = 815.0
-margin_bottom = 44.0
+margin_left = 395.0
+margin_bottom = 48.0
 custom_fonts/font = ExtResource( 1 )
+text = "0"
 
 [node name="GUIRight" type="VBoxContainer" parent="Top/GUI"]
 margin_left = 827.0
@@ -182,6 +216,8 @@ margin_right = 64.0
 margin_bottom = 64.0
 texture = ExtResource( 4 )
 expand = true
+
+[node name="BarTween" type="Tween" parent="."]
 
 [node name="ReloadingAnimation" type="AnimationPlayer" parent="."]
 anims/Reloading = SubResource( 1 )

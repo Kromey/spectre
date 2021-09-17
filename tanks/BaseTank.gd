@@ -104,7 +104,7 @@ func shoot():
 	if ammo > 0 and !reloading and $FireRate.is_stopped():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
-		emit_signal("ammo_changed", ammo)
+		emit_signal("ammo_changed", ammo, MAX_AMMO)
 		
 		var bullet = Bullet.instance()
 		bullet.BULLET_TIME = GUN_RANGE / BULLET_SPEED
@@ -122,15 +122,15 @@ func shoot():
 
 func reload():
 	if !reloading:
-		emit_signal("reloading", true)
+		emit_signal("reloading", true, RELOAD_TIME)
 		reloading = true
 		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", self, "reload_immediate")
 
 func reload_immediate():
 	ammo = MAX_AMMO
-	emit_signal("ammo_changed", ammo)
+	emit_signal("ammo_changed", ammo, MAX_AMMO)
 	reloading = false
-	emit_signal("reloading", false)
+	emit_signal("reloading", false, RELOAD_TIME)
 	# Ensure reloading clears fire rate timer
 	$FireRate.stop()
 

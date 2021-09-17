@@ -22,7 +22,7 @@ func _ready():
 	PlayerCamera.make_current()
 	
 	prints(armor, MAX_ARMOR)
-	emit_signal("ammo_changed", ammo)
+	emit_signal("ammo_changed", ammo, MAX_AMMO)
 	emit_signal("armor_changed", armor, MAX_ARMOR)
 	emit_signal("score_changed", GameState.player_score)
 	emit_signal("kills_changed", GameState.player_kills)

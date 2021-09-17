@@ -13,7 +13,7 @@ shader_param/ROW_COUNT = 10.0
 
 [node name="AdvancedTank" instance=ExtResource( 1 )]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.25, 0 )
-MAX_DAMAGE = 2
+MAX_ARMOR = 2
 MAX_SPEED = 7.0
 ACCEL = 8.0
 TURN_RATE = 1.8

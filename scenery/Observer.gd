@@ -53,8 +53,6 @@ func _physics_process(delta):
 			
 			var direction = global_transform.origin.direction_to(destination)
 			var vel = velocity.normalized()
-			assert(direction.is_normalized(), destination)
-			assert(vel.is_normalized())
 			velocity = vel.slerp(direction, turn_rate * delta)
 			velocity *= speed
 	

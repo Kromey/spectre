@@ -10,6 +10,7 @@ onready var bonus_timer = Timer.new()
 
 enum State {
 	Waiting,
+	LoadingGame,
 	MainMenu,
 	LoadingLevel,
 	Running,
@@ -22,6 +23,8 @@ func set_state(new_state):
 	current_state = new_state
 	
 	match current_state:
+		State.LoadingGame:
+			get_tree().change_scene("Main.tscn")
 		State.LoadingLevel:
 			world.start()
 

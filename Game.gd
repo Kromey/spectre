@@ -57,7 +57,7 @@ func set_bonus(new_bonus):
 	get_tree().call_group("player", "update_bonus", player_bonus)
 
 func set_kills(new_kills):
-	player_kills += new_kills
+	player_kills = new_kills
 	get_tree().call_group("player", "update_kills", player_kills)
 
 func level_up():

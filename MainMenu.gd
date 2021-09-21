@@ -12,6 +12,10 @@ func _ready():
 	
 	Game.current_state = Game.State.MainMenu
 
+func _input(event):
+	if event.is_action("ui_cancel"):
+		get_tree().quit()
+
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:
 		yield(self, "ready")

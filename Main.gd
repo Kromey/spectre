@@ -35,7 +35,7 @@ const Walls = [
 
 func _input(event):
 	# TODO: Temporary quit-to-MainMenu
-	if event.is_action_released("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"):
 		Game.current_state = Game.State.MainMenu
 
 func _ready():

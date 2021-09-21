@@ -63,14 +63,32 @@ margin_right = 514.0
 margin_bottom = 322.0
 rect_min_size = Vector2( 0, 100 )
 
-[node name="ApplyButton" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 326.0
 margin_right = 514.0
 margin_bottom = 376.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ApplyButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 247.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Apply"
+text = "OK"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 267.0
+margin_right = 514.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Cancel"
 
 [connection signal="resolution_changed" from="VBoxContainer/UIResolutionSelector" to="." method="_on_UIResolutionSelector_resolution_changed"]
 [connection signal="toggled" from="VBoxContainer/UIFullscreenCheckbox" to="." method="_on_UIFullscreenCheckbox_toggled"]
 [connection signal="toggled" from="VBoxContainer/UIVsyncCheckbox" to="." method="_on_UIVsyncCheckbox_toggled"]
-[connection signal="pressed" from="VBoxContainer/ApplyButton" to="." method="_on_ApplyButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_ApplyButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

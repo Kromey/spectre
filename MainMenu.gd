@@ -17,9 +17,13 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if video_settings_ui.visible:
+			# Cancel any changes/reset the UI
+			video_settings_ui.init(video_settings.to_dict())
 			toggle_video_settings_panel(false)
 		else:
 			get_tree().quit()
+	if event.is_action_pressed("ui_accept") and video_settings_ui.visible:
+		video_settings_ui.apply_settings()
 
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:
@@ -49,6 +53,12 @@ func _on_Quit_pressed():
 
 func _on_UIVideoSettings_apply_button_pressed(settings):
 	update_settings(settings)
+	toggle_video_settings_panel(false)
+
+
+func _on_UIVideoSettings_cancel_button_pressed():
+	# Cancel any changes/reset the UI
+	video_settings_ui.init(video_settings.to_dict())
 	toggle_video_settings_panel(false)
 
 

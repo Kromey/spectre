@@ -1,6 +1,7 @@
 extends Control
 
 signal apply_button_pressed(settings)
+signal cancel_button_pressed
 
 var _settings := {resolution = Vector2(1920, 1080), fullscreen = false, vsync = false}
 
@@ -15,8 +16,11 @@ func init(settings: Dictionary):
 	$VBoxContainer/UIFullscreenCheckbox.enabled = _settings.fullscreen
 	$VBoxContainer/UIVsyncCheckbox.enabled = _settings.vsync
 
-func _on_ApplyButton_pressed():
+func apply_settings():
 	emit_signal("apply_button_pressed", _settings)
+
+func _on_ApplyButton_pressed():
+	apply_settings()
 
 
 func _on_UIResolutionSelector_resolution_changed(new_resolution):
@@ -29,3 +33,7 @@ func _on_UIFullscreenCheckbox_toggled(is_button_pressed):
 
 func _on_UIVsyncCheckbox_toggled(is_button_pressed):
 	_settings.vsync = is_button_pressed
+
+
+func _on_CancelButton_pressed():
+	emit_signal("cancel_button_pressed")

@@ -134,3 +134,4 @@ margin_bottom = 189.0
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="apply_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_apply_button_pressed"]
+[connection signal="cancel_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_cancel_button_pressed"]

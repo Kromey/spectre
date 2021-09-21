@@ -4,19 +4,16 @@ signal apply_button_pressed(settings)
 
 var _settings := {resolution = Vector2(1920, 1080), fullscreen = false, vsync = false}
 
-func _ready():
+func init(settings: Dictionary):
 	# Get our current settings from the OS
-	_settings.resolution = OS.window_size
-	_settings.fullscreen = OS.window_fullscreen
-	_settings.vsync = OS.vsync_enabled
+	_settings.resolution = settings.resolution
+	_settings.fullscreen = settings.fullscreen
+	_settings.vsync = settings.vsync
 	
 	# Update our UI
 	$VBoxContainer/UIResolutionSelector.set_selected_resolution(_settings.resolution)
 	$VBoxContainer/UIFullscreenCheckbox.enabled = _settings.fullscreen
 	$VBoxContainer/UIVsyncCheckbox.enabled = _settings.vsync
-	
-	# Ensure any changes made (e.g. coercing resolution) are applied
-	emit_signal("apply_button_pressed", _settings)
 
 func _on_ApplyButton_pressed():
 	emit_signal("apply_button_pressed", _settings)

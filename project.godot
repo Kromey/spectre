@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "TankNavigation",
 "language": "GDScript",
 "path": "res://tanks/TankNavigation.gd"
+}, {
+"base": "Object",
+"class": "VideoSettings",
+"language": "GDScript",
+"path": "res://main_menu/VideoSettings.gd"
 } ]
 _global_script_class_icons={
-"TankNavigation": ""
+"TankNavigation": "",
+"VideoSettings": ""
 }
 
 [application]

@@ -1,30 +1,34 @@
 extends Control
 
-onready var video_settings = $UIVideoSettings
+onready var video_settings = VideoSettings.new()
+onready var video_settings_ui = $UIVideoSettings
 onready var buttons = $MenuContainer/ButtonsContainer
 
 func _ready():
-	video_settings.visible = false
+	video_settings_ui.visible = false
+	video_settings.load_from_file()
+	video_settings.apply_settings(get_tree())
+	video_settings_ui.init(video_settings.to_dict())
+	
 	Game.current_state = Game.State.MainMenu
 
 func toggle_video_settings_panel(state: bool):
-	if !video_settings:
+	if !video_settings_ui:
 		yield(self, "ready")
 	
-	video_settings.visible = state
+	video_settings_ui.visible = state
 	
 	for button in buttons.get_children():
 		button.disabled = state
 
 func update_settings(settings: Dictionary) -> void:
-	OS.window_fullscreen = settings.fullscreen
-	get_tree().set_screen_stretch(
-		SceneTree.STRETCH_MODE_DISABLED, SceneTree.STRETCH_ASPECT_IGNORE, settings.resolution
-	)
-	OS.set_window_size(settings.resolution)
-	OS.vsync_enabled = settings.vsync
+	if !video_settings:
+		yield(self, "ready")
 	
-	OS.center_window()
+	video_settings.from_dict(settings)
+	video_settings.save()
+	
+	video_settings.apply_settings(get_tree())
 
 func _on_StartGame_pressed():
 	Game.current_state = Game.State.LoadingGame

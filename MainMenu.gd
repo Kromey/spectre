@@ -5,6 +5,8 @@ onready var video_settings_ui = $UIVideoSettings
 onready var buttons = $MenuContainer/ButtonsContainer
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	video_settings_ui.visible = false
 	video_settings.load_from_file()
 	video_settings.apply_settings(get_tree())

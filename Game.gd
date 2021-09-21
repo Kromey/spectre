@@ -23,8 +23,12 @@ func set_state(new_state):
 	current_state = new_state
 	
 	match current_state:
+		State.MainMenu:
+			if get_tree().get_current_scene().get_name() != "MainMenu":
+				var __ = get_tree().change_scene("MainMenu.tscn")
 		State.LoadingGame:
-			get_tree().change_scene("Main.tscn")
+			if get_tree().get_current_scene().get_name() != "Main":
+				var __ = get_tree().change_scene("Main.tscn")
 		State.LoadingLevel:
 			world.start()
 

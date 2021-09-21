@@ -39,7 +39,8 @@ func _physics_process(delta):
 				turn_input += Direction.LEFT
 			if Input.is_action_pressed("movement_right"):
 				turn_input += Direction.RIGHT
-			turn(clamp(turn_input, -1.0, 1.0), delta)
+			
+			turn(clamp(turn_input, -1.25, 1.25), delta)
 			turn_input = 0.0
 			# -----
 			
@@ -62,7 +63,7 @@ func _input(event):
 			elif event.is_action_pressed("action_reload"):
 				reload()
 			elif event is InputEventMouseMotion:
-				turn_input -= event.relative.x
+				turn_input -= event.relative.x * 0.2
 
 func die(killer):
 	var cam = BOOMCAM.instance()

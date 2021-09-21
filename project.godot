@@ -28,6 +28,8 @@ _global_script_class_icons={
 
 config/name="Spectral Legacy"
 run/main_scene="res://MainMenu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Spectral Legacy"
 boot_splash/image="res://assets/ui/thegrid.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"

@@ -8,6 +8,8 @@ signal toggled(is_button_pressed)
 # Using a setter lets us change the text when the `title` variable changes.
 export var title := "" setget set_title
 
+export var enabled := false setget set_enabled
+
 # We store a reference to the Label node to update its text
 onready var label := $Label
 
@@ -22,3 +24,7 @@ func set_title(value: String) -> void:
 		yield(self, "ready")
 	# Update the label's text
 	label.text = title
+
+func set_enabled(_enabled):
+	enabled = _enabled
+	$CheckBox.pressed = enabled

@@ -6,6 +6,18 @@ signal resolution_changed(new_resolution)
 # We store a reference to the OptionButton to get the selected option later
 onready var option_button: OptionButton = $OptionButton
 
+func set_selected_resolution(resolution: Vector2) -> void:
+	var resolution_string = "%dx%d" % [resolution.x, resolution.y]
+	
+	for i in option_button.get_item_count():
+		if resolution_string == option_button.get_item_text(i):
+			option_button.select(i)
+			return
+	
+	option_button.select(0)
+	print(option_button.text)
+	_update_selected_item(option_button.text)
+
 func _update_selected_item(text: String) -> void:
 	# The resolution options are writen in the form "XRESxYRES"
 	# Using `split_floats` we get an array with both values as floats

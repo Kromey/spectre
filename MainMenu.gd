@@ -7,11 +7,14 @@ func _ready():
 	video_settings.visible = false
 	Game.current_state = Game.State.MainMenu
 
-func toggle_video_settings_panel():
-	video_settings.visible = !video_settings.visible
+func toggle_video_settings_panel(state: bool):
+	if !video_settings:
+		yield(self, "ready")
+	
+	video_settings.visible = state
 	
 	for button in buttons.get_children():
-		button.disabled = video_settings.visible
+		button.disabled = state
 
 func update_settings(settings: Dictionary) -> void:
 	OS.window_fullscreen = settings.fullscreen
@@ -33,8 +36,8 @@ func _on_Quit_pressed():
 
 func _on_UIVideoSettings_apply_button_pressed(settings):
 	update_settings(settings)
-	toggle_video_settings_panel()
+	toggle_video_settings_panel(false)
 
 
 func _on_Settings_pressed():
-	toggle_video_settings_panel()
+	toggle_video_settings_panel(true)

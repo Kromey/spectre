@@ -16,7 +16,10 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+		if video_settings_ui.visible:
+			toggle_video_settings_panel(false)
+		else:
+			get_tree().quit()
 
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:

@@ -37,3 +37,5 @@ func roll():
 		
 		line_timer.start()
 		yield(line_timer, "timeout")
+	
+	is_rolling = false

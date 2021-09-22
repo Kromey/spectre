@@ -130,8 +130,19 @@ margin_top = -189.0
 margin_right = 258.5
 margin_bottom = 189.0
 
+[node name="CreditsLabel" type="Label" parent="."]
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 4
+text = "Credits Go Here"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="MenuContainer/ButtonsContainer/About" to="." method="_on_About_pressed"]
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="apply_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_apply_button_pressed"]
 [connection signal="cancel_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_cancel_button_pressed"]

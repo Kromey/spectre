@@ -4,8 +4,18 @@ onready var video_settings = VideoSettings.new()
 onready var video_settings_ui = $UIVideoSettings
 onready var buttons = $MenuContainer/ButtonsContainer
 
+const CREDITS := [
+	["Game Design & Programming", "Travis Veazey",],
+	["3D Models & Textures", "Travis Veazey",],
+]
+const CREDITS_LINE_TIME := 0.3
+const CREDITS_TITLE_COLOR := Color.blueviolet
+const CREDITS_SPEED := 125
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	$CreditsLabel.hide()
 	
 	video_settings_ui.visible = false
 	video_settings.load_from_file()
@@ -43,6 +53,47 @@ func update_settings(settings: Dictionary) -> void:
 	
 	video_settings.apply_settings(get_tree())
 
+func roll_credits():
+	get_tree().call_group("running_credits", "queue_free")
+	
+	var timer = Timer.new()
+	timer.wait_time = CREDITS_LINE_TIME
+	add_child(timer)
+	
+	var label = $CreditsLabel
+	var title: bool
+	
+	var scroll_time = OS.window_size.y / CREDITS_SPEED
+	
+	for section in CREDITS:
+		title = true
+		
+		for line in section:
+			var l = label.duplicate()
+			l.rect_position.x = 25
+			l.rect_position.y = OS.window_size.y
+			l.text = line
+			l.show()
+			l.add_to_group("running_credits")
+			if title:
+				l.add_color_override("font_color", CREDITS_TITLE_COLOR)
+			add_child(l)
+			
+			var tween = Tween.new()
+			tween.interpolate_property(l, "rect_position", l.rect_position, Vector2(25, 0), scroll_time)
+			tween.interpolate_property(l, "modulate", l.modulate, Color(1, 1, 1, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 3.5)
+			l.add_child(tween)
+			tween.start()
+			var __ = tween.connect("tween_all_completed", l, "queue_free")
+			
+			title = false
+			
+			timer.start()
+			yield(timer, "timeout")
+		
+		timer.start()
+		yield(timer, "timeout")
+
 func _on_StartGame_pressed():
 	Game.current_state = Game.State.LoadingGame
 
@@ -64,3 +115,7 @@ func _on_UIVideoSettings_cancel_button_pressed():
 
 func _on_Settings_pressed():
 	toggle_video_settings_panel(true)
+
+
+func _on_About_pressed():
+	roll_credits()

@@ -1,7 +1,7 @@
 extends Label
 
 const CREDITS_LINE_TIME := 0.3
-const CREDITS_TITLE_COLOR := Color.blueviolet
+const CREDITS_TITLE_COLOR := Color.lightgreen
 const CREDITS_SPEED := 125
 
 var fading = false

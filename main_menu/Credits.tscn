@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://main_menu/CreditsLabel.gd" type="Script" id=2]
+[ext_resource path="res://main_menu/Credits.gd" type="Script" id=3]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="LineTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="CreditsLabel" type="Label" parent="."]
+margin_right = 299.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 4
+text = "Credits Go Here"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

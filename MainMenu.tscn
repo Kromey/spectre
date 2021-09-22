@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/ui/thegrid.png" type="Texture" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://main_menu/UIVideoSettings.tscn" type="PackedScene" id=5]
+[ext_resource path="res://main_menu/Credits.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -120,6 +121,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Credits" parent="." instance=ExtResource( 6 )]
+
 [node name="UIVideoSettings" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -129,16 +132,6 @@ margin_left = -258.5
 margin_top = -189.0
 margin_right = 258.5
 margin_bottom = 189.0
-
-[node name="CreditsLabel" type="Label" parent="."]
-custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 4
-text = "Credits Go Here"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="MenuContainer/ButtonsContainer/Settings" to="." method="_on_Settings_pressed"]

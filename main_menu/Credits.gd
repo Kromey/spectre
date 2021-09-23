@@ -3,6 +3,19 @@ extends Node2D
 const CREDITS := [
 	["Game Design & Programming", "Travis Veazey",],
 	["3D Models & Textures", "Travis Veazey",],
+	["2D Art", "Kenney - www.kenney.nl", "Pixabay.com",],
+	["Sound Effects", "Kenney - www.kenney.nl", "Mixkit - mixkit.co",],
+	["Testing", "Travis Veazey", "Jon Sawyer",],
+	["Creative Ideation", "Travis Veazey", "Jon Sawyer",],
+	[],
+	["Made with Godot", "https://godotengine.org/license",],
+	[
+		"",
+		"Portions of this software are copyright",
+		"© 2020 The FreeType Project",
+		"(www.freetype.org).",
+		"All rights reserved.",
+	],
 ]
 const LINE_HEIGHT = 38
 const TITLE_SPACING = 8

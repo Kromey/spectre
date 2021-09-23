@@ -1,9 +1,7 @@
 extends Label
 
-const CREDITS_LINE_TIME := 0.3
 const CREDITS_TITLE_COLOR := Color.lightgreen
-const CREDITS_TITLE_SPACING := 5
-const CREDITS_SPEED := 125
+const CREDITS_SPEED := 100
 
 var fading = false
 
@@ -21,16 +19,15 @@ func _physics_process(delta):
 		fading = true
 		fade_out()
 
-func start(line: String, is_title := false):
+func start(offset: int, line: String, is_title := false):
 	rect_global_position.x = 25
-	rect_global_position.y = OS.window_size.y + CREDITS_TITLE_SPACING
+	rect_global_position.y = OS.window_size.y + offset
 	text = line
 	show()
 	add_to_group("running_credits")
 	if is_title:
 		add_color_override("font_color", CREDITS_TITLE_COLOR)
 		rect_scale = Vector2(1.1, 1.1)
-		rect_global_position.y -= CREDITS_TITLE_SPACING
 	
 	show()
 	set_physics_process(true)

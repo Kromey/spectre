@@ -4,12 +4,6 @@ var velocity = Vector3.ZERO
 var gravity = Vector3.DOWN * 8
 var bounces = 0
 
-func _ready():
-	var a = Vector2(1, 1)
-	var b = Vector2(0, 8)
-	
-	prints(a, b, a.project(b), b.project(a))
-
 func _physics_process(delta):
 	velocity += gravity * delta
 	

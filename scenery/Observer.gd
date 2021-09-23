@@ -8,10 +8,14 @@ var destination := Vector3.ZERO
 var altitude := 5.0
 var target = null
 
-var current_state = State.Arriving
+var current_state setget set_state
+
+const BOMB = preload("res://scenery/MineBomb.tscn")
+onready var bomb_from = $BombPos
 
 enum State {
 	Arriving,
+	Traveling,
 	Observing,
 	Evacuating,
 }
@@ -36,6 +40,8 @@ func _ready():
 	# Calculate initial speed so that we decelerate by the time we reach our arrival_dist
 	var ispeed = sqrt(pow(speed, 2) + 2 * transit_accel * (dist - arrival_dist))
 	velocity = -global_transform.basis.z * ispeed
+	
+	set_state(State.Arriving)
 
 func _physics_process(delta):
 	match current_state:
@@ -44,16 +50,31 @@ func _physics_process(delta):
 			
 			if velocity.length() < speed + transit_accel * delta:
 				# Within ~1 frame of arrival -- arrive!
-				current_state = State.Observing
+				set_state(State.Observing)
 			
-		State.Observing:
+		State.Traveling, State.Observing:
+			var dist = global_transform.origin.distance_to(destination)
+			
 			if !is_instance_valid(target) || global_transform.origin.distance_to(destination) < 15:
 				new_destination()
+			elif dist > 55:
+				set_state(State.Traveling)
+			else:
+				set_state(State.Observing)
 			
 			var direction = global_transform.origin.direction_to(destination)
 			var vel = velocity.normalized()
 			velocity = vel.slerp(direction, turn_rate * delta)
 			velocity *= speed
+			
+			continue
+			
+		State.Observing:
+			if randf() < 0.3 * delta:
+				drop_da_bomb()
+			
+		State.Traveling:
+			velocity *= 3
 			
 		State.Evacuating:
 			velocity += velocity.normalized() * transit_accel * delta
@@ -63,6 +84,31 @@ func _physics_process(delta):
 	
 	global_translate(velocity * delta)
 	look_at(global_transform.origin + velocity, Vector3.UP)
+
+func set_state(state):
+	if current_state == state:
+		return
+	
+	match state:
+		State.Observing:
+			$LeftLight.show()
+			$RightLight.show()
+		_:
+			$LeftLight.hide()
+			$RightLight.hide()
+	
+	current_state = state
+
+func drop_da_bomb():
+	var bomb = BOMB.instance()
+	bomb.global_transform = bomb_from.global_transform
+	bomb.rotate_x(rand_range(0, 2 * PI))
+	bomb.rotate_y(rand_range(0, 2 * PI))
+	bomb.rotate_z(rand_range(0, 2 * PI))
+	
+	bomb.velocity = velocity
+	
+	get_parent().add_child(bomb)
 
 func new_destination():
 	if current_state == State.Evacuating:

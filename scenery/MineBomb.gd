@@ -13,10 +13,10 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal)
 		velocity -= velocity.project(collision.normal * velocity.length_squared()) * 0.25
 		
-		if bounces > 3 and global_transform.origin.y < 0.11:
+		if collision.collider.has_method("take_damage") or (bounces > 3 and global_transform.origin.y < 0.11):
 			$Disappear.play("Shrink")
 			velocity = Vector3.ZERO
-			set_physics_process(false)
+			$CollisionShape.disabled = true
 			
 			yield($Disappear, "animation_finished")
 			queue_free()

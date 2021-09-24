@@ -6,7 +6,7 @@
 [sub_resource type="CylinderShape" id=1]
 radius = 0.5
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 flags_do_not_receive_shadows = true
 albedo_color = Color( 0.972549, 0.980392, 0.0117647, 0.207843 )
@@ -17,21 +17,24 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [sub_resource type="CylinderMesh" id=3]
-material = SubResource( 6 )
+material = SubResource( 2 )
 top_radius = 0.5
 bottom_radius = 0.5
 height = 0.01
+radial_segments = 16
 rings = 0
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 0.972549, 0.980392, 0.0117647, 0.0784314 )
 
 [sub_resource type="SphereMesh" id=5]
-material = SubResource( 7 )
+material = SubResource( 4 )
 radius = 0.5
 height = 0.5
+radial_segments = 16
+rings = 8
 is_hemisphere = true
 
 [node name="ZoomZoom" type="Area" groups=[

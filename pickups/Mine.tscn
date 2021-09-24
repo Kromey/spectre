@@ -20,6 +20,7 @@ material = SubResource( 2 )
 top_radius = 0.5
 bottom_radius = 0.5
 height = 0.01
+radial_segments = 16
 rings = 0
 
 [sub_resource type="SpatialMaterial" id=4]
@@ -31,6 +32,8 @@ albedo_color = Color( 0.972549, 0.239216, 0.0156863, 0.0784314 )
 material = SubResource( 4 )
 radius = 0.5
 height = 0.5
+radial_segments = 16
+rings = 8
 is_hemisphere = true
 
 [node name="Mine" type="Area"]

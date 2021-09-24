@@ -113,15 +113,20 @@ func start():
 			var min_tanks = tanks_by_level(0, 2)
 			var max_tanks = min_tanks + tanks_by_level(0, 5) * 2
 			var tanks = rng.randi_range(min_tanks, max_tanks)
-			for _t in tanks:
-				spawn_tank(AITank, flag.translation, 0.5, 4.5)
 			
 			for _t in tanks_by_level(3, 5):
+				tanks -= 1
 				spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
 			for _t in tanks_by_level(5, 4):
+				tanks -= 1
 				spawn_tank(Turret, flag.translation, 0.5, 1.5)
 			for _t in tanks_by_level(7, 3):
+				tanks -= 1
 				spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
+			
+			if tanks > 0:
+				for _t in tanks:
+					spawn_tank(AITank, flag.translation, 0.5, 4.5)
 	
 	for _i in 3 + tanks_by_level(0, 2) * 3:
 		spawn_tank(AITank, player.translation, 50, 95)

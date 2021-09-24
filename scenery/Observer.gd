@@ -70,7 +70,7 @@ func _physics_process(delta):
 			continue
 			
 		State.Observing:
-			if randf() < 0.3 * delta:
+			if randf() < 0.3: # * delta:
 				drop_da_bomb()
 			
 		State.Traveling:

@@ -5,6 +5,8 @@ var exploding = false
 
 onready var tween = $Tween
 
+const BOOM = preload("res://tanks/BoomTheMissile.tscn")
+
 func _ready():
 	scale = Vector3.ZERO
 	
@@ -30,6 +32,10 @@ func boom(body):
 		
 		$Lifetime.stop()
 		$Lifetime.start(0.101)
+		
+		var boom = BOOM.instance()
+		boom.global_transform.origin = global_transform.origin
+		get_parent().add_child(boom)
 
 func _on_BoomBoom_body_entered(body):
 	boom(body)

@@ -5,11 +5,6 @@ onready var HUD = find_node("PlayerHUD")
 
 const BOOMCAM = preload("res://tanks/BoomCam.tscn")
 
-signal score_changed
-signal bonus_changed(bonus)
-signal kills_changed
-signal update_level(level)
-
 enum PlayerState {
 	Running,
 	Locked,
@@ -22,12 +17,11 @@ var turn_input := 0.0
 func _ready():
 	PlayerCamera.make_current()
 	
-	prints(armor, MAX_ARMOR)
-	emit_signal("ammo_changed", ammo, MAX_AMMO)
-	emit_signal("armor_changed", armor, MAX_ARMOR)
-	emit_signal("score_changed", Game.player_score)
-	emit_signal("kills_changed", Game.player_kills)
-	emit_signal("update_level", Game.level)
+	HUD.update_ammo(ammo, MAX_AMMO)
+	HUD.update_armor(armor, MAX_ARMOR)
+	HUD.update_score(Game.player_score)
+	HUD.update_kills(Game.player_kills)
+	HUD.update_level(Game.level)
 
 func _physics_process(delta):
 	match current_state:
@@ -77,13 +71,13 @@ func set_state(state):
 	current_state = state
 
 func update_score(score):
-	emit_signal("score_changed", score)
+	HUD.update_score(score)
 
 func update_bonus(bonus):
-	emit_signal("bonus_changed", bonus)
+	HUD.update_bonus(bonus)
 
 func update_kills(kills):
-	emit_signal("kills_changed", kills)
+	HUD.update_kills(kills)
 
 func update_level(level):
-	emit_signal("update_level", level)
+	HUD.update_level(level)

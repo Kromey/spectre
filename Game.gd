@@ -27,6 +27,7 @@ func set_state(new_state):
 			if get_tree().get_current_scene().get_name() != "MainMenu":
 				var __ = get_tree().change_scene("MainMenu.tscn")
 		State.LoadingGame:
+			reset_stats()
 			if get_tree().get_current_scene().get_name() != "Main":
 				var __ = get_tree().change_scene("Main.tscn")
 		State.LoadingLevel:
@@ -73,6 +74,13 @@ func level_up():
 
 func decrement_bonus():
 	set_bonus(player_bonus - 1)
+
+func flag_collected():
+	add_to_score(20)
+
+func enemy_killed():
+	add_to_kills(1)
+	add_to_score(10)
 
 func add_to_score(change):
 	set_score(player_score + change)

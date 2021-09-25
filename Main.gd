@@ -185,7 +185,7 @@ func spawn_pickup(scene):
 func _on_flag_pickup(_body, flag: Spatial):
 	$FlagPickup.play()
 	
-	Game.add_to_score(1)
+	Game.flag_collected()
 	flag.remove_from_group("goals")
 	flag.queue_free()
 	
@@ -215,6 +215,6 @@ func tank_death(killer):
 	print("Enemy tank died!")
 	if is_instance_valid(killer) and killer.is_in_group("player"):
 		print("\tWe blame the player!")
-		Game.add_to_kills(1)
+		Game.enemy_killed()
 	elif is_instance_valid(killer) and killer.is_in_group("enemies"):
 		print("\tFriendly fire casualty!")

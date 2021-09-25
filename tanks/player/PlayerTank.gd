@@ -81,3 +81,26 @@ func update_kills(kills):
 
 func update_level(level):
 	HUD.update_level(level)
+
+func shoot():
+	.shoot()
+	HUD.update_ammo(ammo, MAX_AMMO)
+
+func reload():
+	if .reload():
+		HUD.reloading(true, RELOAD_TIME)
+		
+		return true
+	
+	return false
+
+func reload_immediate():
+	.reload_immediate()
+	
+	if HUD:
+		HUD.reloading(false, RELOAD_TIME)
+		HUD.update_ammo(ammo, MAX_AMMO)
+
+func take_damage(force, amount, shooter = null):
+	.take_damage(force, amount, shooter)
+	HUD.update_armor(armor, MAX_ARMOR)

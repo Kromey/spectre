@@ -42,9 +42,6 @@ const BOOM = preload("res://tanks/BoomTheTank.tscn")
 
 onready var ShootSound = find_node("ShootAudio")
 
-signal armor_changed
-signal ammo_changed
-signal reloading
 signal dead
 
 # Called when the node enters the scene tree for the first time.
@@ -104,7 +101,6 @@ func shoot():
 	if ammo > 0 and !reloading and $FireRate.is_stopped():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
-		emit_signal("ammo_changed", ammo, MAX_AMMO)
 		
 		var bullet = Bullet.instance()
 		bullet.BULLET_TIME = GUN_RANGE / BULLET_SPEED
@@ -122,21 +118,22 @@ func shoot():
 
 func reload():
 	if !reloading:
-		emit_signal("reloading", true, RELOAD_TIME)
 		reloading = true
 		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", self, "reload_immediate")
+		
+		return true
+	
+	return false
 
 func reload_immediate():
 	ammo = MAX_AMMO
-	emit_signal("ammo_changed", ammo, MAX_AMMO)
 	reloading = false
-	emit_signal("reloading", false, RELOAD_TIME)
+	
 	# Ensure reloading clears fire rate timer
 	$FireRate.stop()
 
 func take_damage(_force, amount, shooter = null):
 	armor = clamp(armor - amount, 0, MAX_ARMOR)
-	emit_signal("armor_changed", armor, MAX_ARMOR)
 	
 	if armor <= 0:
 		die(shooter)

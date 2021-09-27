@@ -1,11 +1,11 @@
-extends Area
+extends Spatial
 
 export(float) var DAMAGE = 2
 var exploding = false
 
 onready var tween = $Tween
 
-const BOOM = preload("res://tanks/BoomTheMissile.tscn")
+const KABOOM = preload("res://tanks/BoomTheMissile.tscn")
 
 func _ready():
 	scale = Vector3.ZERO
@@ -17,38 +17,31 @@ func _ready():
 	var lifetime = rand_range(5, 10)
 	$Lifetime.start(lifetime)
 
-func boom(body):
-	if exploding:
-		if body.has_method("take_damage"):
-			body.take_damage(global_transform.origin.direction_to(body.global_transform.origin), DAMAGE)
-			body.velocity += Vector3.UP
-	else:
+func boom():
+	if !exploding:
 		exploding = true
+		$Lifetime.stop()
 		tween.stop_all()
 		
-		var final_scale = rand_range(2.8, 2.2)
-		tween.interpolate_property(self, "scale", Vector3.ZERO, Vector3.ONE * final_scale, 0.1)
-		tween.start()
+		var explosion = KABOOM.instance()
+		get_parent().add_child(explosion)
+		explosion.global_transform.origin = global_transform.origin
 		
-		$Lifetime.stop()
-		$Lifetime.start(0.101)
+		for body in $BoomZone.get_overlapping_bodies():
+			if body.has_method("take_damage"):
+				body.take_damage(global_transform.origin.direction_to(body.global_transform.origin), DAMAGE)
+				body.velocity += Vector3.UP
 		
-		var boom = BOOM.instance()
-		boom.global_transform.origin = global_transform.origin
-		get_parent().add_child(boom)
+		for area in $BoomZone.get_overlapping_areas():
+			if area.has_method("detonate"):
+				area.detonate()
+		
+		queue_free()
 
-func _on_BoomBoom_body_entered(body):
-	boom(body)
 
-
-func _on_Mine_area_entered(area):
-	if area.has_method("boom"):
-		area.boom(self)
-		pass
+func _on_Detonator_body_entered(_body):
+	boom()
 
 
 func _on_Lifetime_timeout():
-	if exploding:
-		queue_free()
-	else:
-		boom(self)
+	boom()

@@ -1,7 +1,13 @@
 extends Spatial
 
-var speed := 2.0
-var transit_accel := 25.0
+var warp_dist := 250.0
+var warp_accel := 25.0
+
+var observation_speed := 2.0
+var travel_speed := 6.0
+var current_speed: float
+var accel := 1.0
+
 var velocity := Vector3.ZERO
 var turn_rate := 0.25
 var destination := Vector3.ZERO
@@ -25,8 +31,7 @@ func _ready():
 	
 	# Where in the infinite void do we start from?
 	var angle = rand_range(0, 2 * PI)
-	var dist = 350 # Very very far away
-	var start = Vector3.FORWARD.rotated(Vector3.UP, angle) * dist
+	var start = Vector3.FORWARD.rotated(Vector3.UP, angle) * warp_dist
 	# Set our altitude
 	start += Vector3.UP * altitude
 	
@@ -38,7 +43,7 @@ func _ready():
 	var arrival_dist = rand_range(25, 75)
 	
 	# Calculate initial speed so that we decelerate by the time we reach our arrival_dist
-	var ispeed = sqrt(pow(speed, 2) + 2 * transit_accel * (dist - arrival_dist))
+	var ispeed = sqrt(pow(observation_speed, 2) + 2 * warp_accel * (warp_dist - arrival_dist))
 	velocity = -global_transform.basis.z * ispeed
 	
 	set_state(State.Arriving)
@@ -46,11 +51,11 @@ func _ready():
 func _physics_process(delta):
 	match current_state:
 		State.Arriving:
-			velocity -= velocity.normalized() * transit_accel * delta
+			velocity -= velocity.normalized() * warp_accel * delta
 			
-			if velocity.length() < speed + transit_accel * delta:
+			if velocity.length() < travel_speed + warp_accel * delta:
 				# Within ~1 frame of arrival -- arrive!
-				set_state(State.Observing)
+				set_state(State.Traveling)
 			
 		State.Traveling, State.Observing:
 			var dist = global_transform.origin.distance_to(destination)
@@ -62,22 +67,27 @@ func _physics_process(delta):
 			else:
 				set_state(State.Observing)
 			
+			current_speed = velocity.length()
+			
 			var direction = global_transform.origin.direction_to(destination)
 			var vel = velocity.normalized()
 			velocity = vel.slerp(direction, turn_rate * delta)
-			velocity *= speed
 			
 			continue
 			
 		State.Observing:
+			var speed = lerp(current_speed, observation_speed, accel * delta)
+			velocity *= speed
+			
 			if randf() < 0.3 * delta:
 				drop_da_bomb()
 			
 		State.Traveling:
-			velocity *= 3
+			var speed = lerp(current_speed, travel_speed, accel * delta)
+			velocity *= speed
 			
 		State.Evacuating:
-			velocity += velocity.normalized() * transit_accel * delta
+			velocity += velocity.normalized() * warp_accel * delta
 			
 			if global_transform.origin.length() > 250:
 				queue_free()

@@ -14,7 +14,6 @@ func shoot():
 	if ammo > 0 and !reloading and $FireRate.is_stopped():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
-		emit_signal("ammo_changed", ammo)
 		
 		# Cycle through our launchers
 		launcher = (launcher + 1) % Launchers.size()

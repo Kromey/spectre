@@ -13,6 +13,8 @@ var current_state = PlayerState.Running
 
 var turn_input := 0.0
 
+var invulnerable := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	PlayerCamera.make_current()
@@ -58,6 +60,10 @@ func _input(event):
 				reload()
 			elif event is InputEventMouseMotion:
 				turn_input -= event.relative.x * 0.2
+	
+	if event.is_action_pressed("ui_console"):
+		get_parent().call_deferred("add_child", load("res://Console.tscn").instance())
+		get_tree().paused = true
 
 func die(killer):
 	var cam = BOOMCAM.instance()
@@ -102,5 +108,13 @@ func reload_immediate():
 		HUD.update_ammo(ammo, MAX_AMMO)
 
 func take_damage(force, amount, shooter = null):
+	if invulnerable:
+		amount = min(amount, 0)
+	
 	.take_damage(force, amount, shooter)
 	HUD.update_armor(armor, MAX_ARMOR)
+
+func toggle_god_mode():
+	invulnerable = !invulnerable
+	
+	return invulnerable

@@ -46,8 +46,7 @@ func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	for __ in 3:
-		var obs = Observers.instance()
-		add_child(obs)
+		spawn_observer()
 	
 	var player = PlayerTank.instance()
 	player.translate(Vector3.UP * 0.2)
@@ -134,15 +133,21 @@ func start():
 func _physics_process(delta):
 	# Chance to spawn a new Observer
 	if randf() < OBSERVER_SPAWN_RATE * delta:
-		var obs = Observers.instance()
-		add_child(obs)
+		spawn_observer()
 	
 	# Equal chance to evacuate one
 	if randf() < OBSERVER_SPAWN_RATE * delta:
-		var observers = get_tree().get_nodes_in_group("observers")
-		if observers.size() > 0:
-			observers.shuffle()
-			observers[0].current_state = observers[0].State.Evacuating
+		evacuate_observer()
+
+func spawn_observer():
+	var obs = Observers.instance()
+	add_child(obs)
+
+func evacuate_observer():
+	var observers = get_tree().get_nodes_in_group("observers")
+	if observers.size() > 0:
+		observers.shuffle()
+		observers[0].current_state = observers[0].State.Evacuating
 
 func tanks_by_level(first_at, more_every = 0):
 	var tanks = 0
@@ -191,8 +196,6 @@ func _on_flag_pickup(_body, flag: Spatial):
 	
 	if get_tree().get_nodes_in_group("goals").size() == 0:
 		Game.level_up()
-		var e = get_tree().reload_current_scene()
-		assert(e == OK)
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

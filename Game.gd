@@ -1,8 +1,8 @@
 extends Node
 
 var player_score = 0
-var player_bonus = 0
 var player_kills = 0
+var level_bonus = 0
 
 var level = 0
 
@@ -58,8 +58,8 @@ func set_score(new_score):
 	get_tree().call_group("player", "update_score", player_score)
 
 func set_bonus(new_bonus):
-	player_bonus = max(new_bonus, 0)
-	get_tree().call_group("player", "update_bonus", player_bonus)
+	level_bonus = max(new_bonus, 0)
+	get_tree().call_group("player", "update_bonus", level_bonus)
 
 func set_kills(new_kills):
 	player_kills = new_kills
@@ -67,13 +67,17 @@ func set_kills(new_kills):
 
 func level_up():
 	bonus_timer.stop()
-	add_to_score(player_bonus)
+	add_to_score(level_bonus)
 	
 	set_level(level + 1)
 	set_bonus(400)
+	
+	var e = get_tree().reload_current_scene()
+	assert(e == OK)
+	get_tree().paused = false
 
 func decrement_bonus():
-	set_bonus(player_bonus - 1)
+	set_bonus(level_bonus - 1)
 
 func flag_collected():
 	add_to_score(20)

@@ -34,6 +34,12 @@ var hidden_aliases = []
 
 
 func _ready():
+	for alias in command_aliases.keys():
+		var a = alias.replace("_", "")
+		if a != alias:
+			command_aliases[a] = command_aliases[alias]
+			hidden_aliases.append(a)
+	
 	for cmd in commands.keys():
 		var alias = cmd.replace("_", "")
 		if cmd != alias:

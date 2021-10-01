@@ -7,6 +7,15 @@ func echo(input: String):
 func level_up():
 	Game.level_up()
 
+func walls_down():
+	get_tree().current_scene.find_node("WallSpawner").descend()
+
+func walls_up():
+	get_tree().current_scene.find_node("WallSpawner").rise()
+
+func new_walls():
+	get_tree().current_scene.find_node("WallSpawner").rebuild_walls()
+
 func spawn_observer(num: int = 1):
 	for __ in num:
 		get_tree().current_scene.spawn_observer()

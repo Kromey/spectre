@@ -62,10 +62,16 @@ func read_args(cmd: String, args: Array):
 	var arg_types = commands.commands[cmd]
 	
 	if arg_types.size() != args.size():
-		return "Expected %d arguments, got %d arguments" % [arg_types.size(), args.size()]
+		if args.size() < arg_types.size() or not commands.ARG_MULTI_STRING in arg_types:
+			return "Expected %d arguments, got %d arguments" % [arg_types.size(), args.size()]
 	
-	for i in args.size():
+	for i in arg_types.size():
 		match arg_types[i]:
+			commands.ARG_MULTI_STRING:
+				while args.size() > arg_types.size():
+					args[i] = "%s %s" % [args[i], args[i+1]]
+					args.remove(i+1)
+			
 			commands.ARG_STRING:
 				# no-op, already a string
 				pass

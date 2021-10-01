@@ -1,6 +1,7 @@
 extends Node
 
 enum {
+	ARG_MULTI_STRING,
 	ARG_STRING,
 	ARG_INT,
 	ARG_FLOAT,
@@ -8,7 +9,7 @@ enum {
 }
 
 var commands = {
-	"echo": [ARG_STRING],
+	"echo": [ARG_MULTI_STRING],
 	"level_up": [],
 	"walls_down": [],
 	"walls_up": [],

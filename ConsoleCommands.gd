@@ -1,8 +1,41 @@
 extends Node
 
+enum {
+	ARG_STRING,
+	ARG_INT,
+	ARG_FLOAT,
+	ARG_BOOL,
+}
+
+var commands = {
+	"echo": [ARG_STRING],
+	"level_up": [],
+	"walls_down": [],
+	"walls_up": [],
+	"new_walls": [],
+	"spawn_observer": [ARG_INT],
+	"evacuate_observer": [ARG_INT],
+	"kill_all": [],
+	"god_mode": [],
+}
+
+var command_aliases = {
+	"observer": "spawn_observer",
+	"evac_observer": "evacuate_observer",
+	"god": "god_mode",
+	"make_me_god": "god_mode",
+}
+
+
+func _ready():
+	for cmd in commands.keys():
+		var alias = cmd.replace("_", "")
+		if cmd != alias:
+			command_aliases[alias] = cmd
+
 
 func echo(input: String):
-	return input
+	return str(input)
 
 func level_up():
 	Game.level_up()
@@ -23,31 +56,22 @@ func new_walls():
 	
 	return "Rebuilding level's walls"
 
-func spawn_observer(num: int = 1):
+func spawn_observer(num: int):
 	for __ in num:
 		get_tree().current_scene.spawn_observer()
 	
 	return str(num, " Observers warping in!")
 
-func observer(num: int = 1):
-	return spawn_observer(num)
-
-func evacuate_observer(num: int = 1):
+func evacuate_observer(num: int):
 	for __ in num:
 		get_tree().current_scene.evacuate_observer()
 	
 	return str(num, " Observers warping away!")
 
-func evac_observer(num: int = 1):
-	return evacuate_observer(num)
-
 func kill_all():
 	get_tree().call_group("enemies", "die", get_tree().get_nodes_in_group("player")[0])
 	
 	return "All enemies dead!"
-
-func killall():
-	return kill_all()
 
 func god_mode():
 	var player = get_tree().get_nodes_in_group("player")[0]

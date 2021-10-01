@@ -6,29 +6,40 @@ func echo(input: String):
 
 func level_up():
 	Game.level_up()
+	return "Leveled up!"
 
 func walls_down():
 	get_tree().current_scene.find_node("WallSpawner").descend()
+	
+	return "Walls lowering"
 
 func walls_up():
 	get_tree().current_scene.find_node("WallSpawner").rise()
+	
+	return "Walls rising"
 
 func new_walls():
 	get_tree().current_scene.find_node("WallSpawner").rebuild_walls()
+	
+	return "Rebuilding level's walls"
 
 func spawn_observer(num: int = 1):
 	for __ in num:
 		get_tree().current_scene.spawn_observer()
+	
+	return str(num, " Observers warping in!")
 
 func observer(num: int = 1):
-	spawn_observer(num)
+	return spawn_observer(num)
 
 func evacuate_observer(num: int = 1):
 	for __ in num:
 		get_tree().current_scene.evacuate_observer()
+	
+	return str(num, " Observers warping away!")
 
 func evac_observer(num: int = 1):
-	evacuate_observer(num)
+	return evacuate_observer(num)
 
 func kill_all():
 	get_tree().call_group("enemies", "die", get_tree().get_nodes_in_group("player")[0])

@@ -9,6 +9,8 @@ enum {
 }
 
 var commands = {
+	"help": [],
+	"aliases": [],
 	"echo": [ARG_MULTI_STRING],
 	"level_up": [],
 	"walls_down": [],
@@ -25,6 +27,7 @@ var command_aliases = {
 	"evac_observer": "evacuate_observer",
 	"god": "god_mode",
 	"make_me_god": "god_mode",
+	"?": "help",
 }
 
 
@@ -34,6 +37,18 @@ func _ready():
 		if cmd != alias:
 			command_aliases[alias] = cmd
 
+
+func help():
+	var cmds = commands.keys()
+	cmds.sort()
+	
+	return PoolStringArray(cmds).join(", ")
+
+func aliases():
+	var a = command_aliases.keys()
+	a.sort()
+	
+	return PoolStringArray(a).join(", ")
 
 func echo(input: String):
 	return str(input)

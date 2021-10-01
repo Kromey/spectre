@@ -56,5 +56,6 @@ context_menu_enabled = false
 shortcut_keys_enabled = false
 virtual_keyboard_enabled = false
 selecting_enabled = false
+wrap_enabled = true
 
 [connection signal="text_entered" from="MarginContainer/VBoxContainer/Input" to="." method="_on_Input_text_entered"]

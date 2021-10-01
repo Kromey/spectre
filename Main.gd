@@ -13,25 +13,6 @@ const Observers = preload("res://scenery/Observer.tscn")
 
 const OBSERVER_SPAWN_RATE := 0.01
 
-const Walls = [
-	preload("res://obstacles/Wall.tscn"), # Basic wall should be the most common
-	preload("res://obstacles/Wall.tscn"),
-	preload("res://obstacles/Wall.tscn"),
-	preload("res://obstacles/Wall.tscn"),
-	preload("res://obstacles/Wall.tscn"),
-	preload("res://obstacles/WindowedWall.tscn"),
-	preload("res://obstacles/WindowedWall.tscn"),
-	preload("res://obstacles/WindowedWall.tscn"),
-	preload("res://obstacles/SawTeeth.tscn"),
-	preload("res://obstacles/SawTeeth.tscn"),
-	preload("res://obstacles/SawTeeth.tscn"),
-	preload("res://obstacles/CWall.tscn"),
-	preload("res://obstacles/Cross.tscn"),
-	preload("res://obstacles/WindowedCross.tscn"),
-	preload("res://obstacles/HalfWall.tscn"),
-	preload("res://obstacles/HalfWall.tscn"),
-]
-
 
 func _input(event):
 	# TODO: Temporary quit-to-MainMenu
@@ -59,37 +40,8 @@ func start():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	var num_walls = 0
-	while num_walls < 250:
-		var x = rng.randi_range(-90, 90)
-		var z = rng.randi_range(-90, 90)
-		var r = rng.randi_range(0, 3) * PI / 2
-		var i = rng.randi_range(0, Walls.size() - 1) # Range is inclusive
-		
-		var wall = Walls[i].instance()
-		wall.translate(Vector3(x, 0, z))
-		wall.rotate_y(r)
-		if wall.translation.distance_to(player.translation) > 3:
-			add_child(wall)
-			num_walls += 1
-			
-			var offset = Vector3.DOWN * 1.5
-			var tween = Tween.new()
-			wall.add_child(tween)
-			tween.interpolate_property(
-				wall,
-				"translation",
-				wall.translation + offset,
-				wall.translation,
-				1,
-				Tween.TRANS_SINE,
-				Tween.EASE_OUT,
-				0.75
-			)
-			tween.start()
-			wall.translation += offset
-	
-	print("Spawned ", num_walls, " walls")
+	$WallSpawner.spawn_walls(250)
+	$WallSpawner.rise()
 	
 	for _i in 5:
 		spawn_pickup(ArmorPickup)

@@ -30,12 +30,15 @@ var command_aliases = {
 	"?": "help",
 }
 
+var hidden_aliases = []
+
 
 func _ready():
 	for cmd in commands.keys():
 		var alias = cmd.replace("_", "")
 		if cmd != alias:
 			command_aliases[alias] = cmd
+			hidden_aliases.append(alias)
 
 
 func help():
@@ -48,7 +51,12 @@ func aliases():
 	var a = command_aliases.keys()
 	a.sort()
 	
-	return PoolStringArray(a).join(", ")
+	var cmds = PoolStringArray()
+	for alias in a:
+		if not alias in hidden_aliases:
+			cmds.append("%s: %s" % [alias, command_aliases[alias]])
+	
+	return cmds.join(", ")
 
 func echo(input: String):
 	return str(input)

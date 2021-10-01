@@ -12,7 +12,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_console"):
 		queue_free()
 		get_tree().set_deferred("paused", false)
 

@@ -23,18 +23,29 @@ const Walls = [
 
 const DESCENT_OFFSET := Vector3.DOWN * 1.5
 onready var ORIGIN := global_transform.origin
+export(int) var pool_size = 300 # Should be a bit more than the largest number at a time to give some variety
+
+var pool = []
+var last_wall_count = 250 # Arbitrary default value
 
 func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
 	global_transform.origin += DESCENT_OFFSET
+	
+	for i in pool_size:
+		var wall = Walls[i % Walls.size()].instance()
+		add_child(wall)
+		hide_wall(wall)
+		pool.append(wall)
 
 func rebuild_walls(num_walls = 0, duration = 1, delay = 0.0):
 	if num_walls == 0:
-		num_walls = get_child_count()
+		num_walls = last_wall_count
 	
 	descend(duration, delay)
+	
 	yield(get_tree().create_timer(duration + delay, false), "timeout")
 	spawn_walls(num_walls)
 	rise(duration, 0)
@@ -71,20 +82,29 @@ func descend(duration = 1, delay = 0.75):
 	tween.start()
 	var __ = tween.connect("tween_all_completed", tween, "queue_free")
 
+func hide_wall(wall):
+	# "Hide" walls by moving them very very far away
+	wall.translation = DESCENT_OFFSET * 5000
+
 func spawn_walls(num_walls, min_dist = 3, origin = Vector3.ZERO):
-	for wall in get_children():
-		wall.queue_free()
+	last_wall_count = num_walls
 	
 	var count = 0
-	while count < num_walls:
+	pool.shuffle()
+	for wall in pool:
+		if count >= num_walls:
+			hide_wall(wall)
+			continue
+		
 		var x = rng.randi_range(-90, 90)
 		var z = rng.randi_range(-90, 90)
 		var r = rng.randi_range(0, 3) * PI / 2
-		var i = rng.randi_range(0, Walls.size() - 1) # Range is inclusive
 		
-		var wall = Walls[i].instance()
-		wall.translate(Vector3(x, 0, z))
+		wall.translation = Vector3(x, 0, z)
 		wall.rotate_y(r)
 		if wall.translation.distance_to(origin) > min_dist:
-			add_child(wall)
 			count += 1
+		else:
+			hide_wall(wall)
+	
+	prints("Showing", count, "pooled walls")

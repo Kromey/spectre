@@ -17,6 +17,9 @@ func update_pos(xform: Transform, zoom := 1.0):
 	if !is_instance_valid(me):
 		queue_free()
 		return
+	if !me.is_visible_in_tree():
+		hide()
+		return
 	
 	var my_pos = to_vec2(xform.xform_inv(me.global_transform.origin)) * zoom
 	
@@ -27,6 +30,7 @@ func update_pos(xform: Transform, zoom := 1.0):
 				return
 			else:
 				show()
+		
 		CLAMP_SHRINK:
 			if my_pos.length() > clamp_to:
 				my_pos = my_pos.clamped(clamp_to)
@@ -35,6 +39,9 @@ func update_pos(xform: Transform, zoom := 1.0):
 			else:
 				self_modulate = Color(1, 1, 1, 1)
 				scale = unscaled
+			
+			show()
+		
 		CLAMP_POINT:
 			if my_pos.length() > clamp_to:
 				my_pos = my_pos.normalized() * point_radius

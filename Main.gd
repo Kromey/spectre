@@ -6,7 +6,6 @@ const AITank = preload("res://tanks/AITank.tscn")
 const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
-const ArmorPickup = preload("res://pickups/ArmorPickup.tscn")
 const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
 const Observers = preload("res://scenery/Observer.tscn")
 
@@ -42,8 +41,8 @@ func start():
 	$WallSpawner.spawn_walls(250)
 	$WallSpawner.rise()
 	
-	for _i in 5:
-		spawn_pickup(ArmorPickup)
+	$RepairSpawner.spawn_repairs()
+	
 	for _i in 10:
 		spawn_pickup(ZoomZoom)
 	

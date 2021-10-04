@@ -1,23 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://materials/BaseTank.material" type="Material" id=1]
-[ext_resource path="res://pickups/ArmorPickup.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/mixkit-unlock-new-item-game-notification-254.wav" type="AudioStream" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.35, 0.5, 0.35 )
 
-[node name="ArmorPickup" type="Spatial" groups=[
+[node name="ArmorPickup" type="Area" groups=[
 "pickups",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
-script = ExtResource( 2 )
-
-[node name="Area" type="Area" parent="."]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
 [node name="CSGTorus" type="CSGTorus" parent="."]
@@ -31,5 +27,3 @@ material = ExtResource( 1 )
 
 [node name="ArmorPickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

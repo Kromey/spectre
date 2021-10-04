@@ -20,17 +20,17 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-func spawn_flags(min_dist = 50, origin = Vector3.ZERO):
+func spawn_flags(min_dist = 50, from = Vector3.ZERO):
 	collected = 0
 	
 	var dist_sq = pow(min_dist, 2)
 	
 	for flag in pool:
-		var x = origin.x
-		var z = origin.z
+		var x = from.x
+		var z = from.z
 		flag.translation = Vector3(x, 0, z)
 		
-		while flag.translation.distance_squared_to(origin) < dist_sq:
+		while flag.translation.distance_squared_to(from) < dist_sq:
 			x = rng.randf_range(-90, 90)
 			z = rng.randf_range(-90, 90)
 			flag.translation = Vector3(x, 0, z)

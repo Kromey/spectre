@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
 [ext_resource path="res://WallSpawner.gd" type="Script" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/mixkit-sci-fi-positive-notification-266.ogg" type="AudioStream" id=4]
+[ext_resource path="res://FlagSpawner.gd" type="Script" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -29,6 +30,12 @@ script = ExtResource( 3 )
 [node name="WallSpawner" type="Spatial" parent="."]
 script = ExtResource( 2 )
 
+[node name="FlagSpawner" type="Spatial" parent="."]
+script = ExtResource( 5 )
+
+[node name="FlagPickup" type="AudioStreamPlayer" parent="FlagSpawner"]
+stream = ExtResource( 4 )
+
 [node name="Floor" type="StaticBody" parent="."]
 physics_material_override = SubResource( 1 )
 
@@ -51,6 +58,3 @@ light_energy = 0.5
 [node name="DirectionalLight2" type="DirectionalLight" parent="."]
 transform = Transform( -0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 5, 0 )
 light_energy = 0.5
-
-[node name="FlagPickup" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )

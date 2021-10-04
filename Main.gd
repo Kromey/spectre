@@ -8,7 +8,6 @@ const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 const ArmorPickup = preload("res://pickups/ArmorPickup.tscn")
 const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
-const Flag = preload("res://pickups/Flag.tscn")
 const Observers = preload("res://scenery/Observer.tscn")
 
 const OBSERVER_SPAWN_RATE := 0.01
@@ -48,36 +47,25 @@ func start():
 	for _i in 10:
 		spawn_pickup(ZoomZoom)
 	
-	var num_flags = 0
-	while num_flags < 5:
-		var x = rng.randf_range(-90, 90)
-		var z = rng.randf_range(-90, 90)
-		
-		var flag = Flag.instance()
-		flag.translate(Vector3(x, 0, z))
-		flag.add_to_group("goals")
-		if flag.translation.distance_to(player.translation) > 50:
-			add_child(flag)
-			_e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
-			num_flags += 1
-			
-			var min_tanks = tanks_by_level(0, 2)
-			var max_tanks = min_tanks + tanks_by_level(0, 5) * 2
-			var tanks = rng.randi_range(min_tanks, max_tanks)
-			
-			for _t in tanks_by_level(3, 5):
-				tanks -= 1
-				spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
-			for _t in tanks_by_level(5, 4):
-				tanks -= 1
-				spawn_tank(Turret, flag.translation, 0.5, 1.5)
-			for _t in tanks_by_level(7, 3):
-				tanks -= 1
-				spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
-			
-			if tanks > 0:
-				for _t in tanks:
-					spawn_tank(AITank, flag.translation, 0.5, 4.5)
+	$FlagSpawner.spawn_flags()
+	for flag in $FlagSpawner.pool:
+		var min_tanks = tanks_by_level(0, 2)
+		var max_tanks = min_tanks + tanks_by_level(0, 5) * 2
+		var tanks = rng.randi_range(min_tanks, max_tanks)
+
+		for _t in tanks_by_level(3, 5):
+			tanks -= 1
+			spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
+		for _t in tanks_by_level(5, 4):
+			tanks -= 1
+			spawn_tank(Turret, flag.translation, 0.5, 1.5)
+		for _t in tanks_by_level(7, 3):
+			tanks -= 1
+			spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
+
+		if tanks > 0:
+			for _t in tanks:
+				spawn_tank(AITank, flag.translation, 0.5, 4.5)
 	
 	for _i in 3 + tanks_by_level(0, 2) * 3:
 		spawn_tank(AITank, player.translation, 50, 95)
@@ -138,16 +126,6 @@ func spawn_pickup(scene):
 	pickup.translate(Vector3(x, 0, z))
 	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
 	call_deferred("add_child", pickup)
-
-func _on_flag_pickup(_body, flag: Spatial):
-	$FlagPickup.play()
-	
-	Game.flag_collected()
-	flag.remove_from_group("goals")
-	flag.queue_free()
-	
-	if get_tree().get_nodes_in_group("goals").size() == 0:
-		Game.level_up()
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

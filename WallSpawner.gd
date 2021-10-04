@@ -23,7 +23,7 @@ const Walls = [
 
 const DESCENT_OFFSET := Vector3.DOWN * 1.5
 onready var ORIGIN := global_transform.origin
-export(int) var pool_size = 300 # Should be a bit more than the largest number at a time to give some variety
+export(int) var pool_size = 450 # Should be more than the largest number at a time to give some variety
 
 var pool = []
 var last_wall_count = 250 # Arbitrary default value

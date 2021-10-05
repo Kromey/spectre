@@ -8,9 +8,9 @@ var fading = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
-	set_physics_process(false)
+	set_process(false)
 
-func _physics_process(delta):
+func _process(delta):
 	rect_global_position.y -= round(CREDITS_SPEED * delta)
 	
 	if rect_global_position.y <= 0:
@@ -30,7 +30,7 @@ func start(offset: int, line: String, is_title := false):
 		rect_scale = Vector2(1.1, 1.1)
 	
 	show()
-	set_physics_process(true)
+	set_process(true)
 
 func fade_out():
 	var tween = Tween.new()

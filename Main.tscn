@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
-[ext_resource path="res://WallSpawner.gd" type="Script" id=2]
+[ext_resource path="res://WallController.gd" type="Script" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/mixkit-sci-fi-positive-notification-266.ogg" type="AudioStream" id=4]
-[ext_resource path="res://FlagSpawner.gd" type="Script" id=5]
+[ext_resource path="res://FlagController.gd" type="Script" id=5]
 [ext_resource path="res://assets/sounds/mixkit-unlock-new-item-game-notification-254.wav" type="AudioStream" id=6]
-[ext_resource path="res://RepairSpawner.gd" type="Script" id=7]
+[ext_resource path="res://RepairController.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/mixkit-space-deploy-whizz-3003.wav" type="AudioStream" id=8]
 [ext_resource path="res://ZoomController.gd" type="Script" id=9]
 
@@ -31,19 +31,19 @@ size = Vector3( 200, 0, 200 )
 [node name="Main" type="Spatial"]
 script = ExtResource( 3 )
 
-[node name="WallSpawner" type="Spatial" parent="."]
+[node name="WallController" type="Spatial" parent="."]
 script = ExtResource( 2 )
 
-[node name="FlagSpawner" type="Spatial" parent="."]
+[node name="FlagController" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="FlagPickup" type="AudioStreamPlayer" parent="FlagSpawner"]
+[node name="FlagPickup" type="AudioStreamPlayer" parent="FlagController"]
 stream = ExtResource( 4 )
 
-[node name="RepairSpawner" type="Spatial" parent="."]
+[node name="RepairController" type="Node" parent="."]
 script = ExtResource( 7 )
 
-[node name="RepairPickup" type="AudioStreamPlayer" parent="RepairSpawner"]
+[node name="RepairPickup" type="AudioStreamPlayer" parent="RepairController"]
 stream = ExtResource( 6 )
 
 [node name="ZoomController" type="Node" parent="."]

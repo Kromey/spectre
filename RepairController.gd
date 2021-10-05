@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 const REPAIR = preload("res://pickups/ArmorPickup.tscn")
 const REPAIR_COUNT := 5
@@ -23,7 +23,7 @@ func _ready():
 		repair.rotate_y(rng.randf_range(0, PI))
 		
 		var tween = repair.get_node("Tween")
-		tween.interpolate_property(repair, "rotation", rotation, rotation + Vector3.UP * 2 * PI, 4)
+		tween.interpolate_property(repair, "rotation", repair.rotation, repair.rotation + Vector3.UP * 2 * PI, 4)
 		tween.repeat = true
 		tween.start()
 

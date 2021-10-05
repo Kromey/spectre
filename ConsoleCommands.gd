@@ -72,17 +72,17 @@ func level_up():
 	return "Leveled up!"
 
 func walls_down():
-	get_tree().current_scene.find_node("WallSpawner").descend()
+	get_tree().current_scene.find_node("WallController").descend()
 	
 	return "Walls lowering"
 
 func walls_up():
-	get_tree().current_scene.find_node("WallSpawner").rise()
+	get_tree().current_scene.find_node("WallController").rise()
 	
 	return "Walls rising"
 
 func new_walls():
-	get_tree().current_scene.find_node("WallSpawner").rebuild_walls()
+	get_tree().current_scene.find_node("WallController").rebuild_walls()
 	
 	return "Rebuilding level's walls"
 

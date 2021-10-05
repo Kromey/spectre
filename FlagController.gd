@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 const FLAG := preload("res://pickups/Flag.tscn")
 const FLAG_COUNT := 5

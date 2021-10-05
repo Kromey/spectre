@@ -37,14 +37,14 @@ func start():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	$WallSpawner.spawn_walls(250)
-	$WallSpawner.rise()
+	$WallController.spawn_walls(250)
+	$WallController.rise()
 	
-	$RepairSpawner.spawn_repairs()
+	$RepairController.spawn_repairs()
 	$ZoomController.spawn_zooms()
 	
-	$FlagSpawner.spawn_flags()
-	for flag in $FlagSpawner.pool:
+	$FlagController.spawn_flags()
+	for flag in $FlagController.pool:
 		var min_tanks = tanks_by_level(0, 2)
 		var max_tanks = min_tanks + tanks_by_level(0, 5) * 2
 		var tanks = rng.randi_range(min_tanks, max_tanks)

@@ -6,7 +6,6 @@ const AITank = preload("res://tanks/AITank.tscn")
 const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
-const ZoomZoom = preload("res://pickups/ZoomZoom.tscn")
 const Observers = preload("res://scenery/Observer.tscn")
 
 const OBSERVER_SPAWN_RATE := 0.01
@@ -42,9 +41,7 @@ func start():
 	$WallSpawner.rise()
 	
 	$RepairSpawner.spawn_repairs()
-	
-	for _i in 10:
-		spawn_pickup(ZoomZoom)
+	$ZoomController.spawn_zooms()
 	
 	$FlagSpawner.spawn_flags()
 	for flag in $FlagSpawner.pool:
@@ -113,18 +110,6 @@ func spawn_tank(scene, around, min_dist, max_dist):
 	tank.add_to_group("enemies")
 	add_child(tank)
 	var _e = tank.connect("dead", self, "tank_death")
-
-func spawn_pickup(scene):
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	
-	var x = rng.randf_range(-90, 90)
-	var z = rng.randf_range(-90, 90)
-	
-	var pickup = scene.instance()
-	pickup.translate(Vector3(x, 0, z))
-	pickup.connect("tree_exiting", self, "spawn_pickup", [scene])
-	call_deferred("add_child", pickup)
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"

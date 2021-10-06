@@ -34,6 +34,8 @@ func set_state(new_state):
 			world.start()
 
 func _ready():
+	randomize()
+	
 	bonus_timer.one_shot = false
 	bonus_timer.wait_time = 0.25
 	add_child(bonus_timer)

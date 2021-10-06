@@ -32,8 +32,6 @@ func _ready():
 	set_state(State.Idle)
 
 func start():
-	randomize()
-	
 	# Where in the infinite void do we start from?
 	var angle = rand_range(0, 2 * PI)
 	var start = Vector3.FORWARD.rotated(Vector3.UP, angle) * warp_dist

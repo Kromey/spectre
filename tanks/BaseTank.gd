@@ -46,8 +46,6 @@ signal dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize()
-	
 	if BULLET_SPEED <= 0:
 		BULLET_SPEED = MAX_SPEED + 2
 	reload_immediate()

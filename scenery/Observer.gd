@@ -20,6 +20,7 @@ const BOMB = preload("res://scenery/MineBomb.tscn")
 onready var bomb_from = $BombPos
 
 enum State {
+	Idle,
 	Arriving,
 	Traveling,
 	Observing,
@@ -27,6 +28,10 @@ enum State {
 }
 
 func _ready():
+	start()
+	set_state(State.Idle)
+
+func start():
 	randomize()
 	
 	# Where in the infinite void do we start from?
@@ -36,7 +41,7 @@ func _ready():
 	start += Vector3.UP * altitude
 	
 	# Set our spawn location
-	translate(start)
+	translation = start
 	look_at(Vector3.UP * altitude, Vector3.UP)
 	
 	# How far from the center of the map we arrive at
@@ -90,7 +95,7 @@ func _physics_process(delta):
 			velocity += velocity.normalized() * warp_accel * delta
 			
 			if global_transform.origin.length() > 250:
-				queue_free()
+				set_state(State.Idle)
 	
 	global_translate(velocity * delta)
 	look_at(global_transform.origin + velocity, Vector3.UP)
@@ -99,10 +104,18 @@ func set_state(state):
 	if current_state == state:
 		return
 	
+	if state == State.Idle:
+		hide()
+		set_physics_process(false)
+	else:
+		set_physics_process(true)
+		show()
+	
 	match state:
 		State.Observing:
 			$LeftLight.show()
 			$RightLight.show()
+		
 		_:
 			$LeftLight.hide()
 			$RightLight.hide()

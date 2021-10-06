@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://grid.shader" type="Shader" id=1]
 [ext_resource path="res://WallController.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://RepairController.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/mixkit-space-deploy-whizz-3003.wav" type="AudioStream" id=8]
 [ext_resource path="res://ZoomController.gd" type="Script" id=9]
+[ext_resource path="res://ObserverController.gd" type="Script" id=10]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
@@ -54,6 +55,12 @@ stream = ExtResource( 8 )
 unit_size = 6.0
 max_db = 6.0
 
+[node name="ObserverController" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="SpawnCheckTimer" type="Timer" parent="ObserverController"]
+autostart = true
+
 [node name="Floor" type="StaticBody" parent="."]
 physics_material_override = SubResource( 1 )
 
@@ -76,3 +83,5 @@ light_energy = 0.5
 [node name="DirectionalLight2" type="DirectionalLight" parent="."]
 transform = Transform( -0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 5, 0 )
 light_energy = 0.5
+
+[connection signal="timeout" from="ObserverController/SpawnCheckTimer" to="ObserverController" method="check_spawn"]

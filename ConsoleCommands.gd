@@ -25,6 +25,7 @@ var commands = {
 var command_aliases = {
 	"observer": "spawn_observer",
 	"evac_observer": "evacuate_observer",
+	"remove_observer": "evacuate_observer",
 	"god": "god_mode",
 	"make_me_god": "god_mode",
 	"?": "help",
@@ -88,13 +89,13 @@ func new_walls():
 
 func spawn_observer(num: int):
 	for __ in num:
-		get_tree().current_scene.spawn_observer()
+		get_tree().current_scene.find_node("ObserverController").spawn_observer()
 	
 	return str(num, " Observers warping in!")
 
 func evacuate_observer(num: int):
 	for __ in num:
-		get_tree().current_scene.evacuate_observer()
+		get_tree().current_scene.find_node("ObserverController").remove_observer()
 	
 	return str(num, " Observers warping away!")
 

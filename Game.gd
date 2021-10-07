@@ -74,8 +74,8 @@ func level_up():
 	set_level(level + 1)
 	set_bonus(400)
 	
-	var e = get_tree().reload_current_scene()
-	assert(e == OK)
+	get_tree().call_group("enemies", "die", null)
+	world.start()
 	get_tree().paused = false
 
 func decrement_bonus():

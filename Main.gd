@@ -7,6 +7,7 @@ const AdvancedTank = preload("res://tanks/AdvancedTank.tscn")
 const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 
+var player
 
 func _input(event):
 	# TODO: Temporary quit-to-MainMenu
@@ -14,6 +15,12 @@ func _input(event):
 		Game.current_state = Game.State.MainMenu
 
 func _ready():
+	player = PlayerTank.instance()
+	player.translate(Vector3.UP * 0.2)
+	add_child(player)
+	var _e = player.connect("dead", self, "player_death")
+	call_deferred("first_shot")
+	
 	Game.world = self
 	Game.current_state = Game.State.LoadingLevel
 
@@ -22,11 +29,6 @@ func start():
 	
 	$ObserverController.spawn_observer(3)
 	
-	var player = PlayerTank.instance()
-	player.translate(Vector3.UP * 0.2)
-	add_child(player)
-	var _e = player.connect("dead", self, "player_death")
-	call_deferred("first_shot", player)
 	player.current_state = player.PlayerState.Locked
 	var __ = get_tree().create_timer(2).connect("timeout", player, "set_state", [player.PlayerState.Running])
 	
@@ -90,7 +92,7 @@ func spawn_tank(scene, around, min_dist, max_dist):
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"
-func first_shot(player):
+func first_shot():
 	var gun_range = player.GUN_RANGE
 	player.GUN_RANGE = 0
 	player.shoot()

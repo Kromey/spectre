@@ -74,7 +74,7 @@ func level_up():
 	set_level(level + 1)
 	set_bonus(400)
 	
-	get_tree().call_group("enemies", "die", null)
+	get_tree().call_group("enemies", "die")
 	world.start()
 	get_tree().paused = false
 

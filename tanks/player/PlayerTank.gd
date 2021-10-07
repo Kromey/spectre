@@ -65,7 +65,7 @@ func _input(event):
 		get_parent().call_deferred("add_child", load("res://Console.tscn").instance())
 		get_tree().paused = true
 
-func die(killer):
+func die(killer = null):
 	var cam = BOOMCAM.instance()
 	cam.translation = translation
 	get_parent().add_child(cam)

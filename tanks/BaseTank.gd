@@ -142,7 +142,7 @@ func take_damage(_force, amount, shooter = null):
 func repair_damage(amount):
 	take_damage(0, -amount)
 
-func die(killer):
+func die(killer = null):
 	var boom = BOOM.instance()
 	boom.translation = translation
 	get_parent().add_child(boom)

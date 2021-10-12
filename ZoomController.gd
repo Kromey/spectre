@@ -23,6 +23,9 @@ func _ready():
 func spawn_zooms(min_dist = 30, from = Vector3.ZERO):
 	var dist_sq = pow(min_dist, 2)
 	
+	if from == Vector3.ZERO and is_instance_valid(Game.world.player):
+			from = Game.world.player.global_transform.origin
+	
 	for zoom in pool:
 		var x = from.x
 		var z = from.z

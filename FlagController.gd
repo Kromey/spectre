@@ -23,6 +23,9 @@ func _ready():
 func spawn_flags(min_dist = 50, from = Vector3.ZERO):
 	collected = 0
 	
+	if from == Vector3.ZERO and is_instance_valid(Game.world.player):
+			from = Game.world.player.global_transform.origin
+	
 	var dist_sq = pow(min_dist, 2)
 	
 	for flag in pool:

@@ -28,6 +28,9 @@ func _ready():
 		tween.start()
 
 func spawn_repairs(min_dist = 50, from = Vector3.ZERO):
+	if from == Vector3.ZERO and is_instance_valid(Game.world.player):
+			from = Game.world.player.global_transform.origin
+	
 	for repair in pool:
 		move(repair, min_dist, from)
 

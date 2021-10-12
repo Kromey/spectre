@@ -86,8 +86,11 @@ func hide_wall(wall):
 	# "Hide" walls by moving them very very far away
 	wall.translation = DESCENT_OFFSET * 5000
 
-func spawn_walls(num_walls, min_dist = 3, origin = Vector3.ZERO):
+func spawn_walls(num_walls, min_dist := 3.0, origin := Vector3.ZERO):
 	last_wall_count = num_walls
+	
+	if origin == Vector3.ZERO and is_instance_valid(Game.world.player):
+			origin = Game.world.player.global_transform.origin
 	
 	var count = 0
 	pool.shuffle()

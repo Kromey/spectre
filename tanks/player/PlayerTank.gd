@@ -73,6 +73,11 @@ func die(killer = null):
 	
 	.die(killer)
 
+func lock_player_controls(duration := 2.0):
+	set_state(PlayerState.Locked)
+	var timer = get_tree().create_timer(duration)
+	var __ = timer.connect("timeout", self, "set_state", [PlayerState.Running])
+
 func set_state(state):
 	current_state = state
 

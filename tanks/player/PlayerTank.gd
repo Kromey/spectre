@@ -78,6 +78,9 @@ func lock_player_controls(duration := 2.0):
 	var timer = get_tree().create_timer(duration)
 	var __ = timer.connect("timeout", self, "set_state", [PlayerState.Running])
 
+func is_running():
+	return current_state == PlayerState.Running
+
 func set_state(state):
 	current_state = state
 

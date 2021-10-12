@@ -16,7 +16,7 @@ func _input(event):
 
 func _ready():
 	player = PlayerTank.instance()
-	player.translate(Vector3.UP * 0.2)
+	player.translate(Vector3.UP * 0.1)
 	add_child(player)
 	var _e = player.connect("dead", self, "player_death")
 	call_deferred("first_shot")
@@ -82,7 +82,7 @@ func spawn_tank(scene, around, min_dist, max_dist):
 	local_pos.z = clamp(local_pos.z, -95, 95)
 	
 	var tank = scene.instance()
-	tank.translate(around + local_pos + Vector3.UP)
+	tank.translate(around + local_pos + Vector3.UP * 0.1)
 	tank.add_to_group("enemies")
 	add_child(tank)
 	var _e = tank.connect("dead", self, "tank_death")

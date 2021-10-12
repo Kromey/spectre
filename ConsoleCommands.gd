@@ -12,6 +12,7 @@ var commands = {
 	"help": [],
 	"aliases": [],
 	"echo": [ARG_MULTI_STRING],
+	"message": [ARG_MULTI_STRING],
 	"level_up": [],
 	"walls_down": [],
 	"walls_up": [],
@@ -23,6 +24,7 @@ var commands = {
 }
 
 var command_aliases = {
+	"msg": "message",
 	"observer": "spawn_observer",
 	"evac_observer": "evacuate_observer",
 	"remove_observer": "evacuate_observer",
@@ -67,6 +69,9 @@ func aliases():
 
 func echo(input: String):
 	return str(input)
+
+func message(msg: String):
+	Game.world.player.show_message(msg)
 
 func level_up():
 	Game.level_up()

@@ -65,16 +65,16 @@ __meta__ = {
 [node name="GUI" type="HSplitContainer" parent="Top"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 1004.0
+margin_right = 1260.0
 margin_bottom = 160.0
 
 [node name="GUILeft" type="VBoxContainer" parent="Top/GUI"]
-margin_right = 726.0
+margin_right = 982.0
 margin_bottom = 140.0
 size_flags_horizontal = 3
 
 [node name="Armor" type="HSplitContainer" parent="Top/GUI/GUILeft"]
-margin_right = 726.0
+margin_right = 982.0
 margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Armor"]
@@ -107,7 +107,7 @@ text = "0"
 
 [node name="Ammo" type="HSplitContainer" parent="Top/GUI/GUILeft"]
 margin_top = 48.0
-margin_right = 726.0
+margin_right = 982.0
 margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Ammo"]
@@ -139,7 +139,7 @@ text = "0"
 
 [node name="Kills" type="HSplitContainer" parent="Top/GUI/GUILeft"]
 margin_top = 96.0
-margin_right = 726.0
+margin_right = 982.0
 margin_bottom = 140.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Kills"]
@@ -151,14 +151,14 @@ text = "Kills:"
 
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Kills"]
 margin_left = 142.0
-margin_right = 726.0
+margin_right = 982.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 
 [node name="GUIRight" type="VBoxContainer" parent="Top/GUI"]
-margin_left = 738.0
-margin_right = 984.0
+margin_left = 994.0
+margin_right = 1240.0
 margin_bottom = 140.0
 
 [node name="Level" type="HSplitContainer" parent="Top/GUI/GUIRight"]

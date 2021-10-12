@@ -96,6 +96,9 @@ func update_kills(kills):
 func update_level(level):
 	HUD.update_level(level)
 
+func show_message(msg):
+	HUD.show_message(msg)
+
 func shoot():
 	.shoot()
 	HUD.update_ammo(ammo, MAX_AMMO)

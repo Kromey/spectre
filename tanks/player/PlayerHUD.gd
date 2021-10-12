@@ -7,6 +7,8 @@ onready var Bonus = find_node("Bonus")
 onready var Kills = find_node("Kills")
 onready var Level = find_node("Level")
 
+const MESSAGE = preload("res://tanks/player/HUDMessage.tscn")
+
 var last_armor = 0
 onready var damage_anim_duration = $DamageAnimation.get_animation("Damage").length * 5
 
@@ -27,6 +29,7 @@ func update_armor(armor, max_armor):
 		else:
 			$DamageCriticalAlarm.play()
 			$DamageAnimation/DurationTimer.stop()
+			show_message("Danger! Damage Critical!")
 	elif armor > 1:
 		# If we're repairing from 1 armor, we want to stop blinking
 		reset_damage_animation()
@@ -53,6 +56,7 @@ func reloading(is_reloading, reload_time):
 	if is_reloading:
 		$ReloadingAnimation.play("Reloading")
 		update_ammo(0, null)
+		show_message("Reloading...")
 		
 		var bar = Ammo.get_node("Bar")
 		$BarTween.interpolate_property(bar, "value", 0, bar.max_value, reload_time + 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -80,3 +84,8 @@ func update_level(level):
 
 func update_bonus(bonus):
 	Bonus.get_node("Value").text = str(bonus)
+
+func show_message(msg):
+	var m = MESSAGE.instance()
+	add_child(m)
+	m.start(msg)

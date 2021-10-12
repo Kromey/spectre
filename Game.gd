@@ -35,6 +35,7 @@ func set_state(new_state):
 			world.start()
 			reset_stats()
 			set_state(State.Running)
+			world.player.show_message("Level 1!")
 
 func _ready():
 	randomize()
@@ -82,6 +83,7 @@ func level_up():
 	
 	get_tree().call_group("enemies", "die")
 	world.start()
+	world.player.show_message("Level %s!" % level)
 
 func decrement_bonus():
 	if current_state == State.Running and is_instance_valid(world.player):

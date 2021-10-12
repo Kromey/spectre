@@ -26,7 +26,7 @@ onready var ORIGIN := global_transform.origin
 export(int) var pool_size = 450 # Should be more than the largest number at a time to give some variety
 
 var pool = []
-var last_wall_count = 250 # Arbitrary default value
+var wall_count = 0
 
 func _ready():
 	rng = RandomNumberGenerator.new()
@@ -42,11 +42,13 @@ func _ready():
 
 func rebuild_walls(num_walls = 0, duration = 1, delay = 0.0):
 	if num_walls == 0:
-		num_walls = last_wall_count
+		num_walls = wall_count
 	
-	descend(duration, delay)
+	if wall_count > 0:
+		descend(duration, delay)
+		
+		yield(get_tree().create_timer(duration + delay, false), "timeout")
 	
-	yield(get_tree().create_timer(duration + delay, false), "timeout")
 	spawn_walls(num_walls)
 	rise(duration, 0)
 
@@ -87,15 +89,13 @@ func hide_wall(wall):
 	wall.translation = DESCENT_OFFSET * 5000
 
 func spawn_walls(num_walls, min_dist := 3.0, origin := Vector3.ZERO):
-	last_wall_count = num_walls
-	
 	if origin == Vector3.ZERO and is_instance_valid(Game.world.player):
 			origin = Game.world.player.global_transform.origin
 	
-	var count = 0
+	wall_count = 0
 	pool.shuffle()
 	for wall in pool:
-		if count >= num_walls:
+		if wall_count >= num_walls:
 			hide_wall(wall)
 			continue
 		
@@ -106,8 +106,8 @@ func spawn_walls(num_walls, min_dist := 3.0, origin := Vector3.ZERO):
 		wall.translation = Vector3(x, 0, z)
 		wall.rotate_y(r)
 		if wall.translation.distance_to(origin) > min_dist:
-			count += 1
+			wall_count += 1
 		else:
 			hide_wall(wall)
 	
-	prints("Showing", count, "pooled walls")
+	prints("Showing", wall_count, "pooled walls")

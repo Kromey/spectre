@@ -33,8 +33,7 @@ func start():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	$WallController.spawn_walls(250)
-	$WallController.rise()
+	$WallController.rebuild_walls(250)
 	
 	$RepairController.spawn_repairs()
 	$ZoomController.spawn_zooms()

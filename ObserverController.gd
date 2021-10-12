@@ -14,7 +14,10 @@ func new_observer():
 	
 	return observer
 
-func spawn_observer(count = 1):
+func spawn_observer(count = 1, is_min_count = false):
+	if is_min_count:
+		count = max(count - active.size(), 0)
+	
 	for __ in count:
 		var observer = pool.pop_back() if pool.size() else new_observer()
 		active.append(observer)

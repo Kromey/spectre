@@ -28,7 +28,7 @@ func _ready():
 func start():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	$ObserverController.spawn_observer(3)
+	$ObserverController.spawn_observer(3, true)
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()

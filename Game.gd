@@ -1,5 +1,7 @@
 extends Node
 
+const MAX_BONUS = 400
+
 var player_score = 0
 var player_kills = 0
 var level_bonus = 0
@@ -44,9 +46,15 @@ func _ready():
 
 func reset_stats():
 	set_score(0)
-	set_bonus(400)
+	reset_bonus()
 	set_kills(0)
 	set_level(1)
+
+func reset_bonus(add = false):
+	if add:
+		add_to_score(level_bonus)
+	
+	set_bonus(MAX_BONUS)
 
 func set_level(new_level):
 	level = new_level
@@ -68,14 +76,12 @@ func set_kills(new_kills):
 
 func level_up():
 	bonus_timer.stop()
-	add_to_score(level_bonus)
 	
+	reset_bonus(true)
 	set_level(level + 1)
-	set_bonus(400)
 	
 	get_tree().call_group("enemies", "die")
 	world.start()
-	get_tree().paused = false
 
 func decrement_bonus():
 	if current_state == State.Running and world.player.is_running():

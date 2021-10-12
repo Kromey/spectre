@@ -84,8 +84,9 @@ func level_up():
 	world.start()
 
 func decrement_bonus():
-	if current_state == State.Running and world.player.is_running():
-		set_bonus(level_bonus - 1)
+	if current_state == State.Running and is_instance_valid(world.player):
+		if world.player.is_running():
+			set_bonus(level_bonus - 1)
 
 func flag_collected():
 	add_to_score(20)

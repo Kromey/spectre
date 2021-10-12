@@ -100,7 +100,6 @@ func player_death(_killer):
 	print("Player died!")
 	yield(get_tree().create_timer(5.5), "timeout")
 	
-	Game.reset_stats()
 	var e = get_tree().reload_current_scene()
 	assert(e == OK)
 

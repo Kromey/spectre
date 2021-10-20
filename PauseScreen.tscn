@@ -28,25 +28,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -131.5
-margin_top = -87.0
-margin_right = 131.5
-margin_bottom = 87.0
+margin_left = -152.5
+margin_top = -152.0
+margin_right = 152.5
+margin_bottom = 152.0
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 263.0
+margin_right = 305.0
 margin_bottom = 44.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0627451, 0.913725, 0.0745098, 1 )
 text = "Game Paused"
+align = 1
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
 margin_top = 59.0
-margin_right = 263.0
+margin_right = 305.0
 margin_bottom = 109.0
 hint_tooltip = "Start a new game [Enter]"
 size_flags_vertical = 0
@@ -60,7 +61,7 @@ __meta__ = {
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 margin_top = 124.0
-margin_right = 263.0
+margin_right = 305.0
 margin_bottom = 174.0
 hint_tooltip = "Start a new game [Enter]"
 size_flags_vertical = 0
@@ -74,14 +75,29 @@ __meta__ = {
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 margin_top = 189.0
-margin_right = 263.0
+margin_right = 305.0
 margin_bottom = 239.0
 hint_tooltip = "Start a new game [Enter]"
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
-text = "Quit"
+text = "Quit to Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitProgram" type="Button" parent="VBoxContainer"]
+margin_top = 254.0
+margin_right = 305.0
+margin_bottom = 304.0
+hint_tooltip = "Start a new game [Enter]"
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = true
+shortcut_in_tooltip = false
+shortcut = SubResource( 3 )
+text = "Quit to Desktop"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -100,5 +116,6 @@ margin_bottom = 189.0
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitProgram" to="." method="_on_QuitProgram_pressed"]
 [connection signal="apply_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_apply_button_pressed"]
 [connection signal="cancel_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_cancel_button_pressed"]

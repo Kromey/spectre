@@ -63,3 +63,7 @@ func _on_UIVideoSettings_cancel_button_pressed():
 	# Cancel any changes/reset the UI
 	video_settings_ui.init(video_settings.to_dict())
 	toggle_video_settings_panel(false)
+
+
+func _on_QuitProgram_pressed():
+	get_tree().quit()

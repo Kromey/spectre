@@ -24,4 +24,5 @@ transform = Transform( 1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 
 
 [node name="Spinner" type="AnimationPlayer" parent="."]
 autoplay = "Spin"
+playback_speed = 0.5
 anims/Spin = SubResource( 1 )

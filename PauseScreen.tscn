@@ -11,8 +11,9 @@ pressed = true
 [sub_resource type="ShortCut" id=3]
 shortcut = SubResource( 2 )
 
-[node name="PauseScreen" type="Node"]
+[node name="PauseScreen" type="CanvasLayer"]
 pause_mode = 2
+layer = 10
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]

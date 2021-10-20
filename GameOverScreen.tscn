@@ -44,3 +44,4 @@ text = "Main Menu"
 [node name="QuitProgram" parent="MarginContainer/VBoxContainer" index="5"]
 margin_top = 248.0
 margin_bottom = 298.0
+text = "Quit"

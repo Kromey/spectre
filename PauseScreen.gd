@@ -9,7 +9,6 @@ func _ready():
 	video_settings_ui.init(video_settings.to_dict())
 
 func _enter_tree():
-	print("Pause screen ready")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):

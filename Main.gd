@@ -9,6 +9,7 @@ const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 
 var player
 onready var PauseScreen = load("res://PauseScreen.tscn").instance()
+onready var GameOverScreen = load("res://GameOverScreen.tscn").instance()
 
 func _input(event):
 	# TODO: Temporary quit-to-MainMenu
@@ -101,10 +102,9 @@ func first_shot():
 
 func player_death(_killer):
 	print("Player died!")
-	yield(get_tree().create_timer(5.5), "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 	
-	var e = get_tree().reload_current_scene()
-	assert(e == OK)
+	add_child(GameOverScreen)
 
 func tank_death(killer):
 	print("Enemy tank died!")

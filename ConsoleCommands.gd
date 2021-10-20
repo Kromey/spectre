@@ -21,6 +21,7 @@ var commands = {
 	"spawn_observer": [ARG_INT],
 	"evacuate_observer": [ARG_INT],
 	"kill_all": [],
+	"kill_me": [],
 	"god_mode": [],
 }
 
@@ -31,6 +32,7 @@ var command_aliases = {
 	"remove_observer": "evacuate_observer",
 	"god": "god_mode",
 	"make_me_god": "god_mode",
+	"suicide": "kill_me",
 	"?": "help",
 }
 
@@ -112,6 +114,10 @@ func kill_all():
 	get_tree().call_group("enemies", "die", get_tree().get_nodes_in_group("player")[0])
 	
 	return "All enemies dead!"
+
+func kill_me():
+	Game.world.player.die(null)
+	$"..".close_console()
 
 func god_mode():
 	var player = get_tree().get_nodes_in_group("player")[0]

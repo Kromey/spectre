@@ -13,6 +13,7 @@ var commands = {
 	"aliases": [],
 	"echo": [ARG_MULTI_STRING],
 	"message": [ARG_MULTI_STRING],
+	"reload": [],
 	"level_up": [],
 	"walls_down": [],
 	"walls_up": [],
@@ -72,6 +73,9 @@ func echo(input: String):
 
 func message(msg: String):
 	Game.world.player.show_message(msg)
+
+func reload():
+	Game.world.player.reload_immediate()
 
 func level_up():
 	Game.level_up()

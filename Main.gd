@@ -8,11 +8,14 @@ const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 
 var player
+onready var PauseScreen = load("res://PauseScreen.tscn").instance()
 
 func _input(event):
 	# TODO: Temporary quit-to-MainMenu
-	if event.is_action_pressed("ui_cancel"):
-		Game.current_state = Game.State.MainMenu
+	if event.is_action_pressed("action_pause"):
+		print("Game got 'action_pause'")
+		add_child(PauseScreen)
+		get_tree().paused = true
 
 func _ready():
 	player = PlayerTank.instance()

@@ -12,6 +12,12 @@ const MESSAGE = preload("res://tanks/player/HUDMessage.tscn")
 var last_armor = 0
 onready var damage_anim_duration = $DamageAnimation.get_animation("Damage").length * 5
 
+enum {
+	MSG_NORMAL,
+	MSG_CRITICAL,
+	MSG_SUCCESS,
+}
+
 func update_armor(armor, max_armor):
 	Armor.get_node("Value").text = str(armor)
 	
@@ -29,7 +35,7 @@ func update_armor(armor, max_armor):
 		else:
 			$DamageCriticalAlarm.play()
 			$DamageAnimation/DurationTimer.stop()
-			show_message("Danger! Damage Critical!")
+			show_message("Danger! Damage Critical!", MSG_CRITICAL)
 	elif armor > 1:
 		# If we're repairing from 1 armor, we want to stop blinking
 		reset_damage_animation()
@@ -85,7 +91,14 @@ func update_level(level):
 func update_bonus(bonus):
 	Bonus.get_node("Value").text = str(bonus)
 
-func show_message(msg):
+func show_message(msg, level = MSG_NORMAL):
 	var m = MESSAGE.instance()
 	add_child(m)
-	m.start(msg)
+	
+	match level:
+		MSG_NORMAL:
+			m.show_message(msg)
+		MSG_CRITICAL:
+			m.show_critical(msg)
+		MSG_SUCCESS:
+			m.show_success(msg)

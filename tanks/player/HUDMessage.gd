@@ -10,7 +10,7 @@ const OFFSET = 100
 func _ready():
 	set_process(false)
 
-func start(msg, duration = 2.0):
+func show_message(msg, duration = 2.0):
 	text = msg
 	rect_global_position.y += OFFSET
 	
@@ -19,6 +19,16 @@ func start(msg, duration = 2.0):
 	$Fader.play("Fade")
 	
 	set_process(true)
+
+func show_critical(msg, duration = 2.0):
+	add_color_override("font_color", Color.red)
+	
+	show_message(msg, duration)
+
+func show_success(msg, duration = 2.0):
+	add_color_override("font_color", Color.green)
+	
+	show_message(msg, duration)
 
 func done(__):
 	queue_free()

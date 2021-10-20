@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PauseScreen.gd" type="Script" id=1]
 [ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://main_menu/UIVideoSettings.tscn" type="PackedScene" id=3]
 
 [sub_resource type="InputEventAction" id=2]
 action = "ui_accept"
@@ -57,10 +58,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer"]
 margin_top = 124.0
 margin_right = 263.0
 margin_bottom = 174.0
+hint_tooltip = "Start a new game [Enter]"
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 3 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 189.0
+margin_right = 263.0
+margin_bottom = 239.0
 hint_tooltip = "Start a new game [Enter]"
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
@@ -71,5 +86,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="UIVideoSettings" parent="." instance=ExtResource( 3 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -258.5
+margin_top = -189.0
+margin_right = 258.5
+margin_bottom = 189.0
+
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="apply_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_apply_button_pressed"]
+[connection signal="cancel_button_pressed" from="UIVideoSettings" to="." method="_on_UIVideoSettings_cancel_button_pressed"]

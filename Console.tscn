@@ -6,7 +6,16 @@
 
 [node name="Console" type="CanvasLayer"]
 pause_mode = 2
+layer = 10
 script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ConsoleCommands" type="Node" parent="."]
 script = ExtResource( 3 )

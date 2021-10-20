@@ -13,7 +13,7 @@ shortcut = SubResource( 2 )
 
 [node name="PauseScreen" type="CanvasLayer"]
 pause_mode = 2
-layer = 10
+layer = 5
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]

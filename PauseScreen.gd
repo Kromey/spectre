@@ -12,10 +12,12 @@ func _enter_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
-	if event.is_action_pressed("action_pause"):
-		resume_game()
-	elif event.is_action_pressed("ui_accept") and video_settings_ui.visible:
-		video_settings_ui.apply_settings()
+	match Game.current_state:
+		Game.State.Paused:
+			if event.is_action_pressed("action_pause"):
+				resume_game()
+			elif event.is_action_pressed("ui_accept") and video_settings_ui.visible:
+				video_settings_ui.apply_settings()
 
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:
@@ -33,11 +35,13 @@ func update_settings(settings: Dictionary) -> void:
 	video_settings.apply_settings(get_tree())
 
 func resume_game():
-	get_tree().set_deferred("paused", false)
-	
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	get_parent().remove_child(self)
+	if Game.current_state == Game.State.Paused:
+		get_tree().set_deferred("paused", false)
+		
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+		get_parent().remove_child(self)
+		Game.current_state = Game.State.Running
 
 
 func _on_Resume_pressed():

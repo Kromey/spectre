@@ -12,11 +12,12 @@ onready var PauseScreen = load("res://PauseScreen.tscn").instance()
 onready var GameOverScreen = load("res://GameOverScreen.tscn").instance()
 
 func _input(event):
-	# TODO: Temporary quit-to-MainMenu
-	if event.is_action_pressed("action_pause"):
-		print("Game got 'action_pause'")
-		add_child(PauseScreen)
-		get_tree().paused = true
+	match Game.current_state:
+		Game.State.Running:
+			if event.is_action_pressed("action_pause"):
+				add_child(PauseScreen)
+				get_tree().paused = true
+				Game.current_state = Game.State.Paused
 
 func _ready():
 	player = PlayerTank.instance()
@@ -102,6 +103,7 @@ func first_shot():
 
 func player_death(_killer):
 	print("Player died!")
+	Game.current_state = Game.State.GameOver
 	yield(get_tree().create_timer(1.5), "timeout")
 	
 	add_child(GameOverScreen)

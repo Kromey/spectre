@@ -16,6 +16,8 @@ enum State {
 	MainMenu,
 	LoadingLevel,
 	Running,
+	Paused,
+	GameOver,
 }
 var current_state = State.Waiting setget set_state
 

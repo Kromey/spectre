@@ -13,12 +13,12 @@ outline_size = 3
 outline_color = Color( 0.431373, 0.286275, 0.733333, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="InputEventAction" id=4]
+[sub_resource type="InputEventAction" id=2]
 action = "ui_accept"
 pressed = true
 
 [sub_resource type="ShortCut" id=3]
-shortcut = SubResource( 4 )
+shortcut = SubResource( 2 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0

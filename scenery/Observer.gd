@@ -63,7 +63,7 @@ func _physics_process(delta):
 		State.Traveling, State.Observing:
 			var dist = global_transform.origin.distance_to(destination)
 			
-			if !is_instance_valid(target) || global_transform.origin.distance_to(destination) < 15:
+			if !(is_instance_valid(target) and target.is_visible_in_tree() and global_transform.origin.distance_to(destination) > 15):
 				new_destination()
 			elif dist > 55:
 				set_state(State.Traveling)
@@ -137,7 +137,7 @@ func new_destination():
 	
 	var flags = get_tree().get_nodes_in_group("goals")
 	if flags.size() > 0:
-		if !is_instance_valid(target):
+		if !(is_instance_valid(target) and target.is_visible_in_tree()):
 			# Find flag closest to our current direction of travel
 			var face = -global_transform.basis.z
 			var angle = 3 * PI

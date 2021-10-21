@@ -13,7 +13,6 @@ func _ready():
 		var flag = FLAG.instance()
 		add_child(flag)
 		flag.hide()
-		flag.add_to_group("goals")
 		var _e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
 		pool.append(flag)
 	
@@ -39,10 +38,15 @@ func spawn_flags(min_dist = 50, from = Vector3.ZERO):
 			flag.translation = Vector3(x, 0, z)
 		
 		flag.show()
+		flag.add_to_group("goals")
 
 func _on_flag_pickup(_body, flag: Spatial):
+	if !flag.is_visible_in_tree():
+		return
+	
 	$FlagPickup.play()
 	flag.hide()
+	flag.remove_from_group("goals")
 	
 	Game.flag_collected()
 	collected += 1

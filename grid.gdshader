@@ -1,8 +1,8 @@
 shader_type spatial;
 
-uniform vec4 BASE_COLOR : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 BASE_COLOR : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float LINE_WIDTH = 0.02;
-uniform vec4 LINE_COLOR : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 LINE_COLOR : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float COLUMN_COUNT = 5.0;
 uniform float ROW_COUNT = 5.0;
 

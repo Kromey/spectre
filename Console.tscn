@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="FontFile" id=1]
 [ext_resource path="res://Console.gd" type="Script" id=2]
 [ext_resource path="res://ConsoleCommands.gd" type="Script" id=3]
 
 [node name="Console" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 layer = 10
 script = ExtResource( 2 )
 
@@ -23,43 +23,43 @@ script = ExtResource( 3 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 50
-custom_constants/margin_top = 50
-custom_constants/margin_left = 50
-custom_constants/margin_bottom = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_bottom = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 1230.0
-margin_bottom = 670.0
-custom_constants/separation = 10
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1230.0
+offset_bottom = 670.0
+theme_override_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Input" type="LineEdit" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0.74902 )
-margin_right = 1180.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 0, 44 )
+offset_right = 1180.0
+offset_bottom = 54.0
+custom_minimum_size = Vector2( 0, 44 )
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 context_menu_enabled = false
 virtual_keyboard_enabled = false
 shortcut_keys_enabled = false
 
 [node name="Output" type="TextEdit" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0.74902 )
-margin_top = 64.0
-margin_right = 1180.0
-margin_bottom = 620.0
+offset_top = 64.0
+offset_right = 1180.0
+offset_bottom = 620.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 readonly = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
@@ -67,4 +67,4 @@ virtual_keyboard_enabled = false
 selecting_enabled = false
 wrap_enabled = true
 
-[connection signal="text_entered" from="MarginContainer/VBoxContainer/Input" to="." method="_on_Input_text_entered"]
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/Input" to="." method="_on_Input_text_entered"]

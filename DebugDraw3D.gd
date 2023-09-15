@@ -21,18 +21,18 @@ func _draw():
 		if !is_instance_valid(tank):
 			continue
 		
-		draw_vector(tank.translation, tank.velocity, Color(1, 1, 1))
-		draw_vector(tank.translation, tank.navigation.get_bumper())
+		draw_vector(tank.position, tank.velocity, Color(1, 1, 1))
+		draw_vector(tank.position, tank.navigation.get_bumper())
 		
 		if is_instance_valid(tank.current_target):
-			draw_vector(tank.translation, tank.navigation.get_intent(tank.current_target), Color(0, 0, 1))
-			draw_vector(tank.translation, tank.navigation.get_direction_to(tank.current_target), Color(0, 1, 0))
+			draw_vector(tank.position, tank.navigation.get_intent(tank.current_target), Color(0, 0, 1))
+			draw_vector(tank.position, tank.navigation.get_direction_to(tank.current_target), Color(0, 1, 0))
 
 func draw_vector(origin, vec, color = Color(1, 0, 0)):
 	if vec.length() == 0:
 		return
 	
-	var camera = get_viewport().get_camera()
+	var camera = get_viewport().get_camera_3d()
 	var start = camera.unproject_position(origin)
 	var end = camera.unproject_position(origin + vec)
 	
@@ -43,5 +43,5 @@ func draw_triangle(pos, dir, size, color):
 	var a = pos + dir * size
 	var b = pos + dir.rotated(2 * PI / 3) * size
 	var c = pos + dir.rotated(4 * PI / 3) * size
-	var points = PoolVector2Array([a, b, c])
-	draw_polygon(points, PoolColorArray([color]))
+	var points = PackedVector2Array([a, b, c])
+	draw_polygon(points, PackedColorArray([color]))

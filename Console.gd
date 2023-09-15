@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-onready var cmd_input: LineEdit = find_node("Input")
-onready var cmd_output: TextEdit = find_node("Output")
+@onready var cmd_input: LineEdit = find_child("Input")
+@onready var cmd_output: TextEdit = find_child("Output")
 
-onready var expression := Expression.new()
-onready var commands := $ConsoleCommands
+@onready var expression := Expression.new()
+@onready var commands := $ConsoleCommands
 
 func _ready():
 	cmd_input.grab_focus()
@@ -44,7 +44,7 @@ func read_command(args: Array):
 	args.clear()
 	
 	while cmd_tokens.size() > 0:
-		var cmd = PoolStringArray(cmd_tokens).join("_")
+		var cmd = "_".join(PackedStringArray(cmd_tokens))
 		cmd = cmd.replace("-", "_")
 	
 		if commands.command_aliases.has(cmd):
@@ -80,7 +80,7 @@ func read_args(cmd: String, args: Array):
 				pass
 			
 			commands.ARG_INT:
-				if not args[i].is_valid_integer():
+				if not args[i].is_valid_int():
 					return "Parameter %d (%s) is not an integer" % [i+1, args[i]]
 				args[i] = args[i].to_int()
 			
@@ -100,7 +100,7 @@ func read_args(cmd: String, args: Array):
 
 func execute(input: String):
 	input = input.strip_edges()
-	if input.empty():
+	if input.is_empty():
 		return
 	
 	var args = Array(input.split(" ", false))

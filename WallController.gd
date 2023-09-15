@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var rng: RandomNumberGenerator
 
@@ -22,8 +22,8 @@ const Walls = [
 ]
 
 const DESCENT_OFFSET := Vector3.DOWN * 1.5
-onready var ORIGIN := global_transform.origin
-export(int) var pool_size = 450 # Should be more than the largest number at a time to give some variety
+@onready var ORIGIN := global_transform.origin
+@export var pool_size: int = 450 # Should be more than the largest number at a time to give some variety
 
 var pool = []
 var wall_count = 0
@@ -35,7 +35,7 @@ func _ready():
 	global_transform.origin += DESCENT_OFFSET
 	
 	for i in pool_size:
-		var wall = Walls[i % Walls.size()].instance()
+		var wall = Walls[i % Walls.size()].instantiate()
 		add_child(wall)
 		hide_wall(wall)
 		pool.append(wall)
@@ -47,7 +47,7 @@ func rebuild_walls(num_walls = 0, duration = 1, delay = 0.0):
 	if wall_count > 0:
 		descend(duration, delay)
 		
-		yield(get_tree().create_timer(duration + delay, false), "timeout")
+		await get_tree().create_timer(duration + delay, false).timeout
 	
 	spawn_walls(num_walls)
 	rise(duration, 0)
@@ -57,7 +57,7 @@ func rise(duration = 1, delay = 0.75):
 	add_child(tween)
 	tween.interpolate_property(
 		self,
-		"translation",
+		"position",
 		ORIGIN + DESCENT_OFFSET,
 		ORIGIN,
 		duration,
@@ -66,14 +66,14 @@ func rise(duration = 1, delay = 0.75):
 		delay
 	)
 	tween.start()
-	var __ = tween.connect("tween_all_completed", tween, "queue_free")
+	var __ = tween.connect("tween_all_completed", Callable(tween, "queue_free"))
 
 func descend(duration = 1, delay = 0.75):
 	var tween = Tween.new()
 	add_child(tween)
 	tween.interpolate_property(
 		self,
-		"translation",
+		"position",
 		ORIGIN,
 		ORIGIN + DESCENT_OFFSET,
 		duration,
@@ -82,11 +82,11 @@ func descend(duration = 1, delay = 0.75):
 		delay
 	)
 	tween.start()
-	var __ = tween.connect("tween_all_completed", tween, "queue_free")
+	var __ = tween.connect("tween_all_completed", Callable(tween, "queue_free"))
 
 func hide_wall(wall):
 	# "Hide" walls by moving them very very far away
-	wall.translation = DESCENT_OFFSET * 5000
+	wall.position = DESCENT_OFFSET * 5000
 
 func spawn_walls(num_walls, min_dist := 3.0, origin := Vector3.ZERO):
 	if origin == Vector3.ZERO and is_instance_valid(Game.world.player):
@@ -103,9 +103,9 @@ func spawn_walls(num_walls, min_dist := 3.0, origin := Vector3.ZERO):
 		var z = rng.randi_range(-90, 90)
 		var r = rng.randi_range(0, 3) * PI / 2
 		
-		wall.translation = Vector3(x, 0, z)
+		wall.position = Vector3(x, 0, z)
 		wall.rotate_y(r)
-		if wall.translation.distance_to(origin) > min_dist:
+		if wall.position.distance_to(origin) > min_dist:
 			wall_count += 1
 		else:
 			hide_wall(wall)

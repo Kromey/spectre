@@ -1,8 +1,8 @@
 extends Control
 
-onready var video_settings = VideoSettings.new()
-onready var video_settings_ui = $UIVideoSettings
-onready var buttons = $MenuContainer/ButtonsContainer
+@onready var video_settings = VideoSettings.new()
+@onready var video_settings_ui = $UIVideoSettings
+@onready var buttons = $MenuContainer/ButtonsContainer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -10,7 +10,7 @@ func _ready():
 	video_settings_ui.visible = false
 	video_settings.load_from_file()
 	video_settings.apply_settings(get_tree())
-	video_settings_ui.init(video_settings.to_dict())
+	video_settings_ui.init(video_settings)
 	
 	Game.current_state = Game.State.MainMenu
 
@@ -27,7 +27,7 @@ func _input(event):
 
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:
-		yield(self, "ready")
+		await self.ready
 	
 	video_settings_ui.visible = state
 	
@@ -36,7 +36,7 @@ func toggle_video_settings_panel(state: bool):
 
 func update_settings(settings: Dictionary) -> void:
 	if !video_settings:
-		yield(self, "ready")
+		await self.ready
 	
 	video_settings.from_dict(settings)
 	video_settings.save()

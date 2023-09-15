@@ -2,8 +2,8 @@
 
 [ext_resource path="res://materials/Flag.material" type="Material" id=1]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.15, 0.15, 0.15 )
+[sub_resource type="BoxShape3D" id=1]
+size = Vector3( 0.15, 0.15, 0.15 )
 
 [sub_resource type="CylinderMesh" id=2]
 material = ExtResource( 1 )
@@ -17,20 +17,20 @@ rings = 2
 material = ExtResource( 1 )
 size = Vector3( 0.2, 0.3, 0.001 )
 
-[node name="Flag" type="Area"]
+[node name="Flag" type="Area3D"]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
 shape = SubResource( 1 )
 
-[node name="FlagPole" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+[node name="FlagPole" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="Pennant" type="MeshInstance" parent="FlagPole"]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.16, 0.2, 0 )
+[node name="Pennant" type="MeshInstance3D" parent="FlagPole"]
+transform = Transform3D( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.16, 0.2, 0 )
 mesh = SubResource( 3 )
 material/0 = null

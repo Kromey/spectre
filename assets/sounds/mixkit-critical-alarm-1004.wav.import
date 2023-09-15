@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/mixkit-critical-alarm-1004.wav-b5760d2feddc0eb9247a58c6ffc659ae.sample"
+type="AudioStreamWAV"
+uid="uid://7004ki3txqjs"
+path="res://.godot/imported/mixkit-critical-alarm-1004.wav-b5760d2feddc0eb9247a58c6ffc659ae.sample"
 
 [deps]
 
 source_file="res://assets/sounds/mixkit-critical-alarm-1004.wav"
-dest_files=[ "res://.import/mixkit-critical-alarm-1004.wav-b5760d2feddc0eb9247a58c6ffc659ae.sample" ]
+dest_files=["res://.godot/imported/mixkit-critical-alarm-1004.wav-b5760d2feddc0eb9247a58c6ffc659ae.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

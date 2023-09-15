@@ -2,14 +2,14 @@ extends Node
 
 const OBSERVER = preload("res://scenery/Observer.tscn")
 
-export(float, 0.0, 1.0) var OBSERVER_SPAWN_RATE := 0.05
+@export var OBSERVER_SPAWN_RATE := 0.05 # (float, 0.0, 1.0)
 
 var pool := [] # Instanced Observers waiting to be used
 var active := [] # Active Observers
 
 func new_observer():
 	print("\tInstancing new observer")
-	var observer = OBSERVER.instance()
+	var observer = OBSERVER.instantiate()
 	add_child(observer)
 	
 	return observer
@@ -27,7 +27,7 @@ func remove_observer(count = 1):
 	active.shuffle()
 	
 	for __ in count:
-		if active.empty():
+		if active.is_empty():
 			return
 		
 		var observer = active.back()

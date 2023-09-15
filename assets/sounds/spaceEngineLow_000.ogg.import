@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/spaceEngineLow_000.ogg-8f1962254766dff85b5a375401396103.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vrj23thxkuk5"
+path="res://.godot/imported/spaceEngineLow_000.ogg-8f1962254766dff85b5a375401396103.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sounds/spaceEngineLow_000.ogg"
-dest_files=[ "res://.import/spaceEngineLow_000.ogg-8f1962254766dff85b5a375401396103.oggstr" ]
+dest_files=["res://.godot/imported/spaceEngineLow_000.ogg-8f1962254766dff85b5a375401396103.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,20 +1,20 @@
-extends Spatial
+extends Node3D
 
-export(float) var DAMAGE = 2
+@export var DAMAGE: float = 2
 var exploding = false
 
-onready var tween = $Tween
+@onready var tween = $Tween
 
 const KABOOM = preload("res://tanks/BoomTheMissile.tscn")
 
 func _ready():
 	scale = Vector3.ZERO
 	
-	var final_scale = rand_range(0.9, 1.1)
+	var final_scale = randf_range(0.9, 1.1)
 	tween.interpolate_property(self, "scale", scale, Vector3.ONE * final_scale, 0.2)
 	tween.start()
 	
-	var lifetime = rand_range(5, 10)
+	var lifetime = randf_range(5, 10)
 	$Lifetime.start(lifetime)
 
 func boom():
@@ -23,7 +23,7 @@ func boom():
 		$Lifetime.stop()
 		tween.stop_all()
 		
-		var explosion = KABOOM.instance()
+		var explosion = KABOOM.instantiate()
 		get_parent().add_child(explosion)
 		explosion.global_transform.origin = global_transform.origin
 		

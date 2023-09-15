@@ -5,10 +5,10 @@
 [ext_resource path="res://tanks/BaseTank.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/explosionCrunch_000.ogg" type="AudioStream" id=4]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.3, 0.15, 0.5 )
+[sub_resource type="BoxShape3D" id=1]
+size = Vector3( 0.3, 0.15, 0.5 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticleProcessMaterial" id=2]
 lifetime_randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 0.01
@@ -21,7 +21,7 @@ initial_velocity_random = 0.75
 angle = 360.0
 angle_random = 1.0
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="StandardMaterial3D" id=3]
 flags_unshaded = true
 flags_vertex_lighting = true
 flags_do_not_receive_shadows = true
@@ -34,27 +34,27 @@ height = 0.001
 radial_segments = 4
 rings = 4
 
-[node name="BaseTank" type="KinematicBody" groups=[
+[node name="BaseTank" type="CharacterBody3D" groups=[
 "tanks",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource( 1 )
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = ExtResource( 1 )
 
-[node name="Body" type="CSGBox" parent="CSGCombiner"]
+[node name="Body" type="CSGBox3D" parent="CSGCombiner3D"]
 width = 0.6
 height = 0.15
 depth = 1.0
 
-[node name="Turret" type="CSGCylinder" parent="CSGCombiner/Body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
+[node name="Turret" type="CSGCylinder3D" parent="CSGCombiner3D/Body"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
 radius = 0.1
 height = 0.1
 sides = 6
@@ -62,28 +62,28 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Gun" type="CSGCylinder" parent="CSGCombiner/Body/Turret"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.27 )
+[node name="Gun" type="CSGCylinder3D" parent="CSGCombiner3D/Body/Turret"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.27 )
 radius = 0.01
 height = 0.4
 
-[node name="MuzzleInterior" type="CSGCylinder" parent="CSGCombiner/Body/Turret/Gun"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15232, 5.96046e-08 )
+[node name="MuzzleInterior" type="CSGCylinder3D" parent="CSGCombiner3D/Body/Turret/Gun"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15232, 5.96046e-08 )
 operation = 2
 radius = 0.008
 height = 0.1
 cone = true
 
-[node name="ShootAudio" type="AudioStreamPlayer3D" parent="CSGCombiner/Body/Turret/Gun/MuzzleInterior"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+[node name="ShootAudio" type="AudioStreamPlayer3D" parent="CSGCombiner3D/Body/Turret/Gun/MuzzleInterior"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 stream = ExtResource( 2 )
 unit_size = 5.0
 
-[node name="BulletSpawn" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, -0.51 )
+[node name="BulletSpawn" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, -0.51 )
 
 [node name="MuzzleFlare" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.125, -0.4746 )
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.125, -0.4746 )
 emitting = false
 amount = 175
 lifetime = 0.2
@@ -97,7 +97,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178697, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178697, 0 )
 stream = ExtResource( 4 )
-unit_db = 4.0
+volume_db = 4.0
 unit_size = 3.0

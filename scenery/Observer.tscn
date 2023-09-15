@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sounds/spaceEngineLow_000.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenery/Observer.gd" type="Script" id=4]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="StandardMaterial3D" id=1]
 flags_transparent = true
 albedo_color = Color( 0.054902, 0.34902, 0.972549, 0.054902 )
 emission_enabled = true
@@ -26,14 +26,14 @@ length = 0.75
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("RunningLights:translation")
+tracks/0/path = NodePath("RunningLights:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0.85 ), Vector3( 0, 0, -0.718245 ) ]
 }
@@ -44,68 +44,68 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
-[node name="Observer" type="Spatial" groups=[
+[node name="Observer" type="Node3D" groups=[
 "observers",
 ]]
 script = ExtResource( 4 )
 
 [node name="Observer" parent="." instance=ExtResource( 1 )]
 
-[node name="BombPos" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.198785, -2.21638 )
+[node name="BombPos" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.198785, -2.21638 )
 
-[node name="EditorLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.5, -0.866025, 0, 0.866025, -0.5, 0, 2.12381, -0.474459 )
+[node name="EditorLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -0.5, -0.866025, 0, 0.866025, -0.5, 0, 2.12381, -0.474459 )
 editor_only = true
 
 [node name="LeftLight" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.927965, -0.247274, -2.11191 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.927965, -0.247274, -2.11191 )
 
 [node name="RightLight" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.928, -0.247, -2.112 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.928, -0.247, -2.112 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.21232 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.21232 )
 stream = ExtResource( 3 )
-unit_db = 4.0
+volume_db = 4.0
 unit_size = 2.5
 autoplay = true
 emission_angle_filter_attenuation_db = -80.0
 
-[node name="EngineLeft" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.887333, -0.461129, 0, 0.461129, -0.887333, -0.655251, -0.146437, 1.2221 )
+[node name="EngineLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -0.887333, -0.461129, 0, 0.461129, -0.887333, -0.655251, -0.146437, 1.2221 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="EngineRight" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.887333, -0.461129, 0, 0.461129, -0.887333, 0.655, -0.146, 1.222 )
+[node name="EngineRight" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -0.887333, -0.461129, 0, 0.461129, -0.887333, 0.655, -0.146, 1.222 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="EngineFront" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, -1.5, 3.01992e-07, 0, -2.26494e-07, -2, 0, -0.256865, -0.609385 )
+[node name="EngineFront" type="MeshInstance3D" parent="."]
+transform = Transform3D( 2, 0, 0, 0, -1.5, 3.01992e-07, 0, -2.26494e-07, -2, 0, -0.256865, -0.609385 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="RunningLights" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.85 )
+[node name="RunningLights" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.85 )
 
-[node name="Right" type="OmniLight" parent="RunningLights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+[node name="Right" type="OmniLight3D" parent="RunningLights"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
 light_color = Color( 0.968627, 0.933333, 0.054902, 1 )
 light_energy = 5.0
 light_specular = 1.0
 omni_range = 0.5
 omni_attenuation = 8.93605e-05
 
-[node name="Left" type="OmniLight" parent="RunningLights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+[node name="Left" type="OmniLight3D" parent="RunningLights"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 light_color = Color( 0.968627, 0.933333, 0.054902, 1 )
 light_energy = 5.0
 light_specular = 1.0

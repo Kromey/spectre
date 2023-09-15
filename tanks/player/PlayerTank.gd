@@ -1,7 +1,7 @@
 extends "res://tanks/BaseTank.gd"
 
-onready var PlayerCamera = find_node("Camera")
-onready var HUD = find_node("PlayerHUD")
+@onready var PlayerCamera = find_child("Camera3D")
+@onready var HUD = find_child("PlayerHUD")
 
 const BOOMCAM = preload("res://tanks/BoomCam.tscn")
 
@@ -62,21 +62,21 @@ func _input(event):
 				turn_input -= event.relative.x * 0.2
 	
 	if event.is_action_pressed("ui_console"):
-		get_parent().call_deferred("add_child", load("res://Console.tscn").instance())
+		get_parent().call_deferred("add_child", load("res://Console.tscn").instantiate())
 		get_tree().paused = true
 
 func die(killer = null):
-	var cam = BOOMCAM.instance()
-	cam.translation = translation
+	var cam = BOOMCAM.instantiate()
+	cam.position = position
 	get_parent().add_child(cam)
-	cam.get_node("Camera").current = true
+	cam.get_node("Camera3D").current = true
 	
-	.die(killer)
+	super.die(killer)
 
 func lock_player_controls(duration := 2.0):
 	set_state(PlayerState.Locked)
 	var timer = get_tree().create_timer(duration)
-	var __ = timer.connect("timeout", self, "set_state", [PlayerState.Running])
+	var __ = timer.connect("timeout", Callable(self, "set_state").bind(PlayerState.Running))
 
 func is_running():
 	return current_state == PlayerState.Running
@@ -100,11 +100,11 @@ func show_message(msg):
 	HUD.show_message(msg)
 
 func shoot():
-	.shoot()
+	super.shoot()
 	HUD.update_ammo(ammo, MAX_AMMO)
 
 func reload():
-	if .reload():
+	if super.reload():
 		HUD.reloading(true, RELOAD_TIME)
 		
 		return true
@@ -112,7 +112,7 @@ func reload():
 	return false
 
 func reload_immediate():
-	.reload_immediate()
+	super.reload_immediate()
 	
 	if HUD:
 		HUD.reloading(false, RELOAD_TIME)
@@ -122,7 +122,7 @@ func take_damage(force, amount, shooter = null):
 	if invulnerable:
 		amount = min(amount, 0)
 	
-	.take_damage(force, amount, shooter)
+	super.take_damage(force, amount, shooter)
 	HUD.update_armor(armor, MAX_ARMOR)
 
 func toggle_god_mode():

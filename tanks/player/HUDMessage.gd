@@ -1,6 +1,6 @@
 extends Label
 
-onready var origin = rect_global_position
+@onready var origin = global_position
 var speed
 
 var fading_out = false
@@ -12,7 +12,7 @@ func _ready():
 
 func show_message(msg, duration = 2.0):
 	text = msg
-	rect_global_position.y += OFFSET
+	global_position.y += OFFSET
 	
 	speed = 2 * OFFSET / duration
 	
@@ -21,12 +21,12 @@ func show_message(msg, duration = 2.0):
 	set_process(true)
 
 func show_critical(msg, duration = 2.0):
-	add_color_override("font_color", Color.red)
+	add_theme_color_override("font_color", Color.RED)
 	
 	show_message(msg, duration)
 
 func show_success(msg, duration = 2.0):
-	add_color_override("font_color", Color.green)
+	add_theme_color_override("font_color", Color.GREEN)
 	
 	show_message(msg, duration)
 
@@ -35,11 +35,11 @@ func done(__):
 
 
 func _process(delta):
-	rect_global_position.y -= delta * speed
+	global_position.y -= delta * speed
 	
 	if not fading_out:
-		if abs(origin.y - rect_global_position.y) >= OFFSET:
+		if abs(origin.y - global_position.y) >= OFFSET:
 			$Fader.play_backwards("Fade")
-			var __ = $Fader.connect("animation_finished", self, "done")
+			var __ = $Fader.connect("animation_finished", Callable(self, "done"))
 			
 			fading_out = true

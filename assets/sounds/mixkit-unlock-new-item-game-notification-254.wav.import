@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/mixkit-unlock-new-item-game-notification-254.wav-60ad3b732a2683b1908c4b787b1d73bb.sample"
+type="AudioStreamWAV"
+uid="uid://b2wh4fc3vq4d5"
+path="res://.godot/imported/mixkit-unlock-new-item-game-notification-254.wav-60ad3b732a2683b1908c4b787b1d73bb.sample"
 
 [deps]
 
 source_file="res://assets/sounds/mixkit-unlock-new-item-game-notification-254.wav"
-dest_files=[ "res://.import/mixkit-unlock-new-item-game-notification-254.wav-60ad3b732a2683b1908c4b787b1d73bb.sample" ]
+dest_files=["res://.godot/imported/mixkit-unlock-new-item-game-notification-254.wav-60ad3b732a2683b1908c4b787b1d73bb.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

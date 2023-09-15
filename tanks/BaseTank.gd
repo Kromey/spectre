@@ -1,30 +1,30 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var falling = 0.0
 const GRAVITY = 2
 
-export(int) var MAX_ARMOR = 1
-onready var armor = MAX_ARMOR
+@export var MAX_ARMOR: int = 1
+@onready var armor = MAX_ARMOR
 
 var velocity = Vector3.ZERO
-export(float) var MAX_SPEED = 10
-export(float) var ACCEL = 9 # Acceleration per second
+@export var MAX_SPEED: float = 10
+@export var ACCEL: float = 9 # Acceleration per second
 
 var angular_velocity = 0
-export(float) var TURN_RATE = PI / 2.0
-export(float) var TURN_ACCEL = 8
+@export var TURN_RATE: float = PI / 2.0
+@export var TURN_ACCEL: float = 8
 
-export(float) var MAX_AMMO = 3
-export(float) var FIRE_RATE = 1.5
-export(float) var RELOAD_TIME = 3
-export(float) var GUN_RANGE = 30
-export(float) var BULLET_SPEED = 0
-export(int) var GUN_DAMAGE = 1
+@export var MAX_AMMO: float = 3
+@export var FIRE_RATE: float = 1.5
+@export var RELOAD_TIME: float = 3
+@export var GUN_RANGE: float = 30
+@export var BULLET_SPEED: float = 0
+@export var GUN_DAMAGE: int = 1
 var ammo = 0
 var reloading = false
 
-export(float) var TRAUMA_DECAY = 0.8
-export(float) var max_offset = 0.3
+@export var TRAUMA_DECAY: float = 0.8
+@export var max_offset: float = 0.3
 
 var trauma = 0.0
 var trauma_power = 2
@@ -40,7 +40,7 @@ enum Direction {
 const Bullet = preload("res://tanks/Bullet.tscn")
 const BOOM = preload("res://tanks/BoomTheTank.tscn")
 
-onready var ShootSound = find_node("ShootAudio")
+@onready var ShootSound = find_child("ShootAudio")
 
 signal dead
 
@@ -52,9 +52,12 @@ func _ready():
 
 func _physics_process(delta):
 	velocity += Vector3.DOWN * GRAVITY * delta
-	velocity = move_and_slide(velocity, Vector3.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	move_and_slide()
+	velocity = velocity
 	
-	if translation.y < -5:
+	if position.y < -5:
 		take_damage(Vector3.DOWN, INF)
 	
 	if trauma:
@@ -63,7 +66,7 @@ func _physics_process(delta):
 
 func shake():
 	var amount = pow(trauma, trauma_power)
-	translation += global_transform.basis.x * max_offset * amount * rand_range(-1, 1)
+	position += global_transform.basis.x * max_offset * amount * randf_range(-1, 1)
 
 func drive(direction, delta):
 	if is_on_floor():
@@ -100,7 +103,7 @@ func shoot():
 		$FireRate.start(FIRE_RATE)
 		ammo -= 1
 		
-		var bullet = Bullet.instance()
+		var bullet = Bullet.instantiate()
 		bullet.BULLET_TIME = GUN_RANGE / BULLET_SPEED
 		bullet.BULLET_SPEED = BULLET_SPEED
 		bullet.BULLET_DAMAGE = GUN_DAMAGE
@@ -117,7 +120,7 @@ func shoot():
 func reload():
 	if !reloading:
 		reloading = true
-		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", self, "reload_immediate")
+		var _e = get_tree().create_timer(RELOAD_TIME).connect("timeout", Callable(self, "reload_immediate"))
 		
 		return true
 	
@@ -143,8 +146,8 @@ func repair_damage(amount):
 	take_damage(0, -amount)
 
 func die(killer = null):
-	var boom = BOOM.instance()
-	boom.translation = translation
+	var boom = BOOM.instantiate()
+	boom.position = position
 	get_parent().add_child(boom)
 	
 	emit_signal("dead", killer)

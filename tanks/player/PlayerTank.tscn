@@ -15,20 +15,20 @@ MAX_AMMO = 8.0
 FIRE_RATE = 0.5
 GUN_RANGE = 60.0
 
-[node name="Camera" type="Camera" parent="CSGCombiner/Body/Turret" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )
+[node name="Camera3D" type="Camera3D" parent="CSGCombiner3D/Body/Turret" index="1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0 )
 far = 210.0
 
-[node name="OmniLight" type="OmniLight" parent="CSGCombiner/Body/Turret/Camera" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012586, -0.103231 )
+[node name="OmniLight3D" type="OmniLight3D" parent="CSGCombiner3D/Body/Turret/Camera3D" index="0"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012586, -0.103231 )
 light_energy = 0.2
 light_indirect_energy = 0.0
 omni_range = 0.8
 omni_attenuation = 0.435275
 
-[node name="PlayerHUD" parent="CSGCombiner/Body/Turret/Camera" index="1" instance=ExtResource( 4 )]
+[node name="PlayerHUD" parent="CSGCombiner3D/Body/Turret/Camera3D" index="1" instance=ExtResource( 4 )]
 
-[node name="HeadlightR" parent="CSGCombiner/Body" index="1" instance=ExtResource( 2 )]
+[node name="HeadlightR" parent="CSGCombiner3D/Body" index="1" instance=ExtResource( 2 )]
 
-[node name="HeadlightL" parent="CSGCombiner/Body" index="2" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )
+[node name="HeadlightL" parent="CSGCombiner3D/Body" index="2" instance=ExtResource( 2 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.5 )

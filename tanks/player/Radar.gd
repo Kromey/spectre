@@ -31,7 +31,7 @@ func refresh():
 		$RadarIcons.remove_child(child)
 		child.queue_free()
 	
-	center = rect_size / 2.0
+	center = size / 2.0
 	
 	# NB: Order matters! First icons added will be underneath later icons
 	
@@ -54,8 +54,8 @@ func refresh():
 	# All good now, enable physics processing
 	set_physics_process(true)
 
-func add_icon(packed_icon: PackedScene, node: Spatial):
-	var icon = packed_icon.instance()
+func add_icon(packed_icon: PackedScene, node: Node3D):
+	var icon = packed_icon.instantiate()
 	icon.me = node
 	icon.center = center
 	$RadarIcons.add_child(icon)

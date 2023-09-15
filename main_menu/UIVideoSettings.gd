@@ -5,7 +5,7 @@ signal cancel_button_pressed
 
 var _settings := {resolution = Vector2(1920, 1080), fullscreen = false, vsync = false}
 
-func init(settings: Dictionary):
+func init(settings: VideoSettings):
 	# Get our current settings from the OS
 	_settings.resolution = settings.resolution
 	_settings.fullscreen = settings.fullscreen

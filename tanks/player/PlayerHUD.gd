@@ -1,16 +1,16 @@
 extends Control
 
-onready var Armor = find_node("Armor")
-onready var Ammo = find_node("Ammo")
-onready var Score = find_node("Score")
-onready var Bonus = find_node("Bonus")
-onready var Kills = find_node("Kills")
-onready var Level = find_node("Level")
+@onready var Armor = find_child("Armor")
+@onready var Ammo = find_child("Ammo")
+@onready var Score = find_child("Score")
+@onready var Bonus = find_child("Bonus")
+@onready var Kills = find_child("Kills")
+@onready var Level = find_child("Level")
 
 const MESSAGE = preload("res://tanks/player/HUDMessage.tscn")
 
 var last_armor = 0
-onready var damage_anim_duration = $DamageAnimation.get_animation("Damage").length * 5
+@onready var damage_anim_duration = $DamageAnimation.get_animation("Damage").length * 5
 
 enum {
 	MSG_NORMAL,
@@ -92,7 +92,7 @@ func update_bonus(bonus):
 	Bonus.get_node("Value").text = str(bonus)
 
 func show_message(msg, level = MSG_NORMAL):
-	var m = MESSAGE.instance()
+	var m = MESSAGE.instantiate()
 	add_child(m)
 	
 	match level:

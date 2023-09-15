@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var velocity = Vector3.ZERO
 var gravity = Vector3.DOWN * 8
@@ -21,12 +21,12 @@ func _physics_process(delta):
 		if collision.collider.has_method("take_damage") or (bounces > 3 and global_transform.origin.y < 0.11):
 			$Disappear.play("Shrink")
 			velocity = Vector3.ZERO
-			$CollisionShape.disabled = true
+			$CollisionShape3D.disabled = true
 			
-			var boom = BOOM.instance()
+			var boom = BOOM.instantiate()
 			get_parent().add_child(boom)
 			boom.global_transform.origin = global_transform.origin
 			boom.global_transform.origin.y = 0
 			
-			yield($Disappear, "animation_finished")
+			await $Disappear.animation_finished
 			queue_free()

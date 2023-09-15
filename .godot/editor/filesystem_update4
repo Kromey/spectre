@@ -1,0 +1,6 @@
+res://default_env.tres
+res://MainMenu.tscn
+res://main_menu/VideoSettings.gd
+res://main_menu/Credits.gd
+res://MainMenu.gd
+res://main_menu/UIVideoSettings.gd

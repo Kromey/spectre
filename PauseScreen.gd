@@ -1,7 +1,7 @@
 extends Node
 
-onready var video_settings = VideoSettings.new()
-onready var video_settings_ui = $UIVideoSettings
+@onready var video_settings = VideoSettings.new()
+@onready var video_settings_ui = $UIVideoSettings
 
 func _ready():
 	video_settings_ui.visible = false
@@ -21,13 +21,13 @@ func _input(event):
 
 func toggle_video_settings_panel(state: bool):
 	if !video_settings_ui:
-		yield(self, "ready")
+		await self.ready
 	
 	video_settings_ui.visible = state
 
 func update_settings(settings: Dictionary) -> void:
 	if !video_settings:
-		yield(self, "ready")
+		await self.ready
 	
 	video_settings.from_dict(settings)
 	video_settings.save()

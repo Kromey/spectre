@@ -1,30 +1,30 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="FontFile" id=1]
 [ext_resource path="res://main_menu/UIResolutionSelector.gd" type="Script" id=2]
 
 [node name="UIResolutionSelector" type="HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="."]
-margin_top = 3.0
-margin_right = 250.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_top = 3.0
+offset_right = 250.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 250, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Resolution"
 
 [node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 254.0
-margin_right = 514.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 260, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = 254.0
+offset_right = 514.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 260, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "1920x1080"
 items = [ "1920x1080", null, false, 0, null, "1280x720", null, false, 1, null, "1024x576", null, false, 2, null ]
 selected = 0

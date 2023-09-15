@@ -10,10 +10,10 @@ var collected := 0
 
 func _ready():
 	for __ in FLAG_COUNT:
-		var flag = FLAG.instance()
+		var flag = FLAG.instantiate()
 		add_child(flag)
 		flag.hide()
-		var _e = flag.connect("body_entered", self, "_on_flag_pickup", [flag])
+		var _e = flag.connect("body_entered", Callable(self, "_on_flag_pickup").bind(flag))
 		pool.append(flag)
 	
 	rng = RandomNumberGenerator.new()
@@ -30,17 +30,17 @@ func spawn_flags(min_dist = 50, from = Vector3.ZERO):
 	for flag in pool:
 		var x = from.x
 		var z = from.z
-		flag.translation = Vector3(x, 0, z)
+		flag.position = Vector3(x, 0, z)
 		
-		while flag.translation.distance_squared_to(from) < dist_sq:
+		while flag.position.distance_squared_to(from) < dist_sq:
 			x = rng.randf_range(-90, 90)
 			z = rng.randf_range(-90, 90)
-			flag.translation = Vector3(x, 0, z)
+			flag.position = Vector3(x, 0, z)
 		
 		flag.show()
 		flag.add_to_group("goals")
 
-func _on_flag_pickup(_body, flag: Spatial):
+func _on_flag_pickup(_body, flag: Node3D):
 	if !flag.is_visible_in_tree():
 		return
 	

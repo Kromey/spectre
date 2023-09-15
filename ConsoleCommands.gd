@@ -57,18 +57,18 @@ func help():
 	var cmds = commands.keys()
 	cmds.sort()
 	
-	return PoolStringArray(cmds).join(", ")
+	return ", ".join(PackedStringArray(cmds))
 
 func aliases():
 	var a = command_aliases.keys()
 	a.sort()
 	
-	var cmds = PoolStringArray()
+	var cmds = PackedStringArray()
 	for alias in a:
 		if not alias in hidden_aliases:
 			cmds.append("%s: %s" % [alias, command_aliases[alias]])
 	
-	return cmds.join(", ")
+	return ", ".join(cmds)
 
 func echo(input: String):
 	return str(input)
@@ -84,29 +84,29 @@ func level_up():
 	return "Leveled up!"
 
 func walls_down():
-	get_tree().current_scene.find_node("WallController").descend()
+	get_tree().current_scene.find_child("WallController").descend()
 	
 	return "Walls lowering"
 
 func walls_up():
-	get_tree().current_scene.find_node("WallController").rise()
+	get_tree().current_scene.find_child("WallController").rise()
 	
 	return "Walls rising"
 
 func new_walls():
-	get_tree().current_scene.find_node("WallController").rebuild_walls()
+	get_tree().current_scene.find_child("WallController").rebuild_walls()
 	
 	return "Rebuilding level's walls"
 
 func spawn_observer(num: int):
 	for __ in num:
-		get_tree().current_scene.find_node("ObserverController").spawn_observer()
+		get_tree().current_scene.find_child("ObserverController").spawn_observer()
 	
 	return str(num, " Observers warping in!")
 
 func evacuate_observer(num: int):
 	for __ in num:
-		get_tree().current_scene.find_node("ObserverController").remove_observer()
+		get_tree().current_scene.find_child("ObserverController").remove_observer()
 	
 	return str(num, " Observers warping away!")
 

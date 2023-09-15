@@ -1,19 +1,19 @@
-extends Sprite
+extends Sprite2D
 
-var me: Spatial
+var me: Node3D
 var center := Vector2.ZERO
 var clamp_to := 72.0
 var point_radius := 105.0
-export(bool) var rotate := false
-export(int, "hide", "shrink", "point") var clamp_behavior = CLAMP_HIDE
+@export var rotate: bool := false
+@export var clamp_behavior = CLAMP_HIDE # (int, "hide", "shrink", "point")
 
 const CLAMP_HIDE = 0
 const CLAMP_SHRINK = 1
 const CLAMP_POINT = 2
 
-onready var unscaled = scale
+@onready var unscaled = scale
 
-func update_pos(xform: Transform, zoom := 1.0):
+func update_pos(xform: Transform3D, zoom := 1.0):
 	if !is_instance_valid(me):
 		queue_free()
 		return
@@ -21,7 +21,7 @@ func update_pos(xform: Transform, zoom := 1.0):
 		hide()
 		return
 	
-	var my_pos = to_vec2(xform.xform_inv(me.global_transform.origin)) * zoom
+	var my_pos = to_vec2((me.global_transform.origin) * xform) * zoom
 	
 	match clamp_behavior:
 		CLAMP_HIDE:
@@ -33,7 +33,7 @@ func update_pos(xform: Transform, zoom := 1.0):
 		
 		CLAMP_SHRINK:
 			if my_pos.length() > clamp_to:
-				my_pos = my_pos.clamped(clamp_to)
+				my_pos = my_pos.limit_length(clamp_to)
 				self_modulate = Color(1, 1, 1, 0.5)
 				scale = unscaled * 0.5
 			else:

@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 #const PillBomb = preload("res://PillBomb.tscn")
 const PlayerTank = preload("res://tanks/player/PlayerTank.tscn")
@@ -8,8 +8,8 @@ const Turret = preload("res://tanks/Turret.tscn")
 const MissileTurret = preload("res://tanks/MissileTurret.tscn")
 
 var player
-onready var PauseScreen = load("res://PauseScreen.tscn").instance()
-onready var GameOverScreen = load("res://GameOverScreen.tscn").instance()
+@onready var PauseScreen = load("res://PauseScreen.tscn").instantiate()
+@onready var GameOverScreen = load("res://GameOverScreen.tscn").instantiate()
 
 func _input(event):
 	match Game.current_state:
@@ -20,10 +20,10 @@ func _input(event):
 				Game.current_state = Game.State.Paused
 
 func _ready():
-	player = PlayerTank.instance()
+	player = PlayerTank.instantiate()
 	player.translate(Vector3.UP * 0.1)
 	add_child(player)
-	var _e = player.connect("dead", self, "player_death")
+	var _e = player.connect("dead", Callable(self, "player_death"))
 	call_deferred("first_shot")
 	player.lock_player_controls(2)
 	
@@ -51,20 +51,20 @@ func start():
 
 		for _t in tanks_by_level(3, 5):
 			tanks -= 1
-			spawn_tank(AdvancedTank, flag.translation, 3.0, 5.0)
+			spawn_tank(AdvancedTank, flag.position, 3.0, 5.0)
 		for _t in tanks_by_level(5, 4):
 			tanks -= 1
-			spawn_tank(Turret, flag.translation, 0.5, 1.5)
+			spawn_tank(Turret, flag.position, 0.5, 1.5)
 		for _t in tanks_by_level(7, 3):
 			tanks -= 1
-			spawn_tank(MissileTurret, flag.translation, 1.5, 3.5)
+			spawn_tank(MissileTurret, flag.position, 1.5, 3.5)
 
 		if tanks > 0:
 			for _t in tanks:
-				spawn_tank(AITank, flag.translation, 0.5, 4.5)
+				spawn_tank(AITank, flag.position, 0.5, 4.5)
 	
 	for _i in 3 + tanks_by_level(0, 2) * 3:
-		spawn_tank(AITank, player.translation, 50, 95)
+		spawn_tank(AITank, player.position, 50, 95)
 
 func tanks_by_level(first_at, more_every = 0):
 	var tanks = 0
@@ -86,11 +86,11 @@ func spawn_tank(scene, around, min_dist, max_dist):
 	local_pos.x = clamp(local_pos.x, -95, 95)
 	local_pos.z = clamp(local_pos.z, -95, 95)
 	
-	var tank = scene.instance()
+	var tank = scene.instantiate()
 	tank.translate(around + local_pos + Vector3.UP * 0.1)
 	tank.add_to_group("enemies")
 	add_child(tank)
-	var _e = tank.connect("dead", self, "tank_death")
+	var _e = tank.connect("dead", Callable(self, "tank_death"))
 
 # Pretty hacky, but calling this at game start ensures all our materials get
 # compiled and eliminates "first-shot lag"
@@ -104,7 +104,7 @@ func first_shot():
 func player_death(_killer):
 	print("Player died!")
 	Game.current_state = Game.State.GameOver
-	yield(get_tree().create_timer(1.5), "timeout")
+	await get_tree().create_timer(1.5).timeout
 	
 	add_child(GameOverScreen)
 

@@ -9,5 +9,5 @@ script = ExtResource( 2 )
 MAX_SPEED = 5.0
 ACCEL = 3.0
 
-[node name="CSGCombiner" parent="." index="1"]
+[node name="CSGCombiner3D" parent="." index="1"]
 material_override = ExtResource( 3 )

@@ -1,4 +1,4 @@
-extends Position3D
+extends Marker3D
 
 var Missile = preload("res://tanks/Missile.tscn")
 
@@ -7,6 +7,6 @@ func fire_missile():
 	
 	if tanks.size() > 0:
 		var target = tanks[0]
-		var missile = Missile.instance()
-		missile.start(global_transform, target)
+		var missile = Missile.instantiate()
+		missile.start(Callable(global_transform, target))
 		add_child(missile)

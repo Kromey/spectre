@@ -8,7 +8,7 @@ var level_bonus = 0
 
 var level = 1
 
-onready var bonus_timer = Timer.new()
+@onready var bonus_timer = Timer.new()
 
 enum State {
 	Waiting,
@@ -19,7 +19,7 @@ enum State {
 	Paused,
 	GameOver,
 }
-var current_state = State.Waiting setget set_state
+var current_state = State.Waiting: set = set_state
 
 var world
 
@@ -29,10 +29,10 @@ func set_state(new_state):
 	match current_state:
 		State.MainMenu:
 			if get_tree().get_current_scene().get_name() != "MainMenu":
-				var __ = get_tree().change_scene("MainMenu.tscn")
+				var __ = get_tree().change_scene_to_file("MainMenu.tscn")
 		State.LoadingGame:
 			if get_tree().get_current_scene().get_name() != "Main":
-				var __ = get_tree().change_scene("Main.tscn")
+				var __ = get_tree().change_scene_to_file("Main.tscn")
 		State.LoadingLevel:
 			world.start()
 			reset_stats()
@@ -45,7 +45,7 @@ func _ready():
 	bonus_timer.one_shot = false
 	bonus_timer.wait_time = 0.25
 	add_child(bonus_timer)
-	var __ = bonus_timer.connect("timeout", self, "decrement_bonus")
+	var __ = bonus_timer.connect("timeout", Callable(self, "decrement_bonus"))
 
 func reset_stats():
 	set_score(0)

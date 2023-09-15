@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://grid.shader" type="Shader" id=1]
+[ext_resource path="res://grid.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenery/ObservationTower.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/mixkit-critical-alarm-1004.wav" type="AudioStream" id=3]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 14, 9.75, 7.5 )
+[sub_resource type="BoxShape3D" id=1]
+size = Vector3( 14, 9.75, 7.5 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
@@ -15,157 +15,157 @@ shader_param/LINE_COLOR = Color( 0.952941, 0.0392157, 0.0392157, 1 )
 shader_param/COLUMN_COUNT = 20.0
 shader_param/ROW_COUNT = 20.0
 
-[node name="ObservationTower" type="StaticBody"]
+[node name="ObservationTower" type="StaticBody3D"]
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0 )
 shape = SubResource( 1 )
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource( 2 )
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 width = 28.0
 height = 4.0
 depth = 15.0
 
-[node name="Left" type="CSGSphere" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0 )
+[node name="Left" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0 )
 radius = 8.0
 radial_segments = 32
 rings = 16
 
-[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Left"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D/Left"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
 radial_segments = 8
 rings = 4
 
-[node name="Right" type="CSGSphere" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0 )
+[node name="Right" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0 )
 radius = 8.0
 radial_segments = 32
 rings = 16
 
-[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Right"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D/Right"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
 radial_segments = 8
 rings = 4
 
-[node name="Middle" type="CSGSphere" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+[node name="Middle" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 radius = 8.0
 radial_segments = 32
 rings = 16
 
-[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox/Middle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D/Middle"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0 )
 radial_segments = 8
 rings = 4
 
-[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 15, 0 )
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 15, 0 )
 visible = false
 radius = 3.0
 radial_segments = 16
 rings = 10
 
-[node name="CSGTorus" type="CSGTorus" parent="CSGCombiner/CSGBox/CSGSphere"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D/CSGBox3D/CSGSphere3D"]
 outer_radius = 4.0
 sides = 16
 ring_sides = 16
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D/CSGSphere3D/CSGTorus3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
 width = 3.0
 height = 1.0
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus/CSGBox"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D/CSGSphere3D/CSGTorus3D/CSGBox3D"]
 operation = 2
 height = 0.5
 
-[node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox/CSGSphere/CSGTorus"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+[node name="CSGBox2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D/CSGSphere3D/CSGTorus3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
 operation = 2
 height = 0.5
 
-[node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6, -7.5 )
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder2" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 6, -7.5 )
+[node name="CSGCylinder2" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder3" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6, 6, -7.5 )
+[node name="CSGCylinder3" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder4" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3, 6, -7.5 )
+[node name="CSGCylinder4" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder5" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6, 6, -7.5 )
+[node name="CSGCylinder5" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder6" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.5, 6, -7.5 )
+[node name="CSGCylinder6" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder7" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4.5, 6, -7.5 )
+[node name="CSGCylinder7" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder8" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.5, 6, -7.5 )
+[node name="CSGCylinder8" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="CSGCylinder9" type="CSGCylinder" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.5, 6, -7.5 )
+[node name="CSGCylinder9" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.5, 6, -7.5 )
 operation = 2
 radius = 0.1
 
-[node name="MissileSilo1" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -7.5 )
+[node name="MissileSilo1" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -7.5 )
 
-[node name="MissileSilo2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, -7.5 )
+[node name="MissileSilo2" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, -7.5 )
 
-[node name="MissileSilo3" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -7.5 )
+[node name="MissileSilo3" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -7.5 )
 
-[node name="MissileSilo4" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, -7.5 )
+[node name="MissileSilo4" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, -7.5 )
 
-[node name="MissileSilo5" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -7.5 )
+[node name="MissileSilo5" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -7.5 )
 
-[node name="MissileSilo6" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, -7.5 )
+[node name="MissileSilo6" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, -7.5 )
 
-[node name="MissileSilo7" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -7.5 )
+[node name="MissileSilo7" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -7.5 )
 
-[node name="MissileSilo8" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, -7.5 )
+[node name="MissileSilo8" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, -7.5 )
 
-[node name="MissileSilo9" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -7.5 )
+[node name="MissileSilo9" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -7.5 )
 
 [node name="FacilityAlarm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -4.0
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84837, 20.2461, -15.7184 )
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84837, 20.2461, -15.7184 )
 editor_only = true
 omni_range = 50.0

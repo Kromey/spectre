@@ -1,18 +1,18 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PauseScreen.gd" type="Script" id=1]
-[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="FontFile" id=2]
 [ext_resource path="res://main_menu/UIVideoSettings.tscn" type="PackedScene" id=3]
 
 [sub_resource type="InputEventAction" id=2]
 action = "ui_accept"
 pressed = true
 
-[sub_resource type="ShortCut" id=3]
+[sub_resource type="Shortcut" id=3]
 shortcut = SubResource( 2 )
 
 [node name="PauseScreen" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 layer = 5
 script = ExtResource( 1 )
 
@@ -29,30 +29,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -152.5
-margin_top = -152.0
-margin_right = 152.5
-margin_bottom = 152.0
-custom_constants/separation = 15
+offset_left = -152.5
+offset_top = -152.0
+offset_right = 152.5
+offset_bottom = 152.0
+theme_override_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 305.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.0627451, 0.913725, 0.0745098, 1 )
+offset_right = 305.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0.0627451, 0.913725, 0.0745098, 1 )
 text = "Game Paused"
 align = 1
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
-margin_top = 59.0
-margin_right = 305.0
-margin_bottom = 109.0
-hint_tooltip = "Start a new game [Enter]"
+offset_top = 59.0
+offset_right = 305.0
+offset_bottom = 109.0
+tooltip_text = "Start a new game [Enter]"
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
 text = "Resume"
@@ -61,12 +61,12 @@ __meta__ = {
 }
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
-margin_top = 124.0
-margin_right = 305.0
-margin_bottom = 174.0
-hint_tooltip = "Start a new game [Enter]"
+offset_top = 124.0
+offset_right = 305.0
+offset_bottom = 174.0
+tooltip_text = "Start a new game [Enter]"
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
 text = "Settings"
@@ -75,12 +75,12 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
-margin_top = 189.0
-margin_right = 305.0
-margin_bottom = 239.0
-hint_tooltip = "Start a new game [Enter]"
+offset_top = 189.0
+offset_right = 305.0
+offset_bottom = 239.0
+tooltip_text = "Start a new game [Enter]"
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
 text = "Quit to Menu"
@@ -89,12 +89,12 @@ __meta__ = {
 }
 
 [node name="QuitProgram" type="Button" parent="VBoxContainer"]
-margin_top = 254.0
-margin_right = 305.0
-margin_bottom = 304.0
-hint_tooltip = "Start a new game [Enter]"
+offset_top = 254.0
+offset_right = 305.0
+offset_bottom = 304.0
+tooltip_text = "Start a new game [Enter]"
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
@@ -109,10 +109,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -258.5
-margin_top = -189.0
-margin_right = 258.5
-margin_bottom = 189.0
+offset_left = -258.5
+offset_top = -189.0
+offset_right = 258.5
+offset_bottom = 189.0
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]

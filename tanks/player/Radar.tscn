@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/sprites/simpleSpace_vector.svg" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/simpleSpace_vector.svg" type="Texture2D" id=1]
 [ext_resource path="res://tanks/player/Radar.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/rollingBall_vector.svg" type="Texture" id=3]
-[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/sprites/rollingBall_vector.svg" type="Texture2D" id=3]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="FontFile" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -19,18 +19,18 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -240.0
-margin_top = -240.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+offset_left = -240.0
+offset_top = -240.0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_bottom = 5
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player" type="Sprite" parent="."]
+[node name="Player" type="Sprite2D" parent="."]
 modulate = Color( 0.0156863, 0.682353, 0.0745098, 1 )
 position = Vector2( 120, 120 )
 scale = Vector2( 0.5, 0.5 )
@@ -39,10 +39,10 @@ texture = SubResource( 1 )
 [node name="RadarIcons" type="Node2D" parent="."]
 
 [node name="Background" type="TextureRect" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 235.0
-margin_bottom = 235.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 235.0
+offset_bottom = 235.0
 texture = SubResource( 2 )
 expand = true
 stretch_mode = 5
@@ -58,9 +58,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -230.0
-margin_top = -44.0
-custom_fonts/font = ExtResource( 4 )
+offset_left = -230.0
+offset_top = -44.0
+theme_override_fonts/font = ExtResource( 4 )
 text = "x12"
 align = 2
 __meta__ = {

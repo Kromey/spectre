@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var warp_dist := 250.0
 var warp_accel := 25.0
@@ -14,10 +14,10 @@ var destination := Vector3.ZERO
 var altitude := 5.0
 var target = null
 
-var current_state setget set_state
+var current_state : set = set_state
 
 const BOMB = preload("res://scenery/MineBomb.tscn")
-onready var bomb_from = $BombPos
+@onready var bomb_from = $BombPos
 
 enum State {
 	Idle,
@@ -33,17 +33,17 @@ func _ready():
 
 func start():
 	# Where in the infinite void do we start from?
-	var angle = rand_range(0, 2 * PI)
+	var angle = randf_range(0, 2 * PI)
 	var start = Vector3.FORWARD.rotated(Vector3.UP, angle) * warp_dist
 	# Set our altitude
 	start += Vector3.UP * altitude
 	
 	# Set our spawn location
-	translation = start
+	position = start
 	look_at(Vector3.UP * altitude, Vector3.UP)
 	
 	# How far from the center of the map we arrive at
-	var arrival_dist = rand_range(25, 75)
+	var arrival_dist = randf_range(25, 75)
 	
 	# Calculate initial speed so that we decelerate by the time we reach our arrival_dist
 	var ispeed = sqrt(pow(observation_speed, 2) + 2 * warp_accel * (warp_dist - arrival_dist))
@@ -121,11 +121,11 @@ func set_state(state):
 	current_state = state
 
 func drop_da_bomb():
-	var bomb = BOMB.instance()
+	var bomb = BOMB.instantiate()
 	bomb.global_transform = bomb_from.global_transform
-	bomb.rotate_x(rand_range(0, 2 * PI))
-	bomb.rotate_y(rand_range(0, 2 * PI))
-	bomb.rotate_z(rand_range(0, 2 * PI))
+	bomb.rotate_x(randf_range(0, 2 * PI))
+	bomb.rotate_y(randf_range(0, 2 * PI))
+	bomb.rotate_z(randf_range(0, 2 * PI))
 	
 	bomb.velocity = velocity
 	
@@ -149,8 +149,8 @@ func new_destination():
 #			flags.shuffle()
 #			target = flags[0]
 		
-		var angle = rand_range(0, 2 * PI)
-		var dist = rand_range(0, 25)
+		var angle = randf_range(0, 2 * PI)
+		var dist = randf_range(0, 25)
 		
 		destination = target.global_transform.origin + Vector3.FORWARD.rotated(Vector3.UP, angle) * dist
 		destination.y = altitude

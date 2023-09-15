@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://tanks/player/PlayerHUDFont.tres" type="FontFile" id=1]
 [ext_resource path="res://tanks/player/PlayerHUD.gd" type="Script" id=2]
 [ext_resource path="res://tanks/player/Radar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/crosshair102.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/crosshair102.png" type="Texture2D" id=4]
 [ext_resource path="res://assets/sounds/mixkit-industry-alarm-tone-2979.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/ui/bar_bg.png" type="Texture" id=6]
-[ext_resource path="res://assets/ui/bar_fill.png" type="Texture" id=7]
-[ext_resource path="res://assets/ui/bar_frame.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/bar_bg.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/ui/bar_fill.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/ui/bar_frame.png" type="Texture2D" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Reloading"
@@ -20,8 +20,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.5 ) ]
 }
@@ -37,8 +37,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
@@ -53,43 +53,43 @@ __meta__ = {
 
 [node name="Top" type="MarginContainer" parent="."]
 anchor_right = 1.0
-margin_bottom = 40.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+offset_bottom = 40.0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GUI" type="HSplitContainer" parent="Top"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1260.0
-margin_bottom = 160.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1260.0
+offset_bottom = 160.0
 
 [node name="GUILeft" type="VBoxContainer" parent="Top/GUI"]
-margin_right = 1240.0
-margin_bottom = 140.0
+offset_right = 1240.0
+offset_bottom = 140.0
 size_flags_horizontal = 3
 
 [node name="Armor" type="HSplitContainer" parent="Top/GUI/GUILeft"]
-margin_right = 1240.0
-margin_bottom = 44.0
+offset_right = 1240.0
+offset_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Armor"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Armor:"
 
-[node name="Bar" type="TextureProgress" parent="Top/GUI/GUILeft/Armor"]
-margin_left = 142.0
-margin_top = 2.0
-margin_right = 390.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 248, 0 )
+[node name="Bar" type="TextureProgressBar" parent="Top/GUI/GUILeft/Armor"]
+offset_left = 142.0
+offset_top = 2.0
+offset_right = 390.0
+offset_bottom = 42.0
+custom_minimum_size = Vector2( 248, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
 step = 0.05
@@ -100,28 +100,28 @@ texture_progress = ExtResource( 7 )
 tint_progress = Color( 0.0980392, 0.603922, 0.0392157, 1 )
 
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Armor"]
-margin_left = 395.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 395.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
 
 [node name="Ammo" type="HSplitContainer" parent="Top/GUI/GUILeft"]
-margin_top = 48.0
-margin_right = 1240.0
-margin_bottom = 92.0
+offset_top = 48.0
+offset_right = 1240.0
+offset_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Ammo"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Ammo:"
 
-[node name="Bar" type="TextureProgress" parent="Top/GUI/GUILeft/Ammo"]
-margin_left = 142.0
-margin_top = 2.0
-margin_right = 390.0
-margin_bottom = 42.0
+[node name="Bar" type="TextureProgressBar" parent="Top/GUI/GUILeft/Ammo"]
+offset_left = 142.0
+offset_top = 2.0
+offset_right = 390.0
+offset_bottom = 42.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 step = 0.05
@@ -132,92 +132,92 @@ texture_progress = ExtResource( 7 )
 tint_progress = Color( 0.65098, 0.556863, 0.0470588, 1 )
 
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Ammo"]
-margin_left = 395.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 395.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
 
 [node name="Kills" type="HSplitContainer" parent="Top/GUI/GUILeft"]
-margin_top = 96.0
-margin_right = 1240.0
-margin_bottom = 140.0
+offset_top = 96.0
+offset_right = 1240.0
+offset_bottom = 140.0
 
 [node name="Label" type="Label" parent="Top/GUI/GUILeft/Kills"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Kills:"
 
 [node name="Value" type="Label" parent="Top/GUI/GUILeft/Kills"]
-margin_left = 142.0
-margin_right = 1240.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 142.0
+offset_right = 1240.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Top/GUI"]
 layer = 6
 
 [node name="GUIRight" type="VBoxContainer" parent="Top/GUI/CanvasLayer"]
-margin_left = 1014.0
-margin_top = 20.0
-margin_right = 1260.0
-margin_bottom = 160.0
+offset_left = 1014.0
+offset_top = 20.0
+offset_right = 1260.0
+offset_bottom = 160.0
 
 [node name="Level" type="HSplitContainer" parent="Top/GUI/CanvasLayer/GUIRight"]
-margin_right = 246.0
-margin_bottom = 44.0
+offset_right = 246.0
+offset_bottom = 44.0
 
 [node name="Label" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Level"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Level:"
 
 [node name="Value" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Level"]
-margin_left = 142.0
-margin_right = 246.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 142.0
+offset_right = 246.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource( 1 )
 
 [node name="Score" type="HSplitContainer" parent="Top/GUI/CanvasLayer/GUIRight"]
-margin_top = 48.0
-margin_right = 246.0
-margin_bottom = 92.0
+offset_top = 48.0
+offset_right = 246.0
+offset_bottom = 92.0
 
 [node name="Label" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Score"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Score:"
 
 [node name="Value" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Score"]
-margin_left = 142.0
-margin_right = 246.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 142.0
+offset_right = 246.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource( 1 )
 
 [node name="Bonus" type="HSplitContainer" parent="Top/GUI/CanvasLayer/GUIRight"]
-margin_top = 96.0
-margin_right = 246.0
-margin_bottom = 140.0
+offset_top = 96.0
+offset_right = 246.0
+offset_bottom = 140.0
 
 [node name="Label" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Bonus"]
-margin_right = 130.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 130, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 130.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 130, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Bonus:"
 
 [node name="Value" type="Label" parent="Top/GUI/CanvasLayer/GUIRight/Bonus"]
-margin_left = 142.0
-margin_right = 246.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 104, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = 142.0
+offset_right = 246.0
+offset_bottom = 44.0
+custom_minimum_size = Vector2( 104, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 
 [node name="Radar" parent="." instance=ExtResource( 3 )]
 
@@ -226,18 +226,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Crosshair"]
 modulate = Color( 0.156863, 0.694118, 0.0431373, 0.392157 )
-margin_right = 64.0
-margin_bottom = 64.0
+offset_right = 64.0
+offset_bottom = 64.0
 texture = ExtResource( 4 )
 expand = true
 

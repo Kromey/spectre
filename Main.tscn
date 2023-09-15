@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://grid.shader" type="Shader" id=1]
+[ext_resource path="res://grid.gdshader" type="Shader" id=1]
 [ext_resource path="res://WallController.gd" type="Script" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/mixkit-sci-fi-positive-notification-266.ogg" type="AudioStream" id=4]
@@ -14,8 +14,8 @@
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 1.0
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 100, 0, 100 )
+[sub_resource type="BoxShape3D" id=2]
+size = Vector3( 100, 0, 100 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
@@ -25,14 +25,14 @@ shader_param/LINE_COLOR = Color( 0.0588235, 0.470588, 0.0941176, 1 )
 shader_param/COLUMN_COUNT = 100.0
 shader_param/ROW_COUNT = 100.0
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="BoxMesh" id=4]
 material = SubResource( 3 )
 size = Vector3( 200, 0, 200 )
 
-[node name="Main" type="Spatial"]
+[node name="Main" type="Node3D"]
 script = ExtResource( 3 )
 
-[node name="WallController" type="Spatial" parent="."]
+[node name="WallController" type="Node3D" parent="."]
 script = ExtResource( 2 )
 
 [node name="FlagController" type="Node" parent="."]
@@ -61,27 +61,27 @@ script = ExtResource( 10 )
 [node name="SpawnCheckTimer" type="Timer" parent="ObserverController"]
 autostart = true
 
-[node name="Floor" type="StaticBody" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
 physics_material_override = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="OverheadLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
+[node name="OverheadLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0 )
 visible = false
 shadow_enabled = true
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 5, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 5, 0 )
 light_energy = 0.5
 
-[node name="DirectionalLight2" type="DirectionalLight" parent="."]
-transform = Transform( -0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 5, 0 )
+[node name="DirectionalLight2" type="DirectionalLight3D" parent="."]
+transform = Transform3D( -0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 5, 0 )
 light_energy = 0.5
 
 [connection signal="timeout" from="ObserverController/SpawnCheckTimer" to="ObserverController" method="check_spawn"]

@@ -1,12 +1,12 @@
 extends "res://tanks/BaseTank.gd"
 
-export(float) var MAX_ENGAGE_DISTANCE = 30
-export(float) var MAX_CHASE_DISTANCE = 80
+@export var MAX_ENGAGE_DISTANCE: float = 30
+@export var MAX_CHASE_DISTANCE: float = 80
 
 var current_target
 
 var navigation
-export(int) var navigation_lookahead = 3
+@export var navigation_lookahead: int = 3
 
 func _ready():
 	navigation = TankNavigation.new(self, navigation_lookahead)
@@ -22,7 +22,7 @@ func _physics_process(delta):
 func select_target(target):
 	var dist = INF
 	for ptarget in get_tree().get_nodes_in_group("player"):
-		var target_dist = translation.distance_to(ptarget.translation)
+		var target_dist = position.distance_to(ptarget.position)
 		if target_dist <= MAX_ENGAGE_DISTANCE and target_dist < dist:
 			target = ptarget
 			dist = target_dist
@@ -33,7 +33,7 @@ func select_target(target):
 		return set_patrol_target()
 
 func set_patrol_target():
-	var target = Position3D.new()
+	var target = Marker3D.new()
 	target.add_to_group("waypoints")
 	
 	var rng = RandomNumberGenerator.new()
@@ -41,16 +41,16 @@ func set_patrol_target():
 	
 	var target_pos = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2 * PI))
 	target_pos *= rng.randf_range(3, 8)
-	target.translate(translation + target_pos)
-	target.translation.y = 0.1
+	target.translate(position + target_pos)
+	target.position.y = 0.1
 	
-	if abs(target.translation.x) > 95 or abs(target.translation.z) > 95:
+	if abs(target.position.x) > 95 or abs(target.position.z) > 95:
 		# Didn't get a valid target, we'll just try again next frame
 		return null
 	else:
 		get_tree().root.add_child(target)
 		# Ensure we clean up our waypoints even if we get stuck/abandon them
-		var _e = get_tree().create_timer(30).connect("timeout", target, "queue_free")
+		var _e = get_tree().create_timer(30).connect("timeout", Callable(target, "queue_free"))
 		
 		return target
 
@@ -58,7 +58,7 @@ func engage_target(target, delta, attack = true):
 	if !is_instance_valid(target):
 		return false
 	
-	var dist = translation.distance_to(target.translation)
+	var dist = position.distance_to(target.position)
 	if dist > MAX_CHASE_DISTANCE:
 		return false
 	elif dist < 1.5 and target.is_in_group("waypoints"):

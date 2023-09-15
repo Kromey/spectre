@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
 const Missile = preload("res://tanks/Missile.tscn")
-onready var Silos = [
+@onready var Silos = [
 	$MissileSilo5,
 	$MissileSilo4,
 	$MissileSilo6,
@@ -21,10 +21,10 @@ func take_damage(_force, _amount, shooter = null):
 			$FacilityAlarm.play()
 		
 		for silo in Silos:
-			yield(get_tree().create_timer(0.2), "timeout")
+			await get_tree().create_timer(0.2).timeout
 			
-			var missile = Missile.instance()
+			var missile = Missile.instantiate()
 			missile.steer_force = 4
 			add_child(missile)
-			missile.start(silo.global_transform, shooter, self)
+			missile.start(Callable(silo.global_transform, shooter).bind(self))
 			

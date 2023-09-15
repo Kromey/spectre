@@ -4,7 +4,7 @@ extends Control
 signal resolution_changed(new_resolution)
 
 # We store a reference to the OptionButton to get the selected option later
-onready var option_button: OptionButton = $OptionButton
+@onready var option_button: OptionButton = $OptionButton
 
 func set_selected_resolution(resolution: Vector2) -> void:
 	var resolution_string = "%dx%d" % [resolution.x, resolution.y]

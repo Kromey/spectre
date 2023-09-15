@@ -2,7 +2,7 @@ extends "res://tanks/AITank.gd"
 
 var Missile = preload("res://tanks/Missile.tscn")
 
-onready var Launchers = [
+@onready var Launchers = [
 	$MissileSpawn1,
 	$MissileSpawn2,
 	$MissileSpawn3,
@@ -18,6 +18,6 @@ func shoot():
 		# Cycle through our launchers
 		launcher = (launcher + 1) % Launchers.size()
 		
-		var missile = Missile.instance()
+		var missile = Missile.instantiate()
 		get_tree().root.add_child(missile)
-		missile.start(Launchers[launcher].global_transform, current_target, self)
+		missile.start(Callable(Launchers[launcher].global_transform, current_target).bind(self))

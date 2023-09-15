@@ -3,7 +3,7 @@ extends Node
 
 func _enter_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	find_node("Score").text = "Score: %s" % Game.player_score
+	find_child("Score").text = "Score: %s" % Game.player_score
 
 
 func _on_NewGame_pressed():

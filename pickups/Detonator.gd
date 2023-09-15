@@ -1,4 +1,4 @@
-extends Area
+extends Area3D
 
 func detonate():
 	$"../".boom()

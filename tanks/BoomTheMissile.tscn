@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sounds/mixkit-explosion-hit-1704.ogg" type="AudioStream" id=1]
-[ext_resource path="res://grid.shader" type="Shader" id=2]
+[ext_resource path="res://grid.gdshader" type="Shader" id=2]
 [ext_resource path="res://tanks/BoomTheTank.gd" type="Script" id=3]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticleProcessMaterial" id=1]
 lifetime_randomness = 1.0
 flag_align_y = true
 flag_rotate_y = true
@@ -26,11 +26,11 @@ shader_param/LINE_COLOR = Color( 0, 0, 0, 1 )
 shader_param/COLUMN_COUNT = 10.0
 shader_param/ROW_COUNT = 10.0
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="BoxMesh" id=2]
 material = SubResource( 3 )
 size = Vector3( 0.01, 0.01, 0.01 )
 
-[node name="BoomTheMissile" type="Spatial"]
+[node name="BoomTheMissile" type="Node3D"]
 script = ExtResource( 3 )
 
 [node name="Particles" type="Particles" parent="."]
@@ -43,10 +43,10 @@ draw_pass_1 = SubResource( 2 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 1 )
-unit_db = 3.0
+volume_db = 3.0
 unit_size = 4.0
 autoplay = true
 
-[node name="EditorLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38924, 0 )
+[node name="EditorLight" type="OmniLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38924, 0 )
 editor_only = true
